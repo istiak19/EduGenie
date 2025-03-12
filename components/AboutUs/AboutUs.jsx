@@ -8,22 +8,27 @@ const AboutUs = () => {
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-5xl font-semibold">About Us</h1>
       </div>
-      <div className="flex flex-col-reverse md:flex justify-center items-center gap-10 ">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-10">
         <div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure
-            <br />
-            dolor in reprehenderit in voluptate velit esse cillum dolore eu
-            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui ocia deserunt mollit anim id est
-            laborum.
+          <p className="text-sm md:text-xl flex flex-col gap-6">
+            <span>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure
+            </span>
+
+            <span>
+              {" "}
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu
+              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui ocia deserunt mollit anim id est
+              laborum.
+            </span>
           </p>
         </div>
         <div className="">
-          <Image src={aboutImg} alt="My Image" width={1000} height={1000} />
+          <Image src={aboutImg} alt="My Image" width={2000} height={2000} />
         </div>
       </div>
     </div>
