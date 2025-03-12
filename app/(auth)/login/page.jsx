@@ -38,7 +38,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="py-8">
+        <div className="py-10">
             <div className="hero-content gap-8 flex-col lg:flex-row">
                 <Image
                     src={loginPic}
