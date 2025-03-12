@@ -86,8 +86,8 @@ export default function CourseCarousel() {
             <p className="text-gray-900">
               "EduGenie helped me transition from a beginner to a full-stack developer in 3 months!"
             </p>
-            <h4 className="font-semibold mt-2">- Alex Johnson</h4>
-          </motion.div>
+            <h4 className="font-bold mt-2">- Alex Johnson</h4>
+          </motion.div> 
 
           <motion.div
             className="p-6 bg-yellow-400 text-gray-900 shadow-lg rounded-lg"
@@ -96,7 +96,7 @@ export default function CourseCarousel() {
             <p className="text-gray-900">
               "The AI-powered learning paths made studying so much easier. Highly recommend!"
             </p>
-            <h4 className="font-semibold mt-2">- Sarah Lee</h4>
+            <h4 className="font-bold mt-2">- Sarah Lee</h4>
           </motion.div>
         </div>
       </div>
