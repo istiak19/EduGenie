@@ -8,6 +8,7 @@ const AboutUs = () => {
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-5xl font-semibold">About Us</h1>
       </div>
+      {/* about section content  */}
       <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-10">
         <div>
           <p className="text-sm md:text-xl flex flex-col gap-6">
