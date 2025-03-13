@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import Chatbot from '../../components/chatbot/Chatbot';
 import StudentDashboard from '../../components/studentdasboard/Studentdasboard';
@@ -39,3 +40,25 @@ const HomePage = () => {
 };
 
                                             export default HomePage;
+=======
+import CourseCarousel from '@/components/CourseCarousel';
+import Footer from '@/components/Footer';
+import HeroBanner from '@/components/HeroBanner';
+import HowItWorks from '@/components/HowItWorks';
+import SuccessStories from '@/components/SuccessStories.jsx';
+import React from 'react';
+
+const page = () => {
+    return (
+        <div>
+            <HeroBanner />
+            <CourseCarousel />
+            <SuccessStories />
+            <HowItWorks />
+            <Footer/>
+        </div>
+    );
+};
+
+export default page;
+>>>>>>> b68a5dde46a3bee8459d75e6b771a2f0466f50cc
