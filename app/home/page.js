@@ -1,5 +1,6 @@
 import CourseCarousel from '@/components/CourseCarousel';
 import HeroBanner from '@/components/HeroBanner';
+import HowItWorks from '@/components/HowItWorks';
 import SuccessStories from '@/components/SuccessStories.jsx';
 import React from 'react';
 
@@ -8,7 +9,8 @@ const page = () => {
         <div>
             <HeroBanner />
             <CourseCarousel />
-            <SuccessStories/>
+            <SuccessStories />
+            <HowItWorks/>
         </div>
     );
 };
