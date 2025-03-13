@@ -38,7 +38,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="py-10">
+        <div className="w-11/12 mx-auto py-10">
             <div className="hero-content gap-8 flex-col lg:flex-row">
                 <Image
                     src={loginPic}
@@ -48,7 +48,7 @@ const LoginPage = () => {
                     className="rounded-lg"
                     priority
                 />
-                <div className="w-full max-w-xl">
+                <div className="w-full max-w-2xl">
                     <h2 className='mb-5 font-bold text-center text-3xl'>Sign In</h2>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
