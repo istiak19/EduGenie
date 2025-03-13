@@ -31,7 +31,7 @@ export default function HeroBanner() {
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-transparent opacity-40"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: 1 }} 
         transition={{ duration: 1 }}
       />
       <motion.div

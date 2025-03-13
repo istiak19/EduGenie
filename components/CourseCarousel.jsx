@@ -16,7 +16,7 @@ export default function CourseCarousel() {
     { id: 2, title: "AI for Beginners", category: "AI", rating: 4.8, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSQFRsxKxu79JnjJSlkrhAA_wEZFzfUfBqmQ&s" },
     { id: 3, title: "Business Growth Strategies", category: "Business", rating: 4.9, image: "https://blog.byldgroup.com/wp-content/uploads/2023/11/Business-Growth.jpg" },
     { id: 4, title: "UI/UX Design Basics", category: "Design", rating: 4.7, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxM5FokizcINMEKDwmx3woJMXBO8GmMhqm1Q&s" },
-    { id: 5, title: "Digital Marketing", category: "Marketing", rating: 4.6, image: "https://nvit.com.bd/wp-content/uploads/2019/07/Digital-Marketing-1.jpg" },
+    { id: 5, title: "Digital Marketing", category: "Marketing", rating: 4.6, image: "/Digital-Marketing-1.jpg" },
   ];
 
   const filteredCourses = activeCategory === "All"
