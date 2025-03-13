@@ -4,12 +4,12 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/f
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-10">
+    <footer className="bg-gradient-to-br from-blue-600 to-indigo-900 text-white  py-10">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-8">
         {/* Column 1 - Logo & Intro */}
         <div>
           <h2 className="text-3xl font-bold text-white">EduGenie</h2>
-          <p className="mt-2 text-gray-400">AI-powered learning made simple and effective.</p>
+          <p className="mt-2 text-yellow-300">AI-powered learning made simple and effective.</p>
         </div>
 
         {/* Column 2 - Quick Links */}
@@ -47,7 +47,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright Section */}
-      <div className="border-t border-gray-700 mt-6 pt-4 text-center text-gray-500">
+      <div className="border-t border-gray-700 mt-6 pt-4 text-center text-yellow-300">
         © {new Date().getFullYear()} EduGenie. All Rights Reserved.
       </div>
     </footer>

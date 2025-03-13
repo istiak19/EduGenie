@@ -67,7 +67,7 @@ export default function HowItWorks() {
         {steps.map((step) => (
           <motion.div
             key={step.id}
-            className="p-6 bg-blue-100 text-center rounded-lg shadow-md"
+            className="p-6 bg-yellow-400 text-black text-center rounded-lg shadow-md"
             whileHover={{ scale: 1.05 }}
           >
             <div className="text-5xl">{step.icon}</div>
