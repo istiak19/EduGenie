@@ -1,6 +1,10 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 
 const StudentDashboard = () => {
+  const [registeredWebinars, setRegisteredWebinars] = useState([]);
+
   const badges = [
     { name: 'Completed Web Dev Course', icon: '🖥️' },
     { name: '100% Quiz Score', icon: '🏆' },
@@ -9,11 +13,10 @@ const StudentDashboard = () => {
 
   const leaderboard = [
     { rank: 1, name: 'Imtiaz', score: 950 },
-    { rank: 2, name: 'Jane Alam', score: 900 },
-    { rank: 3, name: 'Showrov', score: 850 },
+    { rank: 2, name: 'Janealam', score: 900 },
+    { rank: 3, name: 'Showrv', score: 850 },
     { rank: 4, name: 'Istiak', score: 800 },
   ];
-  
 
   const upcomingWebinars = [
     { title: 'Advanced JavaScript', date: 'March 20, 2025', time: '10:00 AM' },
@@ -21,8 +24,12 @@ const StudentDashboard = () => {
     { title: 'Node.js for Beginners', date: 'March 28, 2025', time: '3:00 PM' },
   ];
 
+  const handleRegister = (webinarTitle) => {
+    setRegisteredWebinars((prev) => [...prev, webinarTitle]);
+  };
+
   return (
-    <div className="bg-gray-50 p-8 min-h-screen">
+    <div className="bg-gradient-to-r from-teal-50 to-teal-100 p-8 min-h-screen">
       <div className="mb-8">
         <h2 className="mb-6 font-bold text-teal-700 text-3xl">Student Achievements</h2>
         <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
@@ -68,8 +75,12 @@ const StudentDashboard = () => {
                 <h3 className="font-semibold text-gray-800 text-xl">{webinar.title}</h3>
                 <p className="text-gray-600">{webinar.date} - {webinar.time}</p>
               </div>
-              <button className="bg-teal-600 hover:bg-teal-700 shadow-md px-8 py-3 rounded-lg font-medium text-white hover:scale-105 transition-transform transform">
-                Register Now
+              <button
+                onClick={() => handleRegister(webinar.title)}
+                disabled={registeredWebinars.includes(webinar.title)}
+                className={`bg-teal-600 ${registeredWebinars.includes(webinar.title) ? 'bg-teal-400 cursor-not-allowed' : 'hover:bg-teal-700'} shadow-md px-8 py-3 rounded-lg font-medium text-white hover:scale-105 transition-transform transform`}
+              >
+                {registeredWebinars.includes(webinar.title) ? 'Registered' : 'Register Now'}
               </button>
             </div>
           ))}

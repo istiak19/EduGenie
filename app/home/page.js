@@ -1,8 +1,9 @@
-<<<<<<< HEAD
 import React from 'react';
 import Chatbot from '../../components/chatbot/Chatbot';
 import StudentDashboard from '../../components/studentdasboard/Studentdasboard';
-
+import Footer from '../../components/Footer';
+import EducatorAndSubscription from '../../components/EducatorAndSubscription/EducatorAndSubscription';
+import FeaturedBlogs from '../../components/FeaturedBlogs/FeaturedBlogs';
 const HomePage = () => {
     return (<
         div className="home-container min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6" >
@@ -27,38 +28,22 @@ const HomePage = () => {
         a href="/faq"
                                         className="text-teal-500 hover:underline" > FAQ < /a> or{' '} <
         a href="/contact"
-                                            className="text-teal-500 hover:underline" > contact us < /a>. <
-        /p> <
-        /div> <
-        /div>
+                                            className="text-teal-500 hover:underline" > contact us < /a>. < /
+        p > <
+        /div> < /
+        div >
 
                                             <
                                                 StudentDashboard />
+                                            <
+                                                EducatorAndSubscription />
+                                            <
+                                                FeaturedBlogs />
+                                            <
+                                                Footer />
                                             <
         /div>
                                             );
 };
 
                                             export default HomePage;
-=======
-import CourseCarousel from '@/components/CourseCarousel';
-import Footer from '@/components/Footer';
-import HeroBanner from '@/components/HeroBanner';
-import HowItWorks from '@/components/HowItWorks';
-import SuccessStories from '@/components/SuccessStories.jsx';
-import React from 'react';
-
-const page = () => {
-    return (
-        <div>
-            <HeroBanner />
-            <CourseCarousel />
-            <SuccessStories />
-            <HowItWorks />
-            <Footer/>
-        </div>
-    );
-};
-
-export default page;
->>>>>>> b68a5dde46a3bee8459d75e6b771a2f0466f50cc
