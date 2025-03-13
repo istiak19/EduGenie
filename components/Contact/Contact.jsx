@@ -19,9 +19,10 @@ const Contact = () => {
       {/* ------------- */}
       <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg">
         <h2 className="text-xl md:text-5xl font-semibold text-center my-6">
-          Contact Us
+          Contact with Us
         </h2>
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* first name   */}
           <div>
             <label className="block text-xl font-medium mb-1">First Name</label>
             <Input
@@ -32,6 +33,7 @@ const Contact = () => {
               required
             />
           </div>
+          {/* last name  */}
           <div>
             <label className="block text-xl font-medium mb-1">Last Name</label>
             <Input
@@ -42,6 +44,7 @@ const Contact = () => {
               required
             />
           </div>
+          {/* email  */}
           <div>
             <label className="block text-xl font-medium mb-1">Email</label>
             <Input
@@ -52,6 +55,7 @@ const Contact = () => {
               required
             />
           </div>
+          {/* contact number  */}
           <div>
             <label className="block text-xl font-medium mb-1">Phone</label>
             <Input
@@ -62,6 +66,7 @@ const Contact = () => {
               required
             />
           </div>
+          {/* message  */}
           <div className="md:col-span-2">
             <label className="block text-xl font-medium mb-1">Message</label>
             <Textarea
@@ -71,6 +76,7 @@ const Contact = () => {
               required
             />
           </div>
+          {/* submit button  */}
           <div className="md:col-span-2 text-center">
             <Button type="submit" className="w-full md:w-auto text-xl">
               Send Message
