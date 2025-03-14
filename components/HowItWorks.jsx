@@ -60,7 +60,7 @@ export default function HowItWorks() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        How It Works
+        How It Works...!
       </motion.h2>
 
       <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
