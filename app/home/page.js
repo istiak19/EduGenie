@@ -1,7 +1,6 @@
 import React from 'react';
 import Chatbot from '../../components/chatbot/Chatbot';
 import StudentDashboard from '../../components/studentdasboard/Studentdasboard';
-import Footer from '../../components/Footer';
 import EducatorAndSubscription from '../../components/EducatorAndSubscription/EducatorAndSubscription';
 import FeaturedBlogs from '../../components/FeaturedBlogs/FeaturedBlogs';
 
@@ -47,8 +46,6 @@ const HomePage = () => {
                                                 EducatorAndSubscription />
                                             <
                                                 FeaturedBlogs />
-                                            <
-                                                Footer />
                                             <
         /div>
                                             );
