@@ -9,7 +9,7 @@ export default function Footer() {
         {/* Column 1 - Logo & Intro */}
         <div>
           <h2 className="text-3xl font-bold text-white">EduGenie</h2>
-          <p className="mt-2 text-yellow-300">AI-powered learning made simple and effective.</p>
+          <p className="mt-2 text-yellow-300">AI-powered learning made simple and effective....</p>
         </div>
 
         {/* Column 2 - Quick Links */}
