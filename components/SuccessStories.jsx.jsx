@@ -83,7 +83,7 @@ export default function SuccessStories() {
           transition={{ duration: 1 }}
         >
           <h3 className="text-lg font-bold text-gray-800 mb-4">Meet Your AI Assistant</h3>
-          <p className="text-gray-600">Ask anything about your learning journey!</p>
+          <p className="text-gray-600">Ask anything about your learning journey !!</p>
           
           {/* Chat Bubble */}
           <motion.div
