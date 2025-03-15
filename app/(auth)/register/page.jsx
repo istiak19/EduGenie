@@ -10,6 +10,9 @@ import loginPic from "../../../public/assets/login.jpg";
 import Image from "next/image";
 import Link from "next/link";
 import SocialAuth from "@/components/SocialAuth/SocialAuth";
+import Swal from "sweetalert2";
+import { signIn } from "next-auth/react";
+import { useRouter } from 'next/navigation';
 
 const formSchema = z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -21,6 +24,7 @@ const formSchema = z.object({
 const image_key = process.env.NEXT_PUBLIC_IMAGE_KEY;
 
 const Register = () => {
+    const router = useRouter();
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -60,6 +64,33 @@ const Register = () => {
             photo: result.data.url
         }
         console.log(userInfo)
+        try {
+            const result = await signIn('credentials', {
+                redirect: false,
+                email: data.email,
+                password: data.password,
+            });
+
+            if (result?.error) {
+                console.log("Login Failed:", result.error);
+                return;
+            }
+
+            if (result.status === 200) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Login Successful!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                // console.log("Login Successful:", result);
+                router.push('/');
+            }
+        }
+        catch (error) {
+            console.log("Error during login:", error);
+        }
     };
 
     return (

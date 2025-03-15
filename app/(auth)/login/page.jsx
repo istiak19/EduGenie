@@ -11,7 +11,10 @@ import { Input } from "@/components/ui/input"
 import loginPic from '../../../public/assets/login.jpg'
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 import SocialAuth from "@/components/SocialAuth/SocialAuth";
+import { signIn } from "next-auth/react";
+import Swal from "sweetalert2";
 
 
 const formSchema = z.object({
@@ -25,6 +28,7 @@ const formSchema = z.object({
 
 
 const LoginPage = () => {
+    const router = useRouter();
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -35,6 +39,33 @@ const LoginPage = () => {
 
     const onSubmit = async (data) => {
         console.log("Submitted Data:", data);
+        try {
+            const result = await signIn('credentials', {
+                redirect: false,
+                email: data.email,
+                password: data.password,
+            });
+
+            if (result?.error) {
+                console.log("Login Failed:", result.error);
+                return;
+            }
+
+            if (result.status === 200) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Login Successful!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                // console.log("Login Successful:", result);
+                router.push('/');
+            }
+        }
+        catch (error) {
+            console.log("Error during login:", error);
+        }
     };
 
     return (
