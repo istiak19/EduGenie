@@ -7,6 +7,7 @@ const page = () => {
         <div>
             <AboutUs></AboutUs>
             <OurTeam></OurTeam>
+            {/* ---------- */}
         </div>
     );
 };

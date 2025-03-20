@@ -12,18 +12,31 @@
     "@hookform/resolvers": "^4.1.3",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.2",
+    "@tailwindcss/forms": "^0.5.10",
+    "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.5.0",
     "lucide-react": "^0.479.0",
+<<<<<<< HEAD
     "next": "^15.2.2",
+=======
+    "mongodb": "^6.15.0",
+    "next": "15.2.2",
+    "next-auth": "^4.24.11",
+>>>>>>> b914239baf31d5677cef3f29149133ed2d687285
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "react-icons": "^5.5.0",
     "react-slick": "^0.30.3",
+<<<<<<< HEAD
     "react-toastify": "^11.0.5",
     "slick-carousel": "^1.8.1",
+=======
+    "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.17.2",
+>>>>>>> b914239baf31d5677cef3f29149133ed2d687285
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.2"
