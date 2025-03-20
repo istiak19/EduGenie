@@ -15,6 +15,7 @@ import { useRouter } from 'next/navigation';
 import SocialAuth from "@/components/SocialAuth/SocialAuth";
 import { signIn } from "next-auth/react";
 import Swal from "sweetalert2";
+import { login } from "@/app/actions/auth/login";
 
 
 const formSchema = z.object({
@@ -40,6 +41,12 @@ const LoginPage = () => {
     const onSubmit = async (data) => {
         console.log("Submitted Data:", data);
         try {
+            const userInfo = {
+                email: data.email,
+                password: data.password
+            };
+            const response = await login(userInfo)
+            console.log("Login!-->", response)
             const result = await signIn('credentials', {
                 redirect: false,
                 email: data.email,
@@ -59,7 +66,7 @@ const LoginPage = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                // console.log("Login Successful:", result);
+                console.log("Login Successful:", result);
                 router.push('/');
             }
         }

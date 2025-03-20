@@ -13,6 +13,7 @@ import SocialAuth from "@/components/SocialAuth/SocialAuth";
 import Swal from "sweetalert2";
 import { signIn } from "next-auth/react";
 import { useRouter } from 'next/navigation';
+import { register } from "@/app/actions/auth/register";
 
 const formSchema = z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -65,6 +66,8 @@ const Register = () => {
         }
         console.log(userInfo)
         try {
+            const response = await register(userInfo);
+            console.log("Registration successful!-->", response)
             const result = await signIn('credentials', {
                 redirect: false,
                 email: data.email,
@@ -76,11 +79,11 @@ const Register = () => {
                 return;
             }
 
-            if (result.status === 200) {
+            if (result.status === 200 && response.success === true) {
                 Swal.fire({
-                    position: "top-end",
+                    position: "top",
                     icon: "success",
-                    title: "Login Successful!",
+                    title: "Registration successful!",
                     showConfirmButton: false,
                     timer: 1500
                 });
