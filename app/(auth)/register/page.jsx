@@ -65,6 +65,98 @@ const Register = () => {
             photo: result.data.url
         }
         console.log(userInfo)
+<<<<<<< HEAD
+=======
+    };
+
+    return (
+        <div className="mx-auto py-10 w-11/12">
+            <div className="lg:flex-row flex-col gap-8 hero-content">
+                <Image
+                    src={loginPic}
+                    alt="Login Picture"
+                    width={500}
+                    height={500}
+                    className="rounded-lg"
+                    priority
+                />
+                <div className="w-full max-w-2xl">
+                    <h2 className="mb-5 font-bold text-3xl text-center">Sign Up</h2>
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                            <FormField
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Name</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Your Name" type="text" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Your email" type="email" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="photo"
+                                render={({ field: { onChange, ref, ...rest } }) => (
+                                    <FormItem>
+                                        <FormLabel>Upload Photo</FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={(e) => onChange(e.target.files?.[0] || undefined)}
+                                                ref={ref}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Password</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Your password" type="password" {...field} />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button variant="custom" type="submit">
+                                Sign Up
+                            </Button>
+                        </form>
+                    </Form>
+                    <p className="py-5 font-medium text-center">Or Sign Up With</p>
+                    <div>
+                        <SocialAuth />
+                    </div>
+                    <p className="pt-5 text-gray-600 text-xs text-center">
+                        Already have an account?{" "}
+                        <span className="text-blue-600 hover:underline">
+                            <Link href="/login">Login</Link>
+                        </span>
+                    </p>
+>>>>>>> da3924910a9dd7e7e2b7edf7ad64534c3dcde3d7
         try {
             const response = await register(userInfo);
             console.log("Registration successful!-->", response)
@@ -97,13 +189,13 @@ const Register = () => {
     };
 
     return (
-        <div className="w-full min-h-screen flex items-center justify-center bg-cover bg-center"
+        <div className="flex justify-center items-center bg-cover bg-center w-full min-h-screen"
             style={{
                 backgroundImage: "url('/assets/background.jpg')",
                 backgroundAttachment: "fixed",
             }}>
-            <div className="w-11/12 mx-auto py-10">
-                <div className="hero-content gap-8 flex-col lg:flex-row">
+            <div className="mx-auto py-10 w-11/12">
+                <div className="lg:flex-row flex-col gap-8 hero-content">
                     <Image
                         src={loginPic}
                         alt="Login Picture"
@@ -113,7 +205,7 @@ const Register = () => {
                         priority
                     />
                     <div className="w-full max-w-2xl">
-                        <h2 className="mb-5 font-bold text-center text-3xl">Sign Up</h2>
+                        <h2 className="mb-5 font-bold text-3xl text-center">Sign Up</h2>
                         <Form {...form}>
                             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                                 <FormField
@@ -178,11 +270,11 @@ const Register = () => {
                                 </Button>
                             </form>
                         </Form>
-                        <p className="text-center py-5 font-medium">Or Sign Up With</p>
+                        <p className="py-5 font-medium text-center">Or Sign Up With</p>
                         <div>
                             <SocialAuth />
                         </div>
-                        <p className="text-gray-600 text-xs text-center pt-5">
+                        <p className="pt-5 text-gray-600 text-xs text-center">
                             Already have an account?{" "}
                             <span className="text-blue-600 hover:underline">
                                 <Link href="/login">Login</Link>

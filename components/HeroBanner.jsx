@@ -10,7 +10,7 @@ export default function HeroBanner() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,  // Default for larger screens
+    slidesToShow: 3, // Default for larger screens
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2500,
@@ -41,7 +41,7 @@ export default function HeroBanner() {
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-transparent opacity-40"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }} 
+        animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       />
       <motion.div
@@ -56,7 +56,7 @@ export default function HeroBanner() {
       />
 
       {/* Hero Content */}
-      <div className="relative z-10 max-w-3xl">
+      <div className="z-10 relative max-w-3xl">
         <motion.h1
           className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4"
           initial={{ y: -20, opacity: 0 }}
