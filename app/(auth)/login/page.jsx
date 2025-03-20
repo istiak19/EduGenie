@@ -77,6 +77,8 @@ const LoginPage = () => {
 
     return (
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
         <div className="w-11/12 mx-auto py-10">
             <div className="hero-content gap-8 flex-col lg:flex-row">
                 <Image
@@ -124,6 +126,7 @@ const LoginPage = () => {
                     <div>
                         <SocialAuth></SocialAuth>
 =======
+>>>>>>> da3924910a9dd7e7e2b7edf7ad64534c3dcde3d7
         <div className="w-full min-h-screen flex items-center justify-center bg-cover bg-center"
             style={{
                 backgroundImage: "url('/assets/background.jpg')",
@@ -177,7 +180,10 @@ const LoginPage = () => {
                             <SocialAuth></SocialAuth>
                         </div>
                         <p className='text-xs text-center pt-5'>Have an account? <span className='text-blue-600 hover:underline'><Link href='/register'>Sign Up</Link></span></p>
+<<<<<<< HEAD
+=======
 >>>>>>> b914239baf31d5677cef3f29149133ed2d687285
+>>>>>>> da3924910a9dd7e7e2b7edf7ad64534c3dcde3d7
                     </div>
                 </div>
             </div>

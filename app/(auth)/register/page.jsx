@@ -65,6 +65,8 @@ const Register = () => {
             photo: result.data.url
         }
         console.log(userInfo)
+<<<<<<< HEAD
+=======
     };
 
     return (
@@ -154,6 +156,7 @@ const Register = () => {
                             <Link href="/login">Login</Link>
                         </span>
                     </p>
+>>>>>>> da3924910a9dd7e7e2b7edf7ad64534c3dcde3d7
         try {
             const response = await register(userInfo);
             console.log("Registration successful!-->", response)

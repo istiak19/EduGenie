@@ -60,15 +60,16 @@ export default function HowItWorks() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        How It Works
+        How It Works...!
       </motion.h2>
 
       <div className="gap-8 grid md:grid-cols-4 mx-auto max-w-6xl">
         {steps.map((step) => (
           <motion.div
             key={step.id}
-            className="bg-blue-100 shadow-md p-6 rounded-lg text-center"
-            className="bg-yellow-400 shadow-md p-6 rounded-lg text-black text-center"
+            className="p-6 bg-yellow-400 text-black text-center rounded-lg shadow-md"
+            
+            
             whileHover={{ scale: 1.05 }}
           >
             <div className="text-5xl">{step.icon}</div>
