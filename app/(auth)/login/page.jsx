@@ -46,7 +46,7 @@ const LoginPage = () => {
                 password: data.password
             };
             const response = await login(userInfo)
-            console.log("Login!-->", response)
+            // console.log("Login!-->", response)
             const result = await signIn('credentials', {
                 redirect: false,
                 email: data.email,
