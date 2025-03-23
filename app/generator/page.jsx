@@ -1,20 +1,8 @@
 "use client";
 
 import { GeneratorCourseLayout_AI } from "@/aiModel/aiModel";
-import { useState } from "react";
 
 const Generator = () => {
-    const [formData, setFormData] = useState({
-        category: "Programming",
-        topic: "Python",
-        level: "Beginner",
-        duration: "1 Hour",
-        noOfChapters: "",
-    });
-
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
 
     const handleForm = async (e) => {
         e.preventDefault();
