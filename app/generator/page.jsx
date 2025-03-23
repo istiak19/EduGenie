@@ -16,8 +16,15 @@ const Generator = () => {
         const FINAL_PROMPT = `${BASIC_PROMPT} ${USER_INPUT_PROMPT}`;
         console.log(FINAL_PROMPT);
         const result = await GeneratorCourseLayout_AI.sendMessage(FINAL_PROMPT);
-        console.log(result.response.text())
-        console.log(JSON.parse(result.response.text()))
+        console.log(result.response.text());
+        const courseInfo = JSON.parse(result.response.text());
+        console.log(courseInfo)
+        const res = await fetch('http://localhost:3000/api/course', {
+            method: 'POST',
+            body: JSON.stringify(courseInfo)
+        })
+        const response = await res.json();
+        console.log(response);
     };
 
     return (
