@@ -4,7 +4,6 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import HeroBanner from "@/components/HeroBanner";
 import CourseCarousel from "@/components/CourseCarousel";
-import SuccessStories from "@/components/SuccessStories";
 import HowItWorks from "@/components/HowItWorks";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/chatbot/Chatbot";
@@ -22,7 +21,7 @@ const HomePage = () => {
 
       {/* Features */}
       <CourseCarousel />
-      <SuccessStories />
+      
       <HowItWorks />
 
       {/* Chatbot Section */}

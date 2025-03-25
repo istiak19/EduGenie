@@ -27,7 +27,7 @@ export default function Navbar() {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6">
-          {["Home", "Courses", "Pricing", "About", "Contact"].map((item, index) => (
+          {["Home", "Courses","Generator" ,  "About", "Contact"].map((item, index) => (
             <motion.li
               key={index}
               whileHover={{ scale: 1.1 }}
@@ -43,7 +43,7 @@ export default function Navbar() {
         {/* Authentication Buttons */}
         <div className="hidden md:flex space-x-4">
           <Link href="/login" className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">Login</Link>
-          <Link href="/signup" className="px-4 py-2 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-600 hover:text-white transition">Sign Up</Link>
+          <Link href="/register" className="px-4 py-2 border border-blue-600 text-blue-600 rounded-md hover:bg-blue-600 hover:text-white transition">Sign Up</Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -60,14 +60,14 @@ export default function Navbar() {
           transition={{ duration: 0.3 }}
           className="md:hidden bg-white dark:bg-gray-800 px-6 py-4 space-y-4 shadow-lg"
         >
-          {["Home", "Courses", "Pricing", "About", "Contact"].map((item, index) => (
+          {["/", "Courses","Generator" , "About", "Contact"].map((item, index) => (
             <Link key={index} href={`/${item.toLowerCase()}`} className="block text-gray-800 dark:text-gray-300 hover:text-blue-600 transition">
               {item}
             </Link>
           ))}
           <div className="flex flex-col space-y-2">
             <Link href="/login" className="px-4 py-2 bg-blue-600 text-white rounded-md text-center hover:bg-blue-700 transition">Login</Link>
-            <Link href="/signup" className="px-4 py-2 border border-blue-600 text-blue-600 rounded-md text-center hover:bg-blue-600 hover:text-white transition">Sign Up</Link>
+            <Link href="/register" className="px-4 py-2 border border-blue-600 text-blue-600 rounded-md text-center hover:bg-blue-600 hover:text-white transition">Sign Up</Link>
           </div>
         </motion.div>
       )}
