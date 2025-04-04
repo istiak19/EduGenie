@@ -67,7 +67,7 @@ export default function HowItWorks() {
         {steps.map((step) => (
           <motion.div
             key={step.id}
-            className="p-6 bg-yellow-400 text-black text-center rounded-lg shadow-md"
+            className="p-6 bg-teal-500 text-black text-center rounded-lg shadow-md"
             
             
             whileHover={{ scale: 1.05 }}
@@ -112,7 +112,7 @@ export default function HowItWorks() {
       {/* Write a Blog Button */}
       <div className="mt-12 text-center">
         <motion.button
-          className="bg-yellow-500 hover:bg-blue-700 px-6 py-3 rounded-lg font-bold text-black transition-all"
+          className="bg-teal-500 hover:bg-blue-700 px-6 py-3 rounded-lg font-bold text-black transition-all"
           whileHover={{ scale: 1.05 }}
         >
           Write a Blog ✍️

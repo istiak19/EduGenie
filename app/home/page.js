@@ -9,15 +9,15 @@ import Footer from "@/components/Footer";
 import Chatbot from "@/components/chatbot/Chatbot";
 import StudentDashboard from "@/components/studentdasboard/Studentdasboard";
 import EducatorAndSubscription from "@/components/EducatorAndSubscription/EducatorAndSubscription";
-import FeaturedBlogs from "@/components/FeaturedBlogs/FeaturedBlogs";
+
 
 const HomePage = () => {
   return (
     <div className="home-container min-h-screen bg-gray-50 flex flex-col items-center justify-center p-6">
       <Navbar />
 
-      {/* Hero Section */}
-      <HeroBanner />
+      
+      {/* <HeroBanner /> */}
 
       {/* Features */}
       <CourseCarousel />
@@ -54,7 +54,7 @@ const HomePage = () => {
       {/* Additional Sections */}
       <StudentDashboard />
       <EducatorAndSubscription />
-      <FeaturedBlogs />
+     
 
       {/* Footer */}
       <Footer />

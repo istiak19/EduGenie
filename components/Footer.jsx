@@ -4,7 +4,7 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/f
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-blue-600 to-indigo-900 py-10 text-white">
+    <footer className="bg-teal-600  py-10 text-white">
       <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-8">
         
         {/* Column 1 - Logo & Intro */}
