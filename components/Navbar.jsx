@@ -70,6 +70,7 @@ export default function Navbar() {
             <Link href="/signup" className="px-4 py-2 border border-blue-600 text-blue-600 rounded-md text-center hover:bg-blue-600 hover:text-white transition">Sign Up</Link>
           </div>
         </motion.div>
+        
       )}
     </nav>
   );
