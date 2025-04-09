@@ -56,8 +56,7 @@ const HomePage = () => {
       <EducatorAndSubscription />
      
 
-      {/* Footer */}
-      <Footer />
+      
     </div>
   );
 };
