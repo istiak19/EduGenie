@@ -22,6 +22,7 @@ export default function SuccessStories() {
       text: "The interactive courses and personalized AI recommendations helped me upskill faster than ever.",
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNsxeqTj16QraEJsrpxM8om5YUn83B2JxOqA&s",
     },
+    
   ];
 
   return (
