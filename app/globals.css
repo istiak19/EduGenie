@@ -4,6 +4,13 @@
 @plugin "daisyui";
 
 @plugin "tailwindcss-animate";
+:root {
+  --font-inter: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-inter);
+}
 
 :root {
   --background: oklch(1 0 0);
