@@ -11,7 +11,7 @@ const Page = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get("https://edugenie.vercel.app/api/course");
+        const response = await axios.get("http://localhost:3000/api/course");
         setCourses(response.data);
       } catch (err) {
         setError(err.message);
