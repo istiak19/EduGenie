@@ -1,12 +1,14 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NextAuthProvider from "@/provider/NextAuthProvider";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "700"], // ✅ ওজন নির্ধারণ করা
-  display: "swap", // ✅ অপ্টিমাইজেশন
+  weight: ["400", "700"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -22,7 +24,9 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="light">
       <body className={`${inter.variable} font-sans antialiased`}>
         <NextAuthProvider>
+          <Navbar />
           {children}
+          <Footer></Footer>
         </NextAuthProvider>
       </body>
     </html>

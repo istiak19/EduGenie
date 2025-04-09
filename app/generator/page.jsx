@@ -22,7 +22,7 @@ const Generator = () => {
         console.log(result.response.text());
         const courseInfo = JSON.parse(result.response.text());
         console.log(courseInfo)
-        const res = await fetch('https://edugenie.vercel.app/api/course', {
+        const res = await fetch('http://localhost:3000/api/course', {
             method: 'POST',
             body: JSON.stringify(courseInfo)
         })
