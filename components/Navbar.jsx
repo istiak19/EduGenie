@@ -13,7 +13,8 @@ export default function Navbar() {
 
   const menuItems = ["Home", "Courses", "Generator", "About", "Contact"];
 
-  const getRoute = (item) => item === "Home" ? "/" : `/${item.toLowerCase()}`;
+  const getRoute = (item) =>
+    item === "Home" ? "/" : `/${item.toLowerCase()}`;
 
   const handleSignOut = () => {
     signOut();
@@ -33,25 +34,27 @@ export default function Navbar() {
           >
             <Image src="/Edugine-logo.png" alt="EduGenie Logo" width={40} height={40} />
           </motion.div>
-          <span className="text-2xl font-bold text-blue-600 dark:text-white">EduGenie</span>
+          <span className="text-2xl font-bold text-teal-600 dark:text-white">EduGenie</span>
         </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6">
-          {menuItems.map((item, index) => (
-            <motion.li
-              key={index}
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Link
-                href={getRoute(item)}
-                className="text-gray-800 dark:text-gray-300 hover:text-blue-600 transition-colors"
+          {
+            menuItems.map((item, index) => (
+              <motion.li
+                key={index}
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.2 }}
               >
-                {item}
-              </Link>
-            </motion.li>
-          ))}
+                <Link
+                  href={getRoute(item)}
+                  className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition-colors"
+                >
+                  {item}
+                </Link>
+              </motion.li>
+            ))
+          }
         </ul>
 
         {/* Authentication (Desktop) */}
@@ -63,7 +66,7 @@ export default function Navbar() {
                   Welcome, {session?.user?.name?.split(" ")[0]}
                 </span>
                 <button
-                  className="bg-blue-600 text-white rounded-md px-4 py-2 hover:bg-blue-700 transition"
+                  className="bg-teal-600 text-white rounded-md px-4 py-2 hover:bg-teal-700 transition"
                   onClick={handleSignOut}
                 >
                   Sign out
@@ -72,7 +75,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 transition"
+                className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-700 transition"
               >
                 Login
               </Link>
@@ -91,25 +94,6 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden bg-white dark:bg-gray-800 px-6 py-4 space-y-4 shadow-lg"
-        >
-          {["Home", "Courses", "Pricing", "About", "Contact"].map((item, index) => (
-            <Link key={index} href={`/${item.toLowerCase()}`} className="block text-gray-800 dark:text-gray-300 hover:text-blue-600 transition">
-              {item}
-            </Link>
-          ))}
-          <div className="flex flex-col space-y-2">
-            <Link href="/login" className="px-4 py-2 bg-blue-600 text-white rounded-md text-center hover:bg-blue-700 transition">Login</Link>
-            <Link href="/signup" className="px-4 py-2 border border-blue-600 text-blue-600 rounded-md text-center hover:bg-blue-600 hover:text-white transition">Sign Up</Link>
-          </div>
-        </motion.div>
-        
-      )}
       {
         isOpen && (
           <motion.div
@@ -118,16 +102,18 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-white dark:bg-gray-800 px-6 py-4 space-y-4 shadow-lg"
           >
-            {menuItems.map((item, index) => (
-              <Link
-                key={index}
-                href={getRoute(item)}
-                onClick={() => setIsOpen(false)}
-                className="block text-gray-800 dark:text-gray-300 hover:text-blue-600 transition"
-              >
-                {item}
-              </Link>
-            ))}
+            {
+              menuItems.map((item, index) => (
+                <Link
+                  key={index}
+                  href={getRoute(item)}
+                  onClick={() => setIsOpen(false)}
+                  className="block text-gray-800 dark:text-gray-300 hover:text-teal-600 transition"
+                >
+                  {item}
+                </Link>
+              ))
+            }
             <div className="flex flex-col space-y-2 pt-2">
               {
                 status === 'authenticated' ? (
@@ -136,20 +122,29 @@ export default function Navbar() {
                       Welcome, {session?.user?.name?.split(" ")[0]}
                     </span>
                     <button
-                      className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-700 transition"
+                      className="bg-teal-500 text-white rounded-md px-4 py-2 hover:bg-teal-700 transition"
                       onClick={handleSignOut}
                     >
                       Sign out
                     </button>
                   </>
                 ) : (
-                  <Link
-                    href="/login"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition text-center"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Login
-                  </Link>
+                  <>
+                    <Link
+                      href="/login"
+                      onClick={() => setIsOpen(false)}
+                      className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition text-center"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href="/signup"
+                      onClick={() => setIsOpen(false)}
+                      className="px-4 py-2 border border-teal-600 text-teal-600 rounded-md text-center hover:bg-teal-600 hover:text-white transition"
+                    >
+                      Sign Up
+                    </Link>
+                  </>
                 )
               }
             </div>

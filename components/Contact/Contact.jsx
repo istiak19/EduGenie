@@ -16,7 +16,7 @@ const Contact = () => {
   return (
     <div className="max-w-3xl mx-auto my-28 px-4">
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-3xl md:text-5xl font-bold text-center text-blue-600 mb-8">
+        <h2 className="text-3xl md:text-5xl font-bold text-center text-teal-600 mb-8">
           Contact Us
         </h2>
 
@@ -82,7 +82,7 @@ const Contact = () => {
 
           {/* Submit Button */}
           <div className="md:col-span-2 text-center">
-            <Button type="submit" className="bg-blue-500 hover:bg-blue-700 w-full">
+            <Button type="submit" className="bg-teal-500 hover:bg-teal-700 w-full">
               Send Message
             </Button>
           </div>

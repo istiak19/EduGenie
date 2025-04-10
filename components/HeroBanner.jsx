@@ -16,8 +16,8 @@ export default function HeroBanner() {
     autoplaySpeed: 2500,
     cssEase: "linear",
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } }, // Tablet
-      { breakpoint: 768, settings: { slidesToShow: 1 } },  // Mobile
+      { breakpoint: 1024, settings: { slidesToShow: 2 } },
+      { breakpoint: 768, settings: { slidesToShow: 1 } },
     ],
   };
 
@@ -30,8 +30,8 @@ export default function HeroBanner() {
   ];
 
   return (
-    <section className="relative flex flex-col items-center justify-center pb-28 pt-32 bg-gradient-to-br from-blue-600 to-indigo-900 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
-      
+    <section className="relative flex flex-col items-center justify-center pb-28 pt-32 bg-gradient-to-br from-teal-500 via-cyan-600 to-teal-900 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
+
       {/* Floating Animation Background */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-transparent opacity-50"
@@ -39,13 +39,13 @@ export default function HeroBanner() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       />
-      
+
       <motion.div
         className="absolute top-1/3 left-1/4 w-16 md:w-24 h-16 md:h-24 bg-white opacity-30 rounded-full blur-3xl"
         animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
       />
-      
+
       <motion.div
         className="absolute bottom-1/3 right-1/4 w-24 md:w-32 h-24 md:h-32 bg-yellow-300 opacity-20 rounded-full blur-3xl"
         animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
