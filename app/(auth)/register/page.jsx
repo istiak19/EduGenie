@@ -15,24 +15,29 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { register } from "@/app/actions/auth/register";
 
+// Zod schema validation with password matching
 const formSchema = z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters." }),
     email: z.string().email({ message: "Invalid email format." }),
     password: z.string().min(6, { message: "Password must be at least 6 characters." }),
-    photo: z.any().optional(), // Fix for handling files in react-hook-form
+    cPassword: z.string().min(6, { message: "Password must be at least 6 characters." }),
+    photo: z.any().optional(),
+}).refine((data) => data.password === data.cPassword, {
+    message: "Passwords don't match!",
+    path: ["cPassword"],
 });
 
 const image_key = process.env.NEXT_PUBLIC_IMAGE_KEY;
 
 const Register = () => {
     const router = useRouter();
-
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
             email: "",
             password: "",
+            cPassword: "",
             photo: null,
         },
     });
@@ -45,7 +50,7 @@ const Register = () => {
             let photoURL = "";
             if (data.photo && data.photo.length > 0) {
                 const formData = new FormData();
-                formData.append("image", data.photo[0]); // Only take the first file
+                formData.append("image", data.photo[0]);
 
                 const response = await fetch(`https://api.imgbb.com/1/upload?key=${image_key}`, {
                     method: "POST",
@@ -64,7 +69,7 @@ const Register = () => {
                 name: data.name,
                 email: data.email,
                 password: data.password,
-                photo: photoURL || "", // Ensure a string is always set
+                photo: photoURL || "",
             };
 
             console.log("User Info:", userInfo);
@@ -173,7 +178,20 @@ const Register = () => {
                                         </FormItem>
                                     )}
                                 />
-                                <Button type="submit">
+                                <FormField
+                                    control={form.control}
+                                    name="cPassword"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Confirm Password</FormLabel>
+                                            <FormControl>
+                                                <Input placeholder="Your password" type="password" {...field} />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <Button className="w-full bg-teal-600 hover:bg-teal-700" type="submit">
                                     Sign Up
                                 </Button>
                             </form>
