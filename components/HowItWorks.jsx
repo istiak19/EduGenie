@@ -52,10 +52,10 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="bg-white px-6 py-16">
+    <section className="bg-slate-50 px-6 py-16">
       {/* "How It Works" Section */}
       <motion.h2
-        className="mb-10 font-bold text-gray-800 text-4xl text-center"
+        className="mb-10 font-bold text-indigo-700 text-4xl text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -67,21 +67,19 @@ export default function HowItWorks() {
         {steps.map((step) => (
           <motion.div
             key={step.id}
-            className="p-6 bg-teal-500 text-black text-center rounded-lg shadow-md"
-            
-            
+            className="p-6 bg-white text-slate-800 text-center rounded-lg shadow-md border border-indigo-100 hover:shadow-xl transition"
             whileHover={{ scale: 1.05 }}
           >
             <div className="text-5xl">{step.icon}</div>
-            <h3 className="mt-4 font-bold text-xl">{step.title}</h3>
-            <p className="mt-2 text-gray-600">{step.description}</p>
+            <h3 className="mt-4 font-bold text-xl text-indigo-600">{step.title}</h3>
+            <p className="mt-2 text-slate-600">{step.description}</p>
           </motion.div>
         ))}
       </div>
 
       {/* Blog Showcase Section */}
       <motion.h2
-        className="mt-20 mb-10 font-bold text-gray-800 text-4xl text-center"
+        className="mt-20 mb-10 font-bold text-indigo-700 text-4xl text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -93,7 +91,7 @@ export default function HowItWorks() {
         {blogs.map((blog) => (
           <motion.div
             key={blog.id}
-            className="bg-white shadow-lg rounded-lg overflow-hidden"
+            className="bg-white shadow-md rounded-lg overflow-hidden border hover:shadow-xl transition"
             whileHover={{ scale: 1.05 }}
           >
             <img
@@ -102,8 +100,8 @@ export default function HowItWorks() {
               className="w-full h-48 object-cover"
             />
             <div className="p-4">
-              <h3 className="font-bold text-lg">{blog.title}</h3>
-              <p className="text-gray-600">{blog.author}</p>
+              <h3 className="font-bold text-lg text-rose-500">{blog.title}</h3>
+              <p className="text-slate-600">{blog.author}</p>
             </div>
           </motion.div>
         ))}
@@ -112,7 +110,7 @@ export default function HowItWorks() {
       {/* Write a Blog Button */}
       <div className="mt-12 text-center">
         <motion.button
-          className="bg-teal-500 hover:bg-blue-700 px-6 py-3 rounded-lg font-bold text-black transition-all"
+          className="bg-rose-400 hover:bg-rose-500 px-6 py-3 rounded-lg font-semibold text-white shadow-md transition"
           whileHover={{ scale: 1.05 }}
         >
           Write a Blog ✍️

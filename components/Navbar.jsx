@@ -34,7 +34,7 @@ export default function Navbar() {
           >
             <Image src="/Edugine-logo.png" alt="EduGenie Logo" width={40} height={40} />
           </motion.div>
-          <span className="text-2xl font-bold text-teal-600 dark:text-white">EduGenie</span>
+          <span className="text-2xl font-bold text-emerald-500 dark:text-white">EduGenie</span>
         </Link>
 
         {/* Desktop Menu */}
@@ -48,7 +48,7 @@ export default function Navbar() {
               >
                 <Link
                   href={getRoute(item)}
-                  className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition-colors"
+                  className="text-gray-800 dark:text-gray-300 hover:text-indigo-500 transition-colors"
                 >
                   {item}
                 </Link>
@@ -66,7 +66,7 @@ export default function Navbar() {
                   Welcome, {session?.user?.name?.split(" ")[0]}
                 </span>
                 <button
-                  className="bg-teal-600 text-white rounded-md px-4 py-2 hover:bg-teal-700 transition"
+                  className="bg-emerald-500 text-white rounded-md px-4 py-2 hover:bg-emerald-600 transition"
                   onClick={handleSignOut}
                 >
                   Sign out
@@ -75,7 +75,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/login"
-                className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-700 transition"
+                className="px-4 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-600 transition"
               >
                 Login
               </Link>
@@ -108,7 +108,7 @@ export default function Navbar() {
                   key={index}
                   href={getRoute(item)}
                   onClick={() => setIsOpen(false)}
-                  className="block text-gray-800 dark:text-gray-300 hover:text-teal-600 transition"
+                  className="block text-gray-800 dark:text-gray-300 hover:text-indigo-500 transition"
                 >
                   {item}
                 </Link>
@@ -122,7 +122,7 @@ export default function Navbar() {
                       Welcome, {session?.user?.name?.split(" ")[0]}
                     </span>
                     <button
-                      className="bg-teal-500 text-white rounded-md px-4 py-2 hover:bg-teal-700 transition"
+                      className="bg-emerald-500 text-white rounded-md px-4 py-2 hover:bg-emerald-600 transition"
                       onClick={handleSignOut}
                     >
                       Sign out
@@ -133,14 +133,14 @@ export default function Navbar() {
                     <Link
                       href="/login"
                       onClick={() => setIsOpen(false)}
-                      className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition text-center"
+                      className="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition text-center"
                     >
                       Login
                     </Link>
                     <Link
                       href="/signup"
                       onClick={() => setIsOpen(false)}
-                      className="px-4 py-2 border border-teal-600 text-teal-600 rounded-md text-center hover:bg-teal-600 hover:text-white transition"
+                      className="px-4 py-2 border border-emerald-600 text-emerald-600 rounded-md text-center hover:bg-emerald-600 hover:text-white transition"
                     >
                       Sign Up
                     </Link>

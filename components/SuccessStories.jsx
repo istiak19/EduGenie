@@ -22,21 +22,20 @@ export default function SuccessStories() {
       text: "The interactive courses and personalized AI recommendations helped me upskill faster than ever.",
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNsxeqTj16QraEJsrpxM8om5YUn83B2JxOqA&s",
     },
-    
   ];
 
   return (
-    <section className="bg-gray-300 py-16 px-6 text-center">
+    <section className="bg-slate-50 py-16 px-6 text-center">
       {/* Section Header */}
       <motion.h2
-        className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6"
+        className="text-3xl sm:text-4xl font-bold text-violet-700 mb-6"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         Real Stories. Real Impact.
       </motion.h2>
-      <p className="text-md sm:text-lg text-gray-600 mb-10 px-4">
+      <p className="text-md sm:text-lg text-slate-600 mb-10 px-4">
         See how EduGenie is transforming lives with AI-powered learning.
       </p>
 
@@ -45,22 +44,22 @@ export default function SuccessStories() {
         {stats.map((stat, index) => (
           <motion.div
             key={index}
-            className="bg-white shadow-md p-6 rounded-lg w-40 sm:w-48"
+            className="bg-white shadow-md p-6 rounded-lg w-40 sm:w-48 transition hover:shadow-xl"
             whileHover={{ scale: 1.05 }}
           >
-            <h3 className="text-2xl sm:text-3xl font-bold text-blue-600">{stat.label}</h3>
-            <p className="text-gray-600">{stat.text}</p>
+            <h3 className="text-2xl sm:text-3xl font-bold text-violet-600">{stat.label}</h3>
+            <p className="text-slate-600">{stat.text}</p>
           </motion.div>
         ))}
       </div>
 
-      {/* Success Stories */}
+      {/* Testimonials */}
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {testimonials.map((testimonial) => (
           <motion.div
             key={testimonial.id}
-            className="p-6 bg-white shadow-lg rounded-lg flex flex-col sm:flex-row items-center gap-4"
-            whileHover={{ scale: 1.05 }}
+            className="p-6 bg-white shadow-lg rounded-lg flex flex-col sm:flex-row items-center gap-4 hover:shadow-xl transition"
+            whileHover={{ scale: 1.03 }}
           >
             <img
               src={testimonial.image}
@@ -68,8 +67,8 @@ export default function SuccessStories() {
               className="w-16 h-16 rounded-full object-cover"
             />
             <div className="text-center sm:text-left">
-              <p className="text-gray-700">"{testimonial.text}"</p>
-              <h4 className="font-semibold mt-2 text-blue-600">{testimonial.name}</h4>
+              <p className="text-slate-700">"{testimonial.text}"</p>
+              <h4 className="font-semibold mt-2 text-violet-600">{testimonial.name}</h4>
             </div>
           </motion.div>
         ))}
@@ -83,27 +82,29 @@ export default function SuccessStories() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">Meet Your AI Assistant</h3>
-          <p className="text-gray-600 text-sm sm:text-base">
+          <h3 className="text-lg sm:text-xl font-bold text-violet-700 mb-4">Meet Your AI Assistant</h3>
+          <p className="text-slate-600 text-sm sm:text-base">
             Ask anything about your learning journey!
           </p>
-          
+
           {/* Chat Bubble */}
           <motion.div
-            className="bg-yellow-400 text-gray-900 p-3 rounded-lg mt-4 inline-block text-left text-sm sm:text-base"
+            className="bg-amber-400 text-slate-900 p-3 rounded-lg mt-4 inline-block text-left text-sm sm:text-base shadow-sm"
             whileHover={{ scale: 1.05 }}
           >
             <p>📢 "How can I help you learn today?"</p>
           </motion.div>
 
-          {/* Chat Input Preview */}
+          {/* Chat Input */}
           <div className="mt-4 flex border rounded-lg overflow-hidden">
             <input
               type="text"
               placeholder="Ask something..."
-              className="w-full p-2 text-sm sm:text-base outline-none"
+              className="w-full p-2 text-sm sm:text-base outline-none text-slate-800"
             />
-            <button className="bg-yellow-400 text-gray-900 px-4 text-sm sm:text-base">➤</button>
+            <button className="bg-amber-400 text-slate-900 px-4 text-sm sm:text-base hover:bg-amber-500 transition">
+              ➤
+            </button>
           </div>
         </motion.div>
       </div>
