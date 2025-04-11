@@ -11,7 +11,7 @@ const Page = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/course");
+        const response = await axios.get("https://genie-one-xi.vercel.app/api/course");
         setCourses(response.data);
       } catch (err) {
         setError(err.message);
@@ -23,7 +23,7 @@ const Page = () => {
   }, []);
 
   return (
-    <div className="my-18">
+    <div>
       <div className="space-y-2 py-8 bg-teal-400">
         <h1 className="text-3xl text-teal-900 font-bold text-center">
           All Courses{" "}

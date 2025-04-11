@@ -25,7 +25,9 @@ export default function RootLayout({ children }) {
       <body className={`${inter.variable} font-sans antialiased`}>
         <NextAuthProvider>
           <Navbar />
-          {children}
+          <main className="min-h-[calc(100svh-230px)]">
+            {children}
+          </main>
           <Footer></Footer>
         </NextAuthProvider>
       </body>
