@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function HowItWorks() {
   const steps = [
@@ -68,8 +69,8 @@ export default function HowItWorks() {
           <motion.div
             key={step.id}
             className="p-6 bg-teal-500 text-black text-center rounded-lg shadow-md"
-            
-            
+
+
             whileHover={{ scale: 1.05 }}
           >
             <div className="text-5xl">{step.icon}</div>
@@ -111,12 +112,14 @@ export default function HowItWorks() {
 
       {/* Write a Blog Button */}
       <div className="mt-12 text-center">
-        <motion.button
-          className="bg-teal-500 hover:bg-blue-700 px-6 py-3 rounded-lg font-bold text-black transition-all"
-          whileHover={{ scale: 1.05 }}
-        >
-          Write a Blog ✍️
-        </motion.button>
+        <Link href="/blogs">
+          <motion.button
+            className="bg-teal-500 btn hover:bg-teal-700 px-4 py-6 rounded-lg font-bold text-black transition-all"
+            whileHover={{ scale: 1.05 }}
+          >
+            Write a Blog ✍️
+          </motion.button>
+        </Link>
       </div>
     </section>
   );

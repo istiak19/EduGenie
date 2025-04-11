@@ -124,7 +124,7 @@ const LoginPage = () => {
                 />
 
                 {/* Sign In Button */}
-                <Button type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-700">
+                <Button type="submit" className="w-full bg-teal-500 text-white hover:bg-teal-700">
                   Sign In
                 </Button>
               </form>
@@ -137,7 +137,7 @@ const LoginPage = () => {
             {/* Register Link */}
             <p className="text-xs text-center pt-5">
               Don’t have an account?{" "}
-              <Link href="/register" className="text-blue-600 hover:underline">
+              <Link href="/register" className="text-teal-600 hover:underline">
                 Sign Up
               </Link>
             </p>

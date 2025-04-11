@@ -5,7 +5,7 @@ const AllBlogs = ({refetchBlogs}) => {
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      const res = await fetch("http://localhost:3000/api/blogs");
+      const res = await fetch("https://genie-one-xi.vercel.app/api/blogs");
       const data = await res.json();
       console.log(data);
       setBlogs(data);

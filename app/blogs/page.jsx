@@ -18,12 +18,12 @@ const Page = () => {
       content: form.content.value,
       approval: false,
     };
-    const res = await fetch("http://localhost:3000/api/blogs", {
+    const res = await fetch("https://genie-one-xi.vercel.app/api/blogs", {
       method: "POST",
       body: JSON.stringify(blog),
     });
     const response = await res.json();
-    console.log(response);
+    // console.log(response);
     if (response.insertedId) {
       setRefetchBlogs((prev) => prev + 1);
       setCreateBlogOpen(false)
@@ -31,7 +31,7 @@ const Page = () => {
       Swal.fire({
         position: "top",
         icon: "success",
-        title: "Your course generate successfully!",
+        title: "Your blog created successfully!",
         showConfirmButton: false,
         timer: 1500,
       });
