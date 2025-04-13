@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function HowItWorks() {
   const steps = [
@@ -35,19 +36,22 @@ export default function HowItWorks() {
       id: 1,
       title: "Mastering AI in Education",
       author: "By Jane Doe",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPiTkIL31u1Jplh2A6kouDuCb5PtC4dSEJIQ&s",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPiTkIL31u1Jplh2A6kouDuCb5PtC4dSEJIQ&s",
     },
     {
       id: 2,
       title: "Top 10 Learning Hacks",
       author: "By John Smith",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtP3_BAREFiO-T45XAC620wiE6RWYAifoIg&s",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtP3_BAREFiO-T45XAC620wiE6RWYAifoIg&s",
     },
     {
       id: 3,
       title: "Why AI is the Future of Learning",
       author: "By Alex Brown",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQluAH3XJcELIidT_K1I9d2EWUNKL1WZXzw0w&s",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQluAH3XJcELIidT_K1I9d2EWUNKL1WZXzw0w&s",
     },
   ];
 
@@ -109,12 +113,14 @@ export default function HowItWorks() {
 
       {/* Write a Blog Button */}
       <div className="mt-12 text-center">
-        <motion.button
-          className="bg-rose-400 hover:bg-rose-500 px-6 py-3 rounded-lg font-semibold text-white shadow-md transition"
-          whileHover={{ scale: 1.05 }}
-        >
-          Write a Blog ✍️
-        </motion.button>
+        <Link href="/blogs">
+          <motion.button
+            className="bg-rose-400 hover:bg-rose-500 px-6 py-3 rounded-lg font-semibold text-white shadow-md transition"
+            whileHover={{ scale: 1.05 }}
+          >
+            Write a Blog ✍️
+          </motion.button>
+        </Link>
       </div>
     </section>
   );

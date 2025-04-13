@@ -21,7 +21,7 @@ const formSchema = z.object({
     email: z.string().email({ message: "Invalid email format." }),
     password: z.string().min(6, { message: "Password must be at least 6 characters." }),
     cPassword: z.string().min(6, { message: "Password must be at least 6 characters." }),
-    photo: z.any().optional(),
+    // photo: z.any().optional(),
 }).refine((data) => data.password === data.cPassword, {
     message: "Passwords don't match!",
     path: ["cPassword"],
@@ -38,7 +38,7 @@ const Register = () => {
             email: "",
             password: "",
             cPassword: "",
-            photo: null,
+            // photo: null,
         },
     });
 
@@ -69,7 +69,7 @@ const Register = () => {
                 name: data.name,
                 email: data.email,
                 password: data.password,
-                photo: photoURL || "",
+                // photo: photoURL || "",
             };
 
             console.log("User Info:", userInfo);
@@ -148,7 +148,7 @@ const Register = () => {
                                         </FormItem>
                                     )}
                                 />
-                                <FormField
+                                {/* <FormField
                                     control={form.control}
                                     name="photo"
                                     render={({ field: { onChange } }) => (
@@ -164,7 +164,7 @@ const Register = () => {
                                             <FormMessage />
                                         </FormItem>
                                     )}
-                                />
+                                /> */}
                                 <FormField
                                     control={form.control}
                                     name="password"
@@ -202,7 +202,7 @@ const Register = () => {
                         </div>
                         <p className="pt-5 text-gray-600 text-xs text-center">
                             Already have an account?{" "}
-                            <span className="text-blue-600 hover:underline">
+                            <span className="text-teal-600 hover:underline">
                                 <Link href="/login">Login</Link>
                             </span>
                         </p>

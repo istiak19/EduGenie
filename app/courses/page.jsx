@@ -11,7 +11,7 @@ const Page = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/course");
+        const response = await axios.get("https://genie-one-xi.vercel.app/api/course");
         setCourses(response.data);
       } catch (err) {
         setError(err.message);
@@ -23,9 +23,15 @@ const Page = () => {
   }, []);
 
   return (
+<<<<<<< HEAD
     <div className="my-18">
       <div className="space-y-2 py-8 bg-emerald-500">
         <h1 className="text-3xl text-emerald-900 font-bold text-center">
+=======
+    <div>
+      <div className="space-y-2 py-8 bg-teal-400">
+        <h1 className="text-3xl text-teal-900 font-bold text-center">
+>>>>>>> 589ebaa7129bff3de3a5b10cef6a9511cb6279ab
           All Courses{" "}
           <MdOutlineMenuBook className="inline-block ml-2 text-4xl text-orange-300" />
         </h1>
