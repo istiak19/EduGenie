@@ -25,7 +25,7 @@ const HomePage = () => {
       <HowItWorks />
 
       {/* Chatbot Section */}
-      <div className="bg-white p-6 rounded-lg shadow-md max-w-xl w-full text-center">
+      {/* <div className="bg-white p-6 rounded-lg shadow-md max-w-xl w-full text-center">
         <h2 className="text-2xl font-semibold text-gray-700 mb-4">
           How can we help you today?
         </h2>
@@ -49,15 +49,13 @@ const HomePage = () => {
             .
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* Additional Sections */}
       <StudentDashboard />
       <EducatorAndSubscription />
      
 
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };
