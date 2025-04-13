@@ -1,20 +1,48 @@
 'use client';
-
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
-    console.log("Form Data:", data);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        toast.success("Message sent successfully!");
+        e.target.reset();
+      } else {
+        const errData = await res.json();
+        toast.error(errData?.error || "Something went wrong!");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      toast.error("Server error! Please try again later.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="max-w-3xl mx-auto my-28 px-4">
+      <ToastContainer />
       <div className="bg-white p-6 rounded-lg shadow-md">
         <h2 className="text-3xl md:text-5xl font-bold text-center text-emerald-500 mb-8">
           Contact Us
@@ -82,8 +110,8 @@ const Contact = () => {
 
           {/* Submit Button */}
           <div className="md:col-span-2 text-center">
-            <Button type="submit" className="bg-emerald-500 hover:bg-emerald-700 text-white w-full">
-              Send Message
+            <Button type="submit" disabled={loading} className="bg-emerald-500 hover:bg-emerald-700 text-white w-full">
+              {loading ? "Sending..." : "Send Message"}
             </Button>
           </div>
         </form>
