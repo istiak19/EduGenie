@@ -19,15 +19,20 @@ import { register } from "@/app/actions/auth/register";
 const formSchema = z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters." }),
     email: z.string().email({ message: "Invalid email format." }),
-    password: z.string().min(6, { message: "Password must be at least 6 characters." }),
+    password: z.string()
+        .min(6, { message: "Password must be at least 6 characters." })
+        .regex(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+            {
+                message:
+                    "Password must include uppercase, lowercase, number, and special character.",
+            }
+        ),
     cPassword: z.string().min(6, { message: "Password must be at least 6 characters." }),
-    // photo: z.any().optional(),
 }).refine((data) => data.password === data.cPassword, {
     message: "Passwords don't match!",
     path: ["cPassword"],
 });
-
-// const image_key = process.env.NEXT_PUBLIC_IMAGE_KEY;
 
 const Register = () => {
     const router = useRouter();
@@ -37,8 +42,7 @@ const Register = () => {
             name: "",
             email: "",
             password: "",
-            cPassword: "",
-            // photo: null,
+            cPassword: ""
         },
     });
 
@@ -46,30 +50,11 @@ const Register = () => {
         try {
             console.clear();
             console.log("Submitted Data:", data);
-
-            let photoURL = "";
-            if (data.photo && data.photo.length > 0) {
-                const formData = new FormData();
-                formData.append("image", data.photo[0]);
-
-                const response = await fetch(`https://api.imgbb.com/1/upload?key=${image_key}`, {
-                    method: "POST",
-                    body: formData,
-                });
-
-                if (!response.ok) {
-                    throw new Error("Image upload failed!");
-                }
-
-                const result = await response.json();
-                photoURL = result.data.url;
-            }
-
             const userInfo = {
                 name: data.name,
                 email: data.email,
                 password: data.password,
-                // photo: photoURL || "",
+                role: 'student'
             };
 
             console.log("User Info:", userInfo);
