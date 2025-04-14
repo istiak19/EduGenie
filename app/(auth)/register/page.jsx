@@ -27,7 +27,7 @@ const formSchema = z.object({
     path: ["cPassword"],
 });
 
-const image_key = process.env.NEXT_PUBLIC_IMAGE_KEY;
+// const image_key = process.env.NEXT_PUBLIC_IMAGE_KEY;
 
 const Register = () => {
     const router = useRouter();
