@@ -22,8 +22,8 @@ const OurTeam = () => {
               alt="profile image"
             />
           </div>
-          <h1 className="text-2xl font-semibold">Member name</h1>
-          <p className="text-md">Member role</p>
+          <h1 className="text-xl font-semibold">Istiak Ahamed</h1>
+          <p className="text-md">Frontend Developer</p>
         </div>
      {/* ============ */}
      <div className="flex flex-col items-center justify-center gap-2">
@@ -36,8 +36,8 @@ const OurTeam = () => {
               alt="profile image"
             />
           </div>
-          <h1 className="text-2xl font-semibold">Member name</h1>
-          <p className="text-md">Member role</p>
+          <h1 className="text-xl font-semibold">Ambia khatun</h1>
+          <p className="text-md">Fronted Developer</p>
         </div>
         {/* --------------- */}
         <div className="flex flex-col items-center justify-center gap-2">
@@ -50,8 +50,8 @@ const OurTeam = () => {
               alt="profile image"
             />
           </div>
-          <h1 className="text-2xl font-semibold">Member name</h1>
-          <p className="text-md">Member role</p>
+          <h1 className="text-xl font-semibold">Md Jane Alam</h1>
+          <p className="text-md">Frontend Developer</p>
         </div>
         {/* --------------- */}
         <div className="flex flex-col items-center justify-center gap-2">
@@ -64,8 +64,8 @@ const OurTeam = () => {
               alt="profile image"
             />
           </div>
-          <h1 className="text-2xl font-semibold">Member name</h1>
-          <p className="text-md">Member role</p>
+          <h1 className="text-xl font-semibold">Showrov Ghosh</h1>
+          <p className="text-md">Frontend Developer</p>
         </div>
         {/* ----------------------- */}
         <div className="flex flex-col items-center justify-center gap-2">
@@ -78,8 +78,8 @@ const OurTeam = () => {
               alt="profile image"
             />
           </div>
-          <h1 className="text-2xl font-semibold">Member name</h1>
-          <p className="text-md">Member role</p>
+          <h1 className="text-xl font-semibold">Tahsin</h1>
+          <p className="text-md">Frontendd Developer</p>
         </div>
         {/* ---------------- */}
         <div className="flex flex-col items-center justify-center gap-2">
@@ -92,8 +92,8 @@ const OurTeam = () => {
               alt="profile image"
             />
           </div>
-          <h1 className="text-2xl font-semibold">Member name</h1>
-          <p className="text-md">Member role</p>
+          <h1 className="text-2xl font-semibold">Imtiaz Hossen</h1>
+          <p className="text-md">Frontend Developer</p>
         </div>
         {/* --------- */}
       </div>
