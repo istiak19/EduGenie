@@ -1,7 +1,9 @@
 'use client';
 import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 const QuizAddFrom = () => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     question: '',
     options: ['', '', '', ''],
@@ -17,7 +19,8 @@ const QuizAddFrom = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('/api/quiz', {
+    setLoading(true);
+    const res = await fetch('/api/quiz/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -25,18 +28,19 @@ const QuizAddFrom = () => {
 
     const data = await res.json();
     if (res.ok) {
-      alert('Quiz added successfully!');
       setFormData({ question: '', options: ['', '', '', ''], correctAnswer: '', category: 'web-development' });
+      toast.success("Quiz Data Added Successfully");
     } else {
-      alert('Error: ' + data.message);
+      toast.error(data.message || "Failed to add quiz");
     }
+    setLoading(false);
   };
 
   return (
     <div className="max-w-xl mx-auto p-4">
+      <ToastContainer />
       <h2 className="text-xl font-bold mb-4">Add New Quiz</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-
         <input
           type="text"
           placeholder="Enter question"
@@ -58,17 +62,19 @@ const QuizAddFrom = () => {
           />
         ))}
 
-        <select
-          value={formData.correctAnswer}
-          onChange={(e) => setFormData({ ...formData, correctAnswer: e.target.value })}
-          className="w-full border p-2 rounded"
-          required
-        >
-          <option value="">Select Correct Answer</option>
-          {formData.options.map((option, index) => (
-            <option key={index} value={option}>{option || `Option ${index + 1}`}</option>
-          ))}
-        </select>
+        {formData.options.every(option => option.trim() !== '') && (
+          <select
+            value={formData.correctAnswer}
+            onChange={(e) => setFormData({ ...formData, correctAnswer: e.target.value })}
+            className="w-full border p-2 rounded"
+            required
+          >
+            <option value="">Select Correct Answer</option>
+            {formData.options.map((option, index) => (
+              <option key={index} value={option}>{option}</option>
+            ))}
+          </select>
+        )}
 
         <select
           value={formData.category}
@@ -81,8 +87,8 @@ const QuizAddFrom = () => {
           <option value="digital-marketing">Digital Marketing</option>
         </select>
 
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-          Add Quiz
+        <button type="submit" disabled={loading} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          {loading ? "Adding..." : "Add Quiz"}
         </button>
       </form>
     </div>

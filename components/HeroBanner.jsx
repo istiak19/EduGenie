@@ -10,7 +10,7 @@ export default function HeroBanner() {
     dots: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 3,
+    slidesToShow: 3, // Default for large screens
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2500,
@@ -22,18 +22,19 @@ export default function HeroBanner() {
   };
 
   const features = [
-    { id: 1, text: "AI-Powered Course Generation", color: "bg-indigo-500" },
-    { id: 2, text: "Personalized Learning Paths", color: "bg-emerald-500" },
-    { id: 3, text: "Instant Course Summaries", color: "bg-orange-400" },
-    { id: 4, text: "Smart Quiz Generator", color: "bg-fuchsia-500" },
-    { id: 5, text: "Interactive Video Lessons", color: "bg-rose-500" },
+    { id: 1, text: "AI-Powered Course Generation", color: "bg-blue-500" },
+    { id: 2, text: "Personalized Learning Paths", color: "bg-green-500" },
+    { id: 3, text: "Instant Course Summaries", color: "bg-yellow-500" },
+    { id: 4, text: "Smart Quiz Generator", color: "bg-purple-500" },
+    { id: 5, text: "Interactive Video Lessons", color: "bg-red-500" },
   ];
 
   return (
-    <section className="relative flex flex-col items-center justify-center pb-28 pt-32 bg-gradient-to-br from-indigo-600 via-sky-700 to-indigo-900 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
+    <section className="relative flex flex-col items-center justify-center pb-28 pt-32 bg-gradient-to-br from-teal-500 via-cyan-600 to-teal-900 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
 
+      {/* Floating Animation Background */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-blue-900 to-transparent opacity-50"
+        className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-transparent opacity-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -46,11 +47,12 @@ export default function HeroBanner() {
       />
 
       <motion.div
-        className="absolute bottom-1/3 right-1/4 w-24 md:w-32 h-24 md:h-32 bg-orange-300 opacity-20 rounded-full blur-3xl"
+        className="absolute bottom-1/3 right-1/4 w-24 md:w-32 h-24 md:h-32 bg-yellow-300 opacity-20 rounded-full blur-3xl"
         animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
       />
 
+      {/* Hero Content */}
       <div className="z-10 relative max-w-3xl">
         <motion.h1
           className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight"
@@ -58,7 +60,7 @@ export default function HeroBanner() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          Welcome to <span className="text-orange-300">EduGenie</span>
+          Welcome to <span className="text-yellow-300">EduGenie</span>
         </motion.h1>
 
         <motion.p
@@ -71,13 +73,14 @@ export default function HeroBanner() {
         </motion.p>
 
         <motion.button
-          className="px-6 sm:px-8 py-3 bg-orange-400 text-gray-900 rounded-lg font-bold hover:bg-orange-500 transition-all shadow-xl hover:scale-105"
+          className="px-6 sm:px-8 py-3 bg-yellow-400 text-gray-900 rounded-lg font-bold hover:bg-yellow-500 transition-all shadow-xl hover:scale-105"
           whileHover={{ scale: 1.05 }}
         >
           Get Started
         </motion.button>
       </div>
 
+      {/* Moving Slider Section */}
       <div className="relative mt-12 w-full max-w-5xl z-10">
         <Slider {...settings}>
           {features.map((feature) => (

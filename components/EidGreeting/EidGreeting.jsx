@@ -83,14 +83,14 @@ const EidGreeting = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 70, damping: 12 }}
-            className="bg-indigo-900 shadow-2xl mx-auto my-10 p-8 rounded-xl max-w-lg text-center text-white"
+            className="bg-teal-100 shadow-2xl mx-auto my-10 p-8 rounded-xl max-w-lg text-center"
         >
-            <h2 className="mb-6 font-bold text-orange-300 text-3xl">Eid Greeting Generator</h2>
+            <h2 className="mb-6 font-bold text-teal-600 text-3xl">Eid Greeting Generator</h2>
 
             {showConfetti && <Confetti />}
 
             <div className="mb-6">
-                <div className="text-xl font-semibold text-orange-200 flex items-center justify-center mb-4">
+                <div className="text-xl font-semibold text-teal-700 flex items-center justify-center mb-4">
                     <FaRegCalendarAlt className="mr-2" />
                     Countdown to Eid
                 </div>
@@ -98,7 +98,7 @@ const EidGreeting = () => {
                     {["days", "hours", "minutes", "seconds"].map((unit, index) => (
                         <motion.div
                             key={index}
-                            className="bg-indigo-800 shadow-md rounded-lg p-6 w-24 text-center"
+                            className="bg-white shadow-md rounded-lg p-6 w-24 text-center"
                         >
                             <AnimatePresence mode="wait">
                                 <motion.p
@@ -108,12 +108,12 @@ const EidGreeting = () => {
                                     animate="animate"
                                     exit="exit"
                                     transition={{ duration: 0.3 }}
-                                    className="text-2xl font-bold text-orange-300"
+                                    className="text-2xl font-bold text-teal-700"
                                 >
                                     {countdown[unit]}
                                 </motion.p>
                             </AnimatePresence>
-                            <span className="text-sm text-indigo-300 capitalize">{unit}</span>
+                            <span className="text-sm text-gray-600 capitalize">{unit}</span>
                         </motion.div>
                     ))}
                 </div>
@@ -124,7 +124,7 @@ const EidGreeting = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="mb-6 text-orange-100 text-xl italic"
+                    className="mb-6 text-gray-800 text-xl italic"
                 >
                     {greeting}
                 </motion.p>
@@ -135,11 +135,11 @@ const EidGreeting = () => {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ type: "spring", stiffness: 120, damping: 8 }}
-                    className="bg-indigo-800 shadow-lg hover:shadow-2xl mt-6 p-6 rounded-lg"
+                    className="bg-teal-50 shadow-lg hover:shadow-2xl mt-6 p-6 rounded-lg"
                 >
-                    <p className="mb-2 font-semibold text-orange-300 text-xl">How about this gift idea?</p>
-                    <p className="font-medium text-indigo-100 text-lg">
-                        <span className="font-bold text-orange-200">{gift}</span>
+                    <p className="mb-2 font-semibold text-teal-600 text-xl">How about this gift idea?</p>
+                    <p className="font-medium text-gray-800 text-lg">
+                        <span className="font-bold text-teal-700">{gift}</span>
                     </p>
                 </motion.div>
             )}
@@ -149,7 +149,7 @@ const EidGreeting = () => {
                     whileTap={{ scale: 0.95 }}
                     whileHover={{ scale: 1.05 }}
                     onClick={generateGreeting}
-                    className="bg-orange-400 hover:bg-orange-500 px-6 py-3 rounded-md font-semibold text-white transition duration-300"
+                    className="bg-teal-600 hover:bg-teal-700 px-6 py-3 rounded-md font-semibold text-white transition duration-300"
                 >
                     Get an Eid Greeting
                 </motion.button>
@@ -160,7 +160,7 @@ const EidGreeting = () => {
                             whileTap={{ scale: 0.95 }}
                             whileHover={{ scale: 1.05 }}
                             onClick={copyGreetingToClipboard}
-                            className="bg-orange-300 hover:bg-orange-400 px-6 py-3 rounded-md font-semibold text-black transition duration-300 flex items-center"
+                            className="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-md font-semibold text-white transition duration-300 flex items-center"
                         >
                             <FaCopy className="mr-2" />
                             Copy Greeting
@@ -172,9 +172,9 @@ const EidGreeting = () => {
                             transition={{ delay: 0.3 }}
                             className="flex gap-6 mt-2"
                         >
-                            {[
+                            {[ 
                                 { href: `https://www.facebook.com/sharer/sharer.php?u=https://your-app-url.com&quote=${encodedGreeting}`, icon: <FaFacebookF />, bg: "bg-blue-600", hover: "hover:bg-blue-700" },
-                                { href: `https://twitter.com/intent/tweet?text=${encodedGreeting}`, icon: <FaTwitter />, bg: "bg-sky-500", hover: "hover:bg-sky-600" },
+                                { href: `https://twitter.com/intent/tweet?text=${encodedGreeting}`, icon: <FaTwitter />, bg: "bg-blue-400", hover: "hover:bg-blue-500" },
                                 { href: `https://api.whatsapp.com/send?text=${encodedGreeting}`, icon: <FaWhatsapp />, bg: "bg-green-500", hover: "hover:bg-green-600" },
                             ].map((item, i) => (
                                 <motion.a

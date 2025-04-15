@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 export async function POST(req) {
   try {
     const body = await req.json();
-    console.log(body)
     const { firstName, lastName, email, tel, message } = body;
 
    const result = await dbConnect(collectionNames.messageCollection).insertOne({
@@ -18,7 +17,6 @@ export async function POST(req) {
 
     return NextResponse.json(result);
   } catch (error) {
-    console.error("Error saving contact:", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
