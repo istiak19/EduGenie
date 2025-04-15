@@ -38,7 +38,6 @@ const Courses = () => {
           Explore the wide range of AI-powered courses
         </p>
       </div>
-
       {/* Content */}
       <div className="p-4 max-w-7xl mx-auto">
         {loading ? (
@@ -73,7 +72,6 @@ const Courses = () => {
                       <strong>Duration:</strong> {course.Duration}
                     </p>
                   </div>
-
                   <div className="flex flex-wrap gap-2 mt-auto">
                     <span className="bg-teal-500 text-white text-xs px-3 py-1 rounded-full">
                       {course.Topic}

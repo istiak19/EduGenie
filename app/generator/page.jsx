@@ -30,7 +30,6 @@ const Generator = () => {
             body: JSON.stringify(courseInfo)
         })
         const response = await res.json();
-        // console.log(response);
         if (response.insertedId) {
             Swal.fire({
                 position: "top",
