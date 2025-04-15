@@ -5,6 +5,7 @@ const StudentPanel = () => {
     return (
         <div>
             <Link href='/dashboard/studentHome'>Home</Link>
+            <Link href='/dashboard/profile'>Profile</Link>
         </div>
     );
 };
