@@ -17,7 +17,6 @@ export async function POST(req) {
 
     return NextResponse.json(result);
   } catch (error) {
-    console.error("Error saving contact:", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

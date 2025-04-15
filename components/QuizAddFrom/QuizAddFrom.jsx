@@ -1,13 +1,16 @@
 'use client';
 import { useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
 
 const QuizAddFrom = () => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     question: '',
     options: ['', '', '', ''],
     correctAnswer: '',
     category: 'web-development',
   });
+  console.log(formData)
 
   const handleOptionChange = (index, value) => {
     const newOptions = [...formData.options];
@@ -16,8 +19,9 @@ const QuizAddFrom = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
-    const res = await fetch('/api/quiz', {
+    const res = await fetch('/api/quiz/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
@@ -25,15 +29,18 @@ const QuizAddFrom = () => {
 
     const data = await res.json();
     if (res.ok) {
-      alert('Quiz added successfully!');
+
       setFormData({ question: '', options: ['', '', '', ''], correctAnswer: '', category: 'web-development' });
+      toast.success("Quiz Data Add Succefully");
+      setLoading(false);
     } else {
-      alert('Error: ' + data.message);
+      toast.error(data.message)
     }
   };
 
   return (
     <div className="max-w-xl mx-auto p-4">
+      <ToastContainer />
       <h2 className="text-xl font-bold mb-4">Add New Quiz</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
 
@@ -80,9 +87,11 @@ const QuizAddFrom = () => {
           <option value="graphics-design">Graphics Design</option>
           <option value="digital-marketing">Digital Marketing</option>
         </select>
-
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-          Add Quiz
+        {/* subbmit button  */}
+        <button type="submit" disabled={loading} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+          {
+            loading ? "Adding....." : "Add Quiz"
+          }
         </button>
       </form>
     </div>
