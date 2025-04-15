@@ -16,11 +16,13 @@ const Sidebar = () => {
                 const res = await fetch("https://genie-one-xi.vercel.app/api/user");
                 const data = await res.json();
                 setUsers(data);
-                setLoading(false);
             } catch (err) {
                 console.error("Failed to fetch users", err);
+            } finally {
+                setLoading(false);
             }
         };
+
         fetchUser();
     }, []);
 
@@ -31,11 +33,13 @@ const Sidebar = () => {
     const roleUser = users.find(user => user?.email === session?.user?.email);
 
     return (
-        <div className="text-white">
-            <ul className="menu p-4">
-                {roleUser?.role === "educator" && <EducatorPanel />}
-                {roleUser?.role === "student" && <StudentPanel />}
-            </ul>
+        <div className="text-white w-full">
+            {
+                roleUser?.role === "educator" && <EducatorPanel />
+            }
+            {
+                roleUser?.role === "student" && <StudentPanel />
+            }
         </div>
     );
 };

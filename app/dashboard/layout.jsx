@@ -1,15 +1,18 @@
 import Sidebar from "@/components/Sidebar/Sidebar";
 
 const DashboardLayout = ({ children }) => {
-
     return (
-        <div className="flex flex-col md:flex-row">
-            <div className='bg-teal-500 w-full md:w-64 min-h-screen pl-5'>
-                <Sidebar/>
-            </div>
-            <div className="flex-1 p-4 md:p-10">
+        <div className="flex flex-col md:flex-row min-h-screen">
+            {/* Sidebar */}
+            <aside className="w-full md:w-64 bg-teal-500 text-white">
+                <div className="h-full md:min-h-screen px-5 py-4">
+                    <Sidebar />
+                </div>
+            </aside>
+            {/* Main Content */}
+            <main className="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 bg-gray-50">
                 {children}
-            </div>
+            </main>
         </div>
     );
 };
