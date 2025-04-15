@@ -1,16 +1,21 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
+import { useSession } from 'next-auth/react';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Quiz = () => {
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const searchParams = useSearchParams();
   const category = searchParams.get('category') || 'web-development';
+  const { data: session } = useSession();
+  const email = session?.user?.email;
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -26,24 +31,32 @@ const Quiz = () => {
   };
 
   const handleSubmit = async () => {
-    const answers = questions.map(q => ({
-      questionId: q._id,
-      userAnswer: userAnswers[q._id] || ''
-    }));
+    setLoading(true);
+    try {
+      const answers = questions.map(q => ({
+        questionId: q._id,
+        userAnswer: userAnswers[q._id] || ''
+      }));
 
-    const res = await fetch('/api/quiz/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        userId: 'user123', // তুমি যদি Firebase Auth ইউজ করো, তাহলে dynamic userId পাঠাও
-        category,
-        answers
-      })
-    });
+      const res = await fetch('/api/quiz/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, category, answers })
+      });
 
-    const data = await res.json();
-    setScore(data.score);
-    setSubmitted(true);
+      const data = await res.json();
+      if (res.ok) {
+        setScore(data.score);
+        setSubmitted(true);
+        toast.success(`🎉 Quiz Submitted! Your score is ${data.score}/${questions.length}`);
+      } else {
+        toast.error(data.error || '❌ Something went wrong!');
+      }
+    } catch (error) {
+      toast.error('❌ Failed to submit quiz!');
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (!questions.length) return <p className="text-center mt-10">Loading questions...</p>;
@@ -74,15 +87,18 @@ const Quiz = () => {
       {!submitted ? (
         <button
           onClick={handleSubmit}
-          className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700"
+          disabled={loading}
+          className={`bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 ${loading && 'opacity-50 cursor-not-allowed'}`}
         >
-          Submit Quiz
+          {loading ? 'Submitting...' : 'Submit Quiz'}
         </button>
       ) : (
         <div className="text-center mt-6">
           <h3 className="text-xl font-semibold">Your Score: {score} / {questions.length}</h3>
         </div>
       )}
+
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };
