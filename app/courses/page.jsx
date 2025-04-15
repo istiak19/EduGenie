@@ -42,9 +42,7 @@ const Courses = () => {
       {/* Content */}
       <div className="p-4 max-w-7xl mx-auto">
         {loading ? (
-          <div>
-            <Loading />
-          </div>
+          <Loading />
         ) : error ? (
           <p className="text-center text-red-500 text-lg">{error}</p>
         ) : courses.length === 0 ? (
@@ -63,7 +61,9 @@ const Courses = () => {
                   <h2 className="text-xl font-semibold text-gray-800 mb-2 hover:text-teal-600 transition">
                     {course["Course Name"]}
                   </h2>
-                  <p className="text-gray-600 mb-2"> {course.Description?.slice(0, 100)}...</p>
+                  <p className="text-gray-600 mb-2">
+                    {course.Description?.slice(0, 100)}...
+                  </p>
 
                   <div className="text-sm text-gray-700 space-y-1 mb-4">
                     <p>
