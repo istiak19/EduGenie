@@ -1,17 +1,29 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
+import { useState } from "react";
 
 export default function Navbar() {
+  // const [users, setUsers] = useState([]);
+  // useEffect(() => {
+  //     const fetchUser = async () => {
+  //         const res = await fetch('https://genie-one-xi.vercel.app/api/user');
+  //         const data = await res.json();
+  //         setUsers(data);
+  //     }
+  //     fetchUser()
+  // }, []);
+
+  // const roleUser = users.find(user => user?.email === session?.user?.email)
+
   const [isOpen, setIsOpen] = useState(false);
   const { data: session, status } = useSession();
 
-  const menuItems = ["Home", "Courses", "Generator", "About", "Contact", "Blogs"];
+  const menuItems = ["Home", "Courses", "Generator", "Dashboard", "Contact", "Blogs"];
 
   const getRoute = (item) => (item === "Home" ? "/" : `/${item.toLowerCase()}`);
 
