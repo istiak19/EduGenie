@@ -38,6 +38,7 @@ const Courses = () => {
           Explore the wide range of AI-powered courses
         </p>
       </div>
+
       {/* Content */}
       <div className="p-4 max-w-7xl mx-auto">
         {loading ? (
@@ -56,14 +57,12 @@ const Courses = () => {
                   <div className="h-36 bg-gray-200 rounded-lg mb-4 flex items-center justify-center text-gray-400">
                     Course Image
                   </div>
-
                   <h2 className="text-xl font-semibold text-gray-800 mb-2 hover:text-teal-600 transition">
                     {course["Course Name"]}
                   </h2>
                   <p className="text-gray-600 mb-2">
                     {course.Description?.slice(0, 100)}...
                   </p>
-
                   <div className="text-sm text-gray-700 space-y-1 mb-4">
                     <p>
                       <strong>Category:</strong> {course.Category}

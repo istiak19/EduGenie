@@ -13,12 +13,18 @@ const AboutUs = () => {
         <div>
           <p className="text-md md:text-xl flex flex-col gap-6">
             <span>
-            EduGenie is a cutting-edge platform that empowers learners with AI-driven personalized education. Offering a range of expert-led courses across various domains like tech, business, design, marketing, and AI, it helps users achieve their learning goals faster. With features like interactive video lessons, smart quizzes,
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure
             </span>
 
             <span>
               {" "}
-              and personalized learning paths, EduGenie revolutionizes the learning experience. The platform’s AI assistant provides guidance every step of the way, making learning efficient and engaging. Join EduGenie today and unlock new opportunities in your educational journey.
+              dolor in reprehenderit in voluptate velit esse cillum dolore eu
+              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+              proident, sunt in culpa qui ocia deserunt mollit anim id est
+              laborum.
             </span>
           </p>
         </div>
