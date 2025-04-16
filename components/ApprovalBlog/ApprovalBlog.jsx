@@ -11,7 +11,7 @@ const ApprovalBlog = () => {
     const fetchBlogs = async () => {
         setLoading(true);
         try {
-            const res = await fetch("https://genie-one-xi.vercel.app/api/blogs");
+            const res = await fetch("/api/blogs");
             const data = await res.json();
             setBlogs(data);
         } catch (error) {
@@ -27,7 +27,7 @@ const ApprovalBlog = () => {
 
     const handleStatusChange = async (id, approvalStatus) => {
         try {
-            const res = await fetch(`https://genie-one-xi.vercel.app/api/blogs/${id}`, {
+            const res = await fetch(`/api/blogs/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const ApprovalBlog = () => {
         });
         if (confirm.isConfirmed) {
             try {
-                const res = await fetch(`https://genie-one-xi.vercel.app/api/blogs/${id}`, {
+                const res = await fetch(`/api/blogs/${id}`, {
                     method: "DELETE",
                 });
 

@@ -38,7 +38,7 @@ const Generator = () => {
 
             const courseInfo = JSON.parse(responseText);
 
-            const res = await fetch("https://genie-one-xi.vercel.app/api/course", {
+            const res = await fetch("/api/course", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
