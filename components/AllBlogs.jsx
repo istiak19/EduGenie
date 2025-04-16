@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-const AllBlogs = ({refetchBlogs}) => {
+const AllBlogs = ({ refetchBlogs }) => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
