@@ -1,10 +1,14 @@
 import QuizAddFrom from '@/components/QuizAddFrom/QuizAddFrom'
-import React from 'react'
+
+export const metadata = {
+  title: "QuizAdd | EduGenie",
+  description: "Explore this amazing course on QuizAdd!",
+};
 
 const page = () => {
   return (
     <div>
-      <QuizAddFrom/>
+      <QuizAddFrom />
     </div>
   )
 }
