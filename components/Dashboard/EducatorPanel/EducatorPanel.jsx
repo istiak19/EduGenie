@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CgProfile } from "react-icons/cg";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaMicroblog } from "react-icons/fa";
 
 const EducatorPanel = () => {
     return (
@@ -22,6 +22,15 @@ const EducatorPanel = () => {
                     >
                         <CgProfile className="text-xl" />
                         <span>Profile</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        href="/dashboard/educatorApprovalBlog"
+                        className="flex items-center gap-2 p-2 rounded-lg hover:bg-teal-100 transition-colors duration-200"
+                    >
+                        <FaMicroblog className="text-xl"/>
+                        <span>Approval Blog</span>
                     </Link>
                 </li>
             </ul>
