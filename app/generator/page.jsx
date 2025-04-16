@@ -24,7 +24,7 @@ const Generator = () => {
         const result = await GeneratorCourseLayout_AI.sendMessage(FINAL_PROMPT);
         console.log(result.response.text());
         const courseInfo = JSON.parse(result.response.text());
-        // console.log(courseInfo)
+        console.log(courseInfo)
         const res = await fetch('https://genie-one-xi.vercel.app/api/course', {
             method: 'POST',
             body: JSON.stringify(courseInfo)
