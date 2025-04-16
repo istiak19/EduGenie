@@ -40,7 +40,7 @@ const Blogs = () => {
     };
 
     return (
-        <div className="py-20 px-4 max-w-xl mx-auto">
+        <div className="py-20 px-4 max-w-6xl mx-auto">
             <div className="flex justify-end">
                 <button
                     onClick={() => {

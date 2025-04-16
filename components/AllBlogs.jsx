@@ -11,7 +11,7 @@ const AllBlogs = ({ refetchBlogs }) => {
       try {
         const res = await fetch("https://genie-one-xi.vercel.app/api/blogs");
         const data = await res.json();
-        setBlogs(data);
+        setBlogs(data.filter((blog) => blog.approval));
       } catch (error) {
         console.error("Failed to fetch blogs:", error);
       } finally {
@@ -22,21 +22,33 @@ const AllBlogs = ({ refetchBlogs }) => {
   }, [refetchBlogs]);
 
   return (
-    <div className="max-w-3xl mx-auto py-10">
-      <h2 className="text-2xl font-semibold mb-6">All Blogs</h2>
-
+    <div>
+      <h2 className="text-3xl font-bold text-center text-blue-800 mb-8">
+        Blogs
+      </h2>
       {loading ? (
         <div>
           <Loading />
         </div>
       ) : blogs.length === 0 ? (
-        <div className="text-center text-gray-500 py-10">No blogs found.</div>
+        <div className="text-center text-gray-500 py-10">
+          No approved blogs found.
+        </div>
       ) : (
-        <div className="space-y-6">
+        <div>
           {blogs.map((blog, index) => (
-            <div key={index} className="p-6 bg-white rounded shadow border">
-              <h3 className="text-xl font-semibold mb-2 text-blue-700">{blog.title}</h3>
-              <p className="text-gray-700">{blog.content}</p>
+            <div
+              key={index}
+              className="p-6 bg-white rounded-xl shadow-md border border-gray-200 flex flex-col justify-between min-h-[250px] transition-transform hover:scale-[1.02]"
+            >
+              <div>
+                <h3 className="text-xl font-semibold mb-2 text-blue-700">
+                  {blog.title}
+                </h3>
+                <p className="text-gray-700 text-justify text-sm">
+                  {blog.content}
+                </p>
+              </div>
             </div>
           ))}
         </div>

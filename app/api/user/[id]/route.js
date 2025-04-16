@@ -11,7 +11,7 @@ export async function GET(req, { params }) {
 
 export async function PATCH(req, { params }) {
     const userInfo = await req.json();
-    console.log(userInfo)
+    // console.log(userInfo)
     const p = await params;
     const filter = { _id: new ObjectId(p.id) };
     const options = { upsert: true };

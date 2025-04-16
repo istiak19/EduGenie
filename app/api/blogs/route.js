@@ -1,7 +1,7 @@
 import dbConnect, { collectionNames } from "@/lib/dbConnect";
 import { NextResponse } from "next/server";
 
-// Get by course info
+// Get by blogs info
 export async function GET(req) {
     const result = await dbConnect(collectionNames.blogsCollection).find().toArray();
     return NextResponse.json(result);
