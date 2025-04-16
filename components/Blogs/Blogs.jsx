@@ -19,7 +19,7 @@ const Blogs = () => {
             content: form.content.value,
             approval: false,
         };
-        const res = await fetch("https://genie-one-xi.vercel.app/api/blogs", {
+        const res = await fetch("/api/blogs", {
             method: "POST",
             body: JSON.stringify(blog),
         });

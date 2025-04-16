@@ -13,7 +13,7 @@ const Courses = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch("https://genie-one-xi.vercel.app/api/course");
+        const response = await fetch("/api/course");
         const data = await response.json();
         setCourses(data);
       } catch (err) {

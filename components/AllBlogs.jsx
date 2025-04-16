@@ -9,7 +9,7 @@ const AllBlogs = ({ refetchBlogs }) => {
     const fetchBlogs = async () => {
       setLoading(true);
       try {
-        const res = await fetch("https://genie-one-xi.vercel.app/api/blogs");
+        const res = await fetch("/api/blogs");
         const data = await res.json();
         setBlogs(data.filter((blog) => blog.approval));
       } catch (error) {

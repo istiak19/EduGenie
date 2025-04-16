@@ -11,7 +11,7 @@ export default function Navbar() {
   // const [users, setUsers] = useState([]);
   // useEffect(() => {
   //     const fetchUser = async () => {
-  //         const res = await fetch('https://genie-one-xi.vercel.app/api/user');
+  //         const res = await fetch('/api/user');
   //         const data = await res.json();
   //         setUsers(data);
   //     }

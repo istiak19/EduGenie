@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CgProfile } from "react-icons/cg";
 import { FaHome, FaMicroblog } from "react-icons/fa";
+import { MdOutlineQuiz } from "react-icons/md";
 
 const EducatorPanel = () => {
     return (
@@ -31,6 +32,15 @@ const EducatorPanel = () => {
                     >
                         <FaMicroblog className="text-xl"/>
                         <span>Approval Blog</span>
+                    </Link>
+                </li>
+                <li>
+                    <Link
+                        href="/dashboard/quizAddForm"
+                        className="flex items-center gap-2 p-2 rounded-lg hover:bg-teal-100 transition-colors duration-200"
+                    >
+                        <MdOutlineQuiz />
+                        <span>Add New Quiz</span>
                     </Link>
                 </li>
             </ul>

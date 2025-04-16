@@ -17,7 +17,7 @@ const EditProfile = () => {
     useEffect(() => {
         const fetchSingleUser = async () => {
             try {
-                const res = await fetch(`https://genie-one-xi.vercel.app/api/user/${params.id}`);
+                const res = await fetch(`/api/user/${params.id}`);
                 const data = await res.json();
                 setUser(data);
             } catch (error) {
@@ -59,7 +59,7 @@ const EditProfile = () => {
         const userInfo = { name, photo: photoURL };
 
         try {
-            const res = await fetch(`https://genie-one-xi.vercel.app/api/user/${user._id}`, {
+            const res = await fetch(`/api/user/${user._id}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userInfo),
