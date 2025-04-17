@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { MdOutlineMenuBook } from "react-icons/md";
+import { MdOutlineMenuBook, MdTopic } from "react-icons/md";
 import Loading from "@/components/Loading/Loading";
 import Link from "next/link";
+import { SiLevelsdotfyi } from "react-icons/si";
+import { FaRegClock } from "react-icons/fa";
+import Image from "next/image";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -46,44 +49,49 @@ const Courses = () => {
         ) : error ? (
           <p className="text-center text-red-500 text-lg">{error}</p>
         ) : courses.length === 0 ? (
-          <p className="text-center text-gray-600 text-lg">
-            No courses available.
-          </p>
+          <p className="text-center text-gray-600 text-lg">No courses available.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch py-10">
             {courses.map((course) => (
-              <Link href={`/courses/${course?._id}`} key={course._id}>
-                <div className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition duration-300 p-6 flex flex-col h-full min-h-[450px]">
-                  <div className="h-36 bg-gray-200 rounded-lg mb-4 flex items-center justify-center text-gray-400">
-                    Course Image
-                  </div>
-                  <h2 className="text-xl font-semibold text-gray-800 mb-2 hover:text-teal-600 transition">
-                    {course["Course Name"]}
-                  </h2>
-                  <p className="text-gray-600 mb-2">
-                    {course.Description?.slice(0, 100)}...
-                  </p>
-                  <div className="text-sm text-gray-700 space-y-1 mb-4">
-                    <p>
-                      <strong>Category:</strong> {course.Category}
-                    </p>
-                    <p>
-                      <strong>Duration:</strong> {course.Duration}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    <span className="bg-teal-500 text-white text-xs px-3 py-1 rounded-full">
-                      {course.Topic}
-                    </span>
-                    <span className="bg-green-500 text-white text-xs px-3 py-1 rounded-full">
-                      {course.Level}
-                    </span>
-                    <span className="bg-yellow-500 text-white text-xs px-3 py-1 rounded-full">
-                      {course.NoOfChapters} Chapters
-                    </span>
-                  </div>
+              <div
+                key={course._id}
+                className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition duration-300 p-4 flex flex-col h-full min-h-[250px]"
+              >
+                <div className="relative h-36 bg-gray-200 rounded-lg mb-4 overflow-hidden">
+                  <Image
+                    src={course?.photo || "/course.jpg"}
+                    alt="Course Image"
+                    fill
+                    className="object-cover"
+                    // sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                 </div>
-              </Link>
+                <h2 className="text-xl font-semibold text-gray-800 mb-2 hover:text-teal-600 transition">
+                  {course["Course Name"]}
+                </h2>
+                <p className="text-gray-600 mb-2">
+                  {course.Description?.slice(0, 100)}...
+                </p>
+                <div className="flex flex-wrap gap-2 mt-auto justify-between *:text-xs">
+                  <span className="flex items-center gap-2">
+                    <SiLevelsdotfyi /> {course.Level}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <MdTopic className="text-xl" /> {course.Topic}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <FaRegClock /> {course?.Duration}
+                  </span>
+                </div>
+                <div>
+                  <Link
+                    href={`/courses/${course?._id}`}
+                    className="btn w-full mt-3 bg-teal-500 hover:bg-teal-700 border-none rounded-md text-white"
+                  >
+                    Start
+                  </Link>
+                </div>
+              </div>
             ))}
           </div>
         )}

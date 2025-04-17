@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2';
 
 const QuizAddForm = () => {
     const [loading, setLoading] = useState(false);
@@ -36,9 +37,15 @@ const QuizAddForm = () => {
                 correctAnswer: '',
                 category: 'web-development',
             });
-            toast.success("✅ Quiz added successfully!");
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Quiz added successfully!",
+                showConfirmButton: false,
+                timer: 1500
+            });
         } else {
-            toast.error(data.message || "❌ Failed to add quiz");
+            toast.error(data.message || "Failed to add quiz");
         }
         setLoading(false);
     };
@@ -123,12 +130,16 @@ const QuizAddForm = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className={`w-full md:w-auto px-8 py-4 border-none text-white rounded font-semibold transition duration-200 btn ${loading
+                            className={`w-full md:w-auto px-6 py-2 text-white rounded font-medium transition duration-200 ${loading
                                 ? "bg-teal-300 cursor-not-allowed"
-                                : "bg-teal-600 hover:bg-teal-700"
+                                : "bg-teal-600 hover:bg-teal-700 cursor-pointer"
                                 }`}
                         >
-                            {loading ? "Adding..." : "Add Quiz"}
+                            {loading ? (
+                                <span className="loading loading-infinity loading-sm text-white"></span>
+                            ) : (
+                                "Add Quiz"
+                            )}
                         </button>
                     </div>
                 </form>
