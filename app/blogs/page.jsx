@@ -1,4 +1,4 @@
-import Blogs from "@/components/Blogs/Blogs";
+import AllBlogs from "@/components/AllBlogs";
 
 export const metadata = {
   title: "All Blogs | EduGenie",
@@ -8,7 +8,7 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-      <Blogs />
+      <AllBlogs />
     </div>
   );
 };
