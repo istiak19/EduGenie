@@ -1,8 +1,11 @@
 "use client";
 
 import { GeneratorCourseLayout_AI } from "@/aiModel/aiModel";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 const Generator = () => {
+    const router = useRouter();
 
     const handleForm = async (e) => {
         e.preventDefault();
@@ -21,13 +24,23 @@ const Generator = () => {
         const result = await GeneratorCourseLayout_AI.sendMessage(FINAL_PROMPT);
         console.log(result.response.text());
         const courseInfo = JSON.parse(result.response.text());
-        console.log(courseInfo)
-        const res = await fetch('http://localhost:3000/api/course', {
+        // console.log(courseInfo)
+        const res = await fetch('https://genie-one-xi.vercel.app/api/course', {
             method: 'POST',
             body: JSON.stringify(courseInfo)
         })
         const response = await res.json();
-        console.log(response);
+        // console.log(response);
+        if (response.insertedId) {
+            Swal.fire({
+                position: "top",
+                icon: "success",
+                title: "Your course generate successfully!",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            router.push("/courses");
+        }
     };
 
     return (
@@ -37,7 +50,7 @@ const Generator = () => {
                 <div className="top-1/2 absolute bg-gray-200 w-full h-1"></div>
                 {["📘 Course Information", "🎓 Learning Path", "⚙️ Settings"].map((step, index) => (
                     <div key={index} className="z-10 relative flex flex-col items-center">
-                        <div className="bg-purple-600 shadow-lg p-4 rounded-full text-white">
+                        <div className="bg-teal-600 shadow-lg p-4 rounded-full text-white">
                             <span className="text-xl">{step.split(" ")[0]}</span>
                         </div>
                         <p className="mt-2 text-gray-500 text-sm">{step.split(" ")[1]}</p>
@@ -53,7 +66,7 @@ const Generator = () => {
                             // value={formData.category}
                             // onChange={handleChange}
                             required
-                            className="p-4 border border-gray-300 focus:border-purple-600 rounded-xl focus:ring-2 focus:ring-purple-500 w-full transition duration-300 ease-in-out"
+                            className="p-4 border border-gray-300 focus:border-teal-600 rounded-xl focus:ring-2 focus:ring-teal-500 w-full transition duration-300 ease-in-out"
                         >
                             <option value="Programming">Programming</option>
                             <option value="Design">Design</option>
@@ -68,7 +81,7 @@ const Generator = () => {
                             // value={formData.topic}
                             // onChange={handleChange}
                             required
-                            className="p-4 border border-gray-300 focus:border-purple-600 rounded-xl focus:ring-2 focus:ring-purple-500 w-full transition duration-300 ease-in-out"
+                            className="p-4 border border-gray-300 focus:border-teal-600 rounded-xl focus:ring-2 focus:ring-teal-500 w-full transition duration-300 ease-in-out"
                         >
                             <option value="Python">Python</option>
                             <option value="JavaScript">JavaScript</option>
@@ -91,7 +104,7 @@ const Generator = () => {
                             name="level"
                             // value={formData.level}
                             // onChange={handleChange}
-                            className="p-4 border border-gray-300 focus:border-purple-600 rounded-xl focus:ring-2 focus:ring-purple-500 w-full transition duration-300 ease-in-out"
+                            className="p-4 border border-gray-300 focus:border-teal-600 rounded-xl focus:ring-2 focus:ring-teal-500 w-full transition duration-300 ease-in-out"
                         >
                             <option value="Beginner">Beginner</option>
                             <option value="Intermediate">Intermediate</option>
@@ -108,7 +121,7 @@ const Generator = () => {
                             name="duration"
                             // value={formData.duration}
                             // onChange={handleChange}
-                            className="p-4 border border-gray-300 focus:border-purple-600 rounded-xl focus:ring-2 focus:ring-purple-500 w-full transition duration-300 ease-in-out"
+                            className="p-4 border border-gray-300 focus:border-teal-600 rounded-xl focus:ring-2 focus:ring-teal-500 w-full transition duration-300 ease-in-out"
                         />
                     </div>
 
@@ -119,7 +132,7 @@ const Generator = () => {
                             name="noOfChapters"
                             // value={formData.noOfChapters}
                             // onChange={handleChange}
-                            className="p-4 border border-gray-300 focus:border-purple-600 rounded-xl focus:ring-2 focus:ring-purple-500 w-full transition duration-300 ease-in-out"
+                            className="p-4 border border-gray-300 focus:border-teal-600 rounded-xl focus:ring-2 focus:ring-teal-500 w-full transition duration-300 ease-in-out"
                         />
                     </div>
                 </div>
@@ -127,7 +140,7 @@ const Generator = () => {
                 <div className="flex justify-center col-span-2 mt-8">
                     <button
                         type="submit"
-                        className="bg-purple-600 hover:bg-purple-700 shadow-lg px-6 py-3 rounded-lg font-medium text-white hover:scale-105 transition-transform transform"
+                        className="bg-teal-600 hover:bg-teal-700 shadow-lg px-6 py-3 rounded-lg font-medium text-white hover:scale-105 transition-transform transform"
                     >
                         🎯 Create Course Generator
                     </button>

@@ -94,11 +94,10 @@ export default function CourseCarousel() {
         {categories.map((category) => (
           <motion.button
             key={category}
-            className={`px-4 py-2 rounded-lg font-medium transition-all text-sm sm:text-base ${
-              activeCategory === category
+            className={`px-4 py-2 rounded-lg font-medium transition-all text-sm sm:text-base btn ${activeCategory === category
                 ? "bg-teal-600 text-white"
                 : "bg-gray-200 text-gray-800"
-            }`}
+              }`}
             onClick={() => setActiveCategory(category)}
             whileHover={{ scale: 1.05 }}
           >
@@ -111,17 +110,28 @@ export default function CourseCarousel() {
       <div className="max-w-6xl mx-auto px-4">
         <Slider {...settings}>
           {filteredCourses.map((course) => (
-            <motion.div key={course.id} className="px-2">
-              <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-                <img
+            <motion.div
+              key={course.id}
+              className="px-2"
+              whileHover={{ scale: 1.03, y: -5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <div className="relative group bg-white shadow-md rounded-2xl overflow-hidden border border-transparent hover:border-teal-600 transition duration-300">
+                {/* Category Badge */}
+                <span className="absolute top-2 left-2 bg-teal-600 text-white text-xs font-medium px-3 py-1 rounded-full z-10">
+                  {course.category}
+                </span>
+
+                {/* Image with Zoom Effect */}
+                <motion.img
                   src={course.image}
                   alt={course.title}
-                  className="w-full h-40 md:h-48 object-cover"
+                  className="w-full h-40 md:h-48 object-cover transform transition-transform duration-300 group-hover:scale-105"
                 />
-                <div className="p-4">
-                  <h3 className="text-base sm:text-lg font-semibold">
-                    {course.title}
-                  </h3>
+
+                {/* Course Info */}
+                <div className="p-4 space-y-2">
+                  <h3 className="text-lg font-semibold text-gray-800">{course.title}</h3>
                   <p className="text-yellow-500 text-sm">⭐ {course.rating}</p>
                 </div>
               </div>
