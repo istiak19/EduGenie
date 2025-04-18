@@ -1,16 +1,16 @@
 import Generator from "@/components/Generator/Generator";
 
 export const metadata = {
-    title: "GeneratorCourse | EduGenie",
+    title: "Generator Course | EduGenie",
     description: "Explore this amazing course on CourseGenie!",
 };
 
 const GeneratorCourse = () => {
     return (
-        <div>
+        <div className="py-10">
             <Generator />
         </div>
     );
 };
 
-export default GeneratorCourse ;
+export default GeneratorCourse;
