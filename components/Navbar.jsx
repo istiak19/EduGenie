@@ -51,9 +51,9 @@ export default function Navbar() {
           <span className="text-2xl font-bold text-teal-600 dark:text-white">EduGenie</span>
         </Link>
 
-        {/* Right Side: Menu + Search + Icons + Auth */}
+        {/* Right Side */}
         <div className="hidden md:flex items-center space-x-6">
-          {/* Menu Links */}
+          
           {menuItems.map((item, index) => (
             <Link
               key={index}
