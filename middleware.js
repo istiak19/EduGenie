@@ -1,17 +1,28 @@
-import { NextResponse } from 'next/server'
-import { getToken } from "next-auth/jwt"
+import { NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 export async function middleware(req) {
-    const token = await getToken({ req })
-
-    if (token) {
-        return NextResponse.next()
-    } else {
-        return NextResponse.redirect(new URL('/login', req.url))
+    const token = await getToken({ req });
+    const url = req.nextUrl;
+    if (!token) {
+        return NextResponse.redirect(new URL("/login", req.url));
     }
+
+    // Role protection
+    if (url.pathname.startsWith("/dashboard/educator") && token.role !== "educator") {
+        return NextResponse.redirect(new URL("/unauthorized", req.url));
+    }
+    if (url.pathname.startsWith("/dashboard/student") && token.role !== "student") {
+        return NextResponse.redirect(new URL("/unauthorized", req.url));
+    }
+    return NextResponse.next();
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-    matcher: ['/generator', '/dashboard/:path*'],
-}
+    matcher: [
+        "/courses/:id",
+        "/generator",
+        "/dashboard/:path*",
+        "/profile/:path*",
+    ],
+};  

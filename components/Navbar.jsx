@@ -1,16 +1,29 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X, Bell } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
+import { useState } from "react";
 
 export default function Navbar() {
+  // const [users, setUsers] = useState([]);
+  // useEffect(() => {
+  //     const fetchUser = async () => {
+  //         const res = await fetch('/api/user');
+  //         const data = await res.json();
+  //         setUsers(data);
+  //     }
+  //     fetchUser()
+  // }, []);
+
+  // const roleUser = users.find(user => user?.email === session?.user?.email)
+
   const [isOpen, setIsOpen] = useState(false);
   const { data: session, status } = useSession();
 
+  
   const menuItems = ["Home", "Courses", "Generator", "Contact", "Blogs"];
 
   const getRoute = (item) => (item === "Home" ? "/" : `/${item.toLowerCase()}`);
@@ -55,10 +68,10 @@ export default function Navbar() {
           {status === "authenticated" && userRole && (
             <div className="relative group cursor-pointer">
               <span className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition">Dashboard</span>
-              <div className="absolute top-full mt-2 w-40 bg-white dark:bg-gray-800 shadow-md rounded-md p-2 hidden group-hover:block z-50">
+              <div className="absolute top-full mt-2 w-56 bg-white dark:bg-gray-800 shadow-md rounded-md p-2 hidden group-hover:block z-50">
                 {userRole === "educator" && (
                   <Link
-                    href="/educator"
+                    href="/dashboard/educatorHome"
                     className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
                   >
                     Educator Panel
@@ -66,7 +79,7 @@ export default function Navbar() {
                 )}
                 {userRole === "student" && (
                   <Link
-                    href="/student"
+                    href="/dashboard/studentHome"
                     className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
                   >
                     Student Panel
@@ -75,7 +88,6 @@ export default function Navbar() {
               </div>
             </div>
           )}
-
           {/* Search Bar */}
           <input
             type="text"
