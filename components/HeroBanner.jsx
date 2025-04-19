@@ -31,6 +31,7 @@ export default function HeroBanner() {
   ];
 
   return (
+<<<<<<< HEAD
     <section className="relative flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-blue-800 to-indigo-900 text-white text-center px-4 md:px-8 lg:px-24 overflow-hidden">
       
       {/* Background Image */}
@@ -45,13 +46,29 @@ export default function HeroBanner() {
       </div>
 
       {/* Floating Animation Circles */}
+=======
+    <section className="relative flex flex-col items-center justify-center pb-28 pt-32 bg-gradient-to-br from-teal-500 via-cyan-600 to-teal-900 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
+
+      {/* Floating Animation Background */}
       <motion.div
-        className="absolute top-1/3 left-1/4 w-16 md:w-24 h-16 md:h-24 bg-white opacity-20 rounded-full blur-2xl"
+        className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-transparent opacity-50"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      />
+
+>>>>>>> 3032cfcd5ff7718122ba1456c4d8ac992a5b9526
+      <motion.div
+        className="absolute top-1/3 left-1/4 w-16 md:w-24 h-16 md:h-24 bg-white opacity-30 rounded-full blur-3xl"
         animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
       />
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3032cfcd5ff7718122ba1456c4d8ac992a5b9526
       <motion.div
-        className="absolute bottom-1/3 right-1/4 w-24 md:w-32 h-24 md:h-32 bg-yellow-300 opacity-30 rounded-full blur-2xl"
+        className="absolute bottom-1/3 right-1/4 w-24 md:w-32 h-24 md:h-32 bg-yellow-300 opacity-20 rounded-full blur-3xl"
         animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
       />
@@ -59,7 +76,11 @@ export default function HeroBanner() {
       {/* Main Content */}
       <div className="z-10 relative max-w-3xl pt-20 pb-10">
         <motion.h1
+<<<<<<< HEAD
           className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 bg-clip-text text-transparent"
+=======
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight"
+>>>>>>> 3032cfcd5ff7718122ba1456c4d8ac992a5b9526
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1 }}
@@ -77,25 +98,36 @@ export default function HeroBanner() {
         </motion.p>
 
         <motion.button
-          className="px-6 sm:px-8 py-3 bg-yellow-400 text-gray-900 rounded-lg font-bold hover:bg-yellow-500 transition-all shadow-lg"
+          className="px-6 sm:px-8 py-3 bg-yellow-400 text-gray-900 rounded-lg font-bold hover:bg-yellow-500 transition-all shadow-xl hover:scale-105"
           whileHover={{ scale: 1.05 }}
         >
           Get Started
         </motion.button>
       </div>
 
+<<<<<<< HEAD
       {/* Feature Slider */}
       <div className="relative mt-8 md:mt-16 w-full max-w-5xl z-10 px-4">
+=======
+      {/* Moving Slider Section */}
+      <div className="relative mt-12 w-full max-w-5xl z-10">
+>>>>>>> 3032cfcd5ff7718122ba1456c4d8ac992a5b9526
         <Slider {...settings}>
           {features.map((feature) => (
             <motion.div
               key={feature.id}
+<<<<<<< HEAD
               className="p-6 mx-2 text-white text-center rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-xl"
+=======
+              className={`p-6 ${feature.color} text-center rounded-xl shadow-2xl mx-2 flex items-center justify-center hover:scale-105 transition-all`}
+>>>>>>> 3032cfcd5ff7718122ba1456c4d8ac992a5b9526
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: feature.id * 0.2 }}
             >
-              <p className="text-base sm:text-lg font-semibold">{feature.text}</p>
+              <p className="text-base sm:text-lg font-semibold text-white">
+                {feature.text}
+              </p>
             </motion.div>
           ))}
         </Slider>

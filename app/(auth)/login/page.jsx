@@ -4,14 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import loginPic from "../../../public/assets/login.jpg";
 import Image from "next/image";
@@ -22,10 +15,17 @@ import { signIn } from "next-auth/react";
 import Swal from "sweetalert2";
 import { login } from "@/app/actions/auth/login";
 
-// ✅ Define form validation schema
+
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email format." }),
-  password: z.string().min(6, { message: "Password must be at least 6 characters." }),
+  password: z.string().min(6, { message: "Password must be at least 6 characters." })
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+      {
+        message:
+          "Password must include uppercase, lowercase, number, and special character.",
+      }
+    ),
 });
 
 const LoginPage = () => {
@@ -35,7 +35,6 @@ const LoginPage = () => {
     defaultValues: { email: "", password: "" },
   });
 
-  // ✅ Handle form submission
   const onSubmit = async (data) => {
     try {
       const userInfo = { email: data.email, password: data.password };
@@ -54,7 +53,7 @@ const LoginPage = () => {
 
       if (result.status === 200) {
         Swal.fire({
-          position: "top-end",
+          position: "top",
           icon: "success",
           title: "Login Successful!",
           showConfirmButton: false,
@@ -77,7 +76,6 @@ const LoginPage = () => {
     >
       <div className="w-11/12 mx-auto py-10">
         <div className="hero-content gap-8 flex-col lg:flex-row">
-          {/* ✅ Login Image */}
           <Image
             src={loginPic}
             alt="Login"
@@ -86,11 +84,8 @@ const LoginPage = () => {
             className="rounded-lg"
             priority
           />
-
-          {/* ✅ Login Form */}
           <div className="w-full max-w-2xl">
             <h2 className="mb-5 font-bold text-center text-3xl">Sign In</h2>
-
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 {/* Email Field */}
@@ -107,7 +102,6 @@ const LoginPage = () => {
                     </FormItem>
                   )}
                 />
-
                 {/* Password Field */}
                 <FormField
                   control={form.control}
@@ -122,22 +116,16 @@ const LoginPage = () => {
                     </FormItem>
                   )}
                 />
-
-                {/* Sign In Button */}
-                <Button type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-700">
+                <Button type="submit" className="w-full bg-teal-500 text-white hover:bg-teal-700">
                   Sign In
                 </Button>
               </form>
             </Form>
-
-            {/* Social Authentication */}
             <p className="text-center py-5 font-medium">Or Sign In With</p>
             <SocialAuth />
-
-            {/* Register Link */}
             <p className="text-xs text-center pt-5">
               Don’t have an account?{" "}
-              <Link href="/register" className="text-blue-600 hover:underline">
+              <Link href="/register" className="text-teal-600 hover:underline">
                 Sign Up
               </Link>
             </p>

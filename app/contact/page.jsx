@@ -1,5 +1,9 @@
 import Contact from '@/components/Contact/Contact';
-import React from 'react';
+
+export const metadata = {
+    title: "Contact | EduGenie",
+    description: "Explore this amazing course on Contact!",
+};
 
 const page = () => {
     return (
