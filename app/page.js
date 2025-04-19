@@ -1,33 +1,23 @@
+import Chatbot from "@/components/chatbot/Chatbot";
 import Chat from "@/components/chatbot/Chat";
 import CourseCarousel from "@/components/CourseCarousel";
-<<<<<<< HEAD
 import EducatorAndSubscription from "@/components/EducatorAndSubscription/EducatorAndSubscription";
 import Footer from "@/components/Footer";
 import HeroBanner from "@/components/HeroBanner";
 import HowItWorks from "@/components/HowItWorks";
 import Navbar from "@/components/Navbar";
 import SuccessStories from "@/components/SuccessStories";
-import Chatbot from "@/components/chatbot/Chatbot";
 import StudentDashboard from "@/components/studentdasboard/Studentdasboard";
-=======
 import EidGreeting from "@/components/EidGreeting/EidGreeting";
-import HeroBanner from "@/components/HeroBanner";
-import HowItWorks from "@/components/HowItWorks";
-import SuccessStories from "@/components/SuccessStories.jsx";
->>>>>>> 3032cfcd5ff7718122ba1456c4d8ac992a5b9526
 
 export default function Home() {
   return (
     <div>
-<<<<<<< HEAD
       <Navbar />
-=======
->>>>>>> 3032cfcd5ff7718122ba1456c4d8ac992a5b9526
       <HeroBanner />
       <EidGreeting />
       <CourseCarousel />
       <HowItWorks />
-<<<<<<< HEAD
       <SuccessStories />
 
       {/* Chatbot Section */}
@@ -36,8 +26,7 @@ export default function Home() {
           How can we help you today?
         </h2>
         <p className="text-sm text-gray-500 mb-6">
-          Our chatbot is here to assist with your inquiries and provide
-          recommendations.
+          Our chatbot is here to assist with your inquiries and provide recommendations.
         </p>
 
         <Chatbot />
@@ -60,9 +49,7 @@ export default function Home() {
       <StudentDashboard />
       <EducatorAndSubscription />
       <Footer />
-=======
       <Chat />
->>>>>>> 3032cfcd5ff7718122ba1456c4d8ac992a5b9526
     </div>
   );
 }
