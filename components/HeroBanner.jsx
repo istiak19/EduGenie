@@ -31,7 +31,7 @@ export default function HeroBanner() {
   ];
 
   return (
-    <section className="relative flex flex-col items-center justify-center pb-28 pt-32 bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-950 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
+    <section className="relative flex flex-col items-center justify-center pb-28 pt-32 bg-gradient-to-br from-teal-500 via-cyan-600 to-teal-900 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 -z-10">
         <Image
@@ -45,20 +45,20 @@ export default function HeroBanner() {
 
       {/* Floating Background Effects */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-purple-950 to-transparent opacity-50"
+        className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-transparent opacity-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       />
 
       <motion.div
-        className="absolute top-1/3 left-1/4 w-16 md:w-24 h-16 md:h-24 bg-purple-400 opacity-30 rounded-full blur-3xl"
+        className="absolute top-1/3 left-1/4 w-16 md:w-24 h-16 md:h-24 bg-white opacity-30 rounded-full blur-3xl"
         animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
       />
 
       <motion.div
-        className="absolute bottom-1/3 right-1/4 w-24 md:w-32 h-24 md:h-32 bg-pink-400 opacity-20 rounded-full blur-3xl"
+        className="absolute bottom-1/3 right-1/4 w-24 md:w-32 h-24 md:h-32 bg-yellow-300 opacity-20 rounded-full blur-3xl"
         animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
       />
@@ -66,7 +66,7 @@ export default function HeroBanner() {
       {/* Main Content */}
       <div className="z-10 relative max-w-3xl pt-20 pb-10">
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight bg-gradient-to-r from-pink-400 via-purple-500 to-indigo-400 bg-clip-text text-transparent"
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 bg-clip-text text-transparent"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1 }}
@@ -75,7 +75,7 @@ export default function HeroBanner() {
         </motion.h1>
 
         <motion.p
-          className="text-lg sm:text-xl mb-6 px-4 sm:px-6 text-gray-300"
+          className="text-lg sm:text-xl mb-6 px-4 sm:px-6"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 1 }}
@@ -84,7 +84,7 @@ export default function HeroBanner() {
         </motion.p>
 
         <motion.button
-          className="px-6 sm:px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-bold hover:from-pink-500 hover:to-purple-500 transition-all shadow-xl hover:scale-105"
+          className="px-6 sm:px-8 py-3 bg-yellow-400 text-gray-900 rounded-lg font-bold hover:bg-yellow-500 transition-all shadow-xl hover:scale-105"
           whileHover={{ scale: 1.05 }}
         >
           Get Started
@@ -97,8 +97,7 @@ export default function HeroBanner() {
           {features.map((feature) => (
             <motion.div
               key={feature.id}
-              className="p-6 mx-2 text-white text-center rounded-2xl backdrop-blur-md bg-opacity-10 border border-white/20 shadow-xl flex items-center justify-center"
-              style={{ backgroundColor: "rgba(255, 255, 255, 0.05)" }}
+              className="p-6 mx-2 text-white text-center rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-xl flex items-center justify-center"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: feature.id * 0.2 }}

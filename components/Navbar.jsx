@@ -6,13 +6,24 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
-import { usePathname } from "next/navigation"; // Import usePathname for active route detection
 
 export default function Navbar() {
+  // const [users, setUsers] = useState([]);
+  // useEffect(() => {
+  //     const fetchUser = async () => {
+  //         const res = await fetch('/api/user');
+  //         const data = await res.json();
+  //         setUsers(data);
+  //     }
+  //     fetchUser()
+  // }, []);
+
+  // const roleUser = users.find(user => user?.email === session?.user?.email)
+
   const [isOpen, setIsOpen] = useState(false);
   const { data: session, status } = useSession();
-  const pathname = usePathname(); // Get the current route
 
+  
   const menuItems = ["Home", "Courses", "Generator", "Contact", "Blogs"];
 
   const getRoute = (item) => (item === "Home" ? "/" : `/${item.toLowerCase()}`);
@@ -23,10 +34,11 @@ export default function Navbar() {
   };
 
   const userRole = session?.user?.role;
-
+  // addedddd
   return (
-    <nav className="sticky top-0 left-0 w-full bg-gray-900 text-white shadow z-50 transition-all">
+    <nav className="sticky top-0 left-0 w-full bg-white dark:bg-gray-900 shadow z-50 transition-all">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        
         {/* Logo & Brand Name */}
         <Link href="/" className="flex items-center space-x-2">
           <motion.div
@@ -36,39 +48,26 @@ export default function Navbar() {
           >
             <Image src="/Edugine-logo.png" alt="EduGenie Logo" width={40} height={40} />
           </motion.div>
-          <span className="text-2xl font-bold bg-gradient-to-r from-pink-400 via-purple-500 to-indigo-400 bg-clip-text text-transparent">
-            EduGenie
-          </span>
+          <span className="text-2xl font-bold text-teal-600 dark:text-white">EduGenie</span>
         </Link>
 
         {/* Right Side */}
         <div className="hidden md:flex items-center space-x-6">
-          {/* Menu Items */}
-          {menuItems.map((item, index) => {
-            const isActive = pathname === getRoute(item); // Check if the current route matches
-            return (
-              <Link
-                key={index}
-                href={getRoute(item)}
-                className={`relative text-gray-300 hover:text-white transition-colors ${
-                  isActive ? "font-bold" : ""
-                }`}
-              >
-                {item}
-                {isActive && (
-                  <motion.span
-                    layoutId="underline"
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-teal-400"
-                  />
-                )}
-              </Link>
-            );
-          })}
+          
+          {menuItems.map((item, index) => (
+            <Link
+              key={index}
+              href={getRoute(item)}
+              className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition-colors"
+            >
+              {item}
+            </Link>
+          ))}
 
           {/* Dashboard Dropdown */}
           {status === "authenticated" && userRole && (
             <div className="relative group cursor-pointer">
-              <span className="text-gray-300 hover:text-white transition">Dashboard</span>
+              <span className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition">Dashboard</span>
               <div className="absolute top-full mt-2 w-56 bg-white dark:bg-gray-800 shadow-md rounded-md p-2 hidden group-hover:block z-50">
                 {userRole === "educator" && (
                   <Link
@@ -89,16 +88,15 @@ export default function Navbar() {
               </div>
             </div>
           )}
-
           {/* Search Bar */}
           <input
             type="text"
             placeholder="Search..."
-            className="px-3 py-1 rounded-md border border-white/20 bg-transparent text-sm focus:outline-none focus:border-teal-400 transition"
+            className="px-3 py-1 rounded-md border dark:bg-gray-800 dark:border-gray-700 dark:text-white text-sm focus:outline-teal-500"
           />
 
           {/* Bell Icon */}
-          <button className="text-gray-300 hover:text-white transition">
+          <button className="text-gray-600 dark:text-gray-300 hover:text-teal-500">
             <Bell size={20} />
           </button>
 
@@ -106,15 +104,15 @@ export default function Navbar() {
           {status === "authenticated" ? (
             <div className="flex items-center space-x-3">
               <Image
-                src={session?.user?.image || "/default-profile.png"}
+                src={session.user?.image || "/default-profile.png"}
                 alt="Profile"
                 width={32}
                 height={32}
-                className="rounded-full border-2 border-teal-400"
+                className="rounded-full border-2 border-teal-500"
               />
               <button
                 onClick={handleSignOut}
-                className="px-3 py-1 text-sm bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded hover:from-purple-500 hover:to-pink-500 transition"
+                className="px-3 py-1 text-sm bg-teal-600 text-white rounded hover:bg-teal-700 transition"
               >
                 Sign out
               </button>
@@ -122,7 +120,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-md hover:from-purple-500 hover:to-pink-500 transition"
+              className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-700 transition"
             >
               Login
             </Link>
@@ -132,7 +130,7 @@ export default function Navbar() {
         {/* Mobile Menu Icon */}
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-gray-300 hover:text-white transition"
+          className="md:hidden"
           whileTap={{ scale: 0.9 }}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -144,48 +142,38 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="md:hidden bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-950 text-white px-6 py-4 space-y-4 shadow-lg"
+          className="md:hidden bg-white dark:bg-gray-800 px-6 py-4 space-y-4 shadow-lg"
         >
-          {menuItems.map((item, index) => {
-            const isActive = pathname === getRoute(item); // Check if the current route matches
-            return (
-              <Link
-                key={index}
-                href={getRoute(item)}
-                onClick={() => setIsOpen(false)}
-                className={`block ${isActive ? "font-bold" : ""} text-gray-300 hover:text-white transition relative`}
-              >
-                {item}
-                {isActive && (
-                  <motion.span
-                    layoutId="underline-mobile"
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-teal-400"
-                  />
-                )}
-              </Link>
-            );
-          })}
+          {menuItems.map((item, index) => (
+            <Link
+              key={index}
+              href={getRoute(item)}
+              onClick={() => setIsOpen(false)}
+              className="block text-gray-800 dark:text-gray-300 hover:text-teal-600 transition"
+            >
+              {item}
+            </Link>
+          ))}
 
           {/* Dashboard Mobile */}
           {status === "authenticated" && userRole && (
             <div className="pt-2">
-              <span className="block text-gray-300 font-semibold">Dashboard</span>
+              <span className="block text-gray-600 dark:text-gray-300 font-semibold">Dashboard</span>
               {userRole === "educator" && (
                 <Link
-                  href="/dashboard/educatorHome"
+                  href="/educator"
                   onClick={() => setIsOpen(false)}
-                  className="block pl-4 py-2 text-sm text-gray-300 hover:text-white rounded"
+                  className="block pl-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
                 >
                   Educator Panel
                 </Link>
               )}
               {userRole === "student" && (
                 <Link
-                  href="/dashboard/studentHome"
+                  href="/student"
                   onClick={() => setIsOpen(false)}
-                  className="block pl-4 py-2 text-sm text-gray-300 hover:text-white rounded"
+                  className="block pl-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
                 >
                   Student Panel
                 </Link>
@@ -198,23 +186,23 @@ export default function Navbar() {
             <input
               type="text"
               placeholder="Search..."
-              className="w-full px-3 py-2 rounded-md border border-white/20 bg-transparent text-sm focus:outline-none focus:border-teal-400 transition"
+              className="w-full px-3 py-2 rounded-md border dark:bg-gray-800 dark:border-gray-700 dark:text-white text-sm focus:outline-teal-500"
             />
-            <button className="text-gray-300 hover:text-white transition">
+            <button className="text-gray-600 dark:text-gray-300 hover:text-teal-500">
               <Bell size={20} />
             </button>
             {status === "authenticated" ? (
               <div className="flex items-center space-x-3 pt-2">
                 <Image
-                  src={session?.user?.image || "/default-profile.png"}
+                  src={session.user?.image || "/default-profile.png"}
                   alt="Profile"
                   width={32}
                   height={32}
-                  className="rounded-full border-2 border-teal-400"
+                  className="rounded-full border-2 border-teal-500"
                 />
                 <button
                   onClick={handleSignOut}
-                  className="px-3 py-1 text-sm bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded hover:from-purple-500 hover:to-pink-500 transition"
+                  className="px-3 py-1 text-sm bg-teal-600 text-white rounded hover:bg-teal-700 transition"
                 >
                   Sign out
                 </button>
@@ -223,7 +211,7 @@ export default function Navbar() {
               <Link
                 href="/login"
                 onClick={() => setIsOpen(false)}
-                className="block text-center px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-md hover:from-purple-500 hover:to-pink-500 transition"
+                className="block text-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition"
               >
                 Login
               </Link>
