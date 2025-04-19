@@ -6,19 +6,17 @@ import { FaChartBar, FaClock, FaBookOpen, FaPlayCircle, FaArrowLeft, FaArrowRigh
 import Loading from "@/components/Loading/Loading";
 import Link from "next/link";
 import Image from "next/image";
-import { GeneratorChapterContent_AI } from "@/aiModel/aiModel";
 
 const image_key = process.env.NEXT_PUBLIC_IMAGE_KEY;
 
 const CourseDetails = () => {
     const [course, setCourse] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { id } = useParams();
 
     const fetchCourse = async () => {
         try {
-            setLoading(true)
             const res = await fetch(`/api/course/${id}`);
             const data = await res.json();
             setCourse(data);
@@ -76,51 +74,24 @@ const CourseDetails = () => {
 
     if (loading)
         return (
-            <div className="py-10 animate-pulse">
+            <div className="py-10">
                 <Loading />
             </div>
         );
     if (error)
         return <div className="text-center py-10 text-red-500">{error}</div>;
     if (!course) return null;
-    // console.log(course)
-
-    const handleGenerateChapterContent = async () => {
-        const chapters = course?.Chapters;
-        if (!chapters || chapters.length === 0) return;
-
-        chapters.forEach(async (chapter, index) => {
-            setLoading(true)
-            const courseName = course?.["Course Name"];
-            const chapterName = chapter?.["Chapter Name"];
-
-            const prompt = `Explain the concept in detail on Topic: '${courseName}', Chapter: '${chapterName}', in JSON format with fields as title, detailed description, and code example (code field in <precode> format) if applicable.`;
-
-            // console.log(`Prompt for Chapter ${index + 1}:`, prompt);
-            // if (index == 0) {
-            try {
-                const result = await GeneratorChapterContent_AI.sendMessage(prompt);
-                const res = result?.response?.text();
-                console.log("ai model-->", JSON.parse(res))
-                setLoading(false)
-            } catch (e) {
-                setLoading(false)
-                console.log(e)
-            }
-            // }
-        });
-    };
 
     return (
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-10">
+        <div className="bg-gray-900 text-white min-h-screen max-w-6xl mx-auto px-4 md:px-8 py-10">
             {/* Header */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10 bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition duration-300 p-6 md:p-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 p-6 md:p-8">
                 {/* Left: Text */}
                 <div className="w-full md:w-1/2 space-y-4 text-center md:text-left">
-                    <h1 className="text-xl md:text-2xl font-bold text-teal-700">
+                    <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">
                         {course?.["Course Name"]}
                     </h1>
-                    <p className="text-gray-600 text-base md:text-lg text-justify">
+                    <p className="text-gray-400 text-base md:text-lg text-justify">
                         {course?.Description}
                     </p>
                 </div>
@@ -151,7 +122,7 @@ const CourseDetails = () => {
             </div>
 
             {/* Meta Info */}
-            <div className="bg-white p-6 border border-gray-200 rounded-xl shadow hover:shadow-lg transition duration-300 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-6">
+            <div className="bg-gray-800 p-6 border border-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-6">
                 <InfoCard icon={<FaChartBar />} label="Skill Level" value={course?.Level} />
                 <InfoCard icon={<FaClock />} label="Duration" value={course?.Duration} />
                 <InfoCard icon={<FaBookOpen />} label="Chapters" value={`${course?.NoOfChapters} Chapters`} />
@@ -160,19 +131,19 @@ const CourseDetails = () => {
 
             {/* Chapters */}
             <div className="mt-10">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-2xl font-semibold text-purple-400 mb-4">
                     Course Chapters
                 </h2>
                 <div className="space-y-4 md:space-y-6">
                     {course?.Chapters?.map((chapter, index) => (
                         <div
                             key={index}
-                            className="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition"
+                            className="border border-gray-700 rounded-lg p-4 bg-gray-800 shadow-md hover:shadow-lg transition"
                         >
-                            <h3 className="text-lg font-bold text-teal-700">
+                            <h3 className="text-lg font-bold text-purple-400">
                                 {index + 1}. {chapter?.["Chapter Name"]}
                             </h3>
-                            <p className="text-gray-600 mt-1">{chapter?.About}</p>
+                            <p className="text-gray-400 mt-1">{chapter?.About}</p>
                             <p className="text-sm text-gray-500 mt-2">
                                 <strong>Duration:</strong> {chapter?.Duration}
                             </p>
@@ -185,12 +156,12 @@ const CourseDetails = () => {
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-10">
                 <Link
                     href="/courses"
-                    className="bg-teal-500 hover:bg-teal-700 text-white rounded-md flex items-center gap-2 px-4 py-2 transition duration-200"
+                    className="bg-gradient-to-r from-purple-500 to-indigo-600 hover:opacity-90 text-white rounded-md flex items-center gap-2 px-4 py-2 transition duration-200"
                 >
                     <FaArrowLeft /> Back to Courses
                 </Link>
-                <button onClick={handleGenerateChapterContent} className="bg-teal-500 hover:bg-teal-700 text-white rounded-md flex items-center gap-2 px-4 py-2 transition duration-200">
-                    Generate Course Content <FaArrowRight />
+                <button className="bg-gradient-to-r from-purple-500 to-indigo-600 hover:opacity-90 text-white rounded-md flex items-center gap-2 px-4 py-2 transition duration-200">
+                    Finished <FaArrowRight />
                 </button>
             </div>
         </div>
@@ -199,10 +170,10 @@ const CourseDetails = () => {
 
 const InfoCard = ({ icon, label, value }) => (
     <div className="flex items-center gap-4">
-        <div className="text-purple-600 text-2xl">{icon}</div>
+        <div className="text-purple-400 text-2xl">{icon}</div>
         <div>
             <p className="text-sm text-gray-500">{label}</p>
-            <p className="text-base font-semibold">{value}</p>
+            <p className="text-base font-semibold text-gray-400">{value}</p>
         </div>
     </div>
 );

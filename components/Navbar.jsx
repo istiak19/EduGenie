@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Bell } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
@@ -23,7 +23,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session, status } = useSession();
 
-  const menuItems = ["Home", "Courses", "Generator", "Dashboard", "Contact", "Blogs"];
+  
+  const menuItems = ["Home", "Courses", "Generator", "Contact", "Blogs"];
 
   const getRoute = (item) => (item === "Home" ? "/" : `/${item.toLowerCase()}`);
 
@@ -32,60 +33,90 @@ export default function Navbar() {
     setIsOpen(false);
   };
 
+  const userRole = session?.user?.role;
+  // addedddd
   return (
-    <nav className="sticky top-0 left-0 w-full bg-white shadow-md dark:bg-gray-900 z-50 transition-all">
-      <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
+    <nav className="sticky top-0 left-0 w-full bg-white dark:bg-gray-900 shadow z-50 transition-all">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        
+        {/* Logo & Brand Name */}
         <Link href="/" className="flex items-center space-x-2">
           <motion.div
             initial={{ rotate: 0 }}
             whileHover={{ rotate: 360 }}
             transition={{ duration: 0.5 }}
           >
-            <Image
-              src="/Edugine-logo.png"
-              alt="EduGenie Logo"
-              width={40}
-              height={40}
-            />
+            <Image src="/Edugine-logo.png" alt="EduGenie Logo" width={40} height={40} />
           </motion.div>
-          <span className="text-2xl font-bold text-teal-600 dark:text-white">
-            EduGenie
-          </span>
+          <span className="text-2xl font-bold text-teal-600 dark:text-white">EduGenie</span>
         </Link>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-6">
+        {/* Right Side */}
+        <div className="hidden md:flex items-center space-x-6">
+          
           {menuItems.map((item, index) => (
-            <motion.li
+            <Link
               key={index}
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2 }}
+              href={getRoute(item)}
+              className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition-colors"
             >
-              <Link
-                href={getRoute(item)}
-                className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition-colors"
-              >
-                {item}
-              </Link>
-            </motion.li>
+              {item}
+            </Link>
           ))}
-        </ul>
 
-        {/* Authentication (Desktop) */}
-        <div className="hidden md:flex items-center space-x-4">
+          {/* Dashboard Dropdown */}
+          {status === "authenticated" && userRole && (
+            <div className="relative group cursor-pointer">
+              <span className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition">Dashboard</span>
+              <div className="absolute top-full mt-2 w-56 bg-white dark:bg-gray-800 shadow-md rounded-md p-2 hidden group-hover:block z-50">
+                {userRole === "educator" && (
+                  <Link
+                    href="/dashboard/educatorHome"
+                    className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                  >
+                    Educator Panel
+                  </Link>
+                )}
+                {userRole === "student" && (
+                  <Link
+                    href="/dashboard/studentHome"
+                    className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                  >
+                    Student Panel
+                  </Link>
+                )}
+              </div>
+            </div>
+          )}
+          {/* Search Bar */}
+          <input
+            type="text"
+            placeholder="Search..."
+            className="px-3 py-1 rounded-md border dark:bg-gray-800 dark:border-gray-700 dark:text-white text-sm focus:outline-teal-500"
+          />
+
+          {/* Bell Icon */}
+          <button className="text-gray-600 dark:text-gray-300 hover:text-teal-500">
+            <Bell size={20} />
+          </button>
+
+          {/* Profile Image or Login */}
           {status === "authenticated" ? (
-            <>
-              <span className="text-sm text-gray-600 dark:text-gray-300">
-                Welcome, {session?.user?.name?.split(" ")[0]}
-              </span>
+            <div className="flex items-center space-x-3">
+              <Image
+                src={session.user?.image || "/default-profile.png"}
+                alt="Profile"
+                width={32}
+                height={32}
+                className="rounded-full border-2 border-teal-500"
+              />
               <button
-                className="bg-teal-600 text-white rounded-md px-4 py-2 hover:bg-teal-700 transition"
                 onClick={handleSignOut}
+                className="px-3 py-1 text-sm bg-teal-600 text-white rounded hover:bg-teal-700 transition"
               >
                 Sign out
               </button>
-            </>
+            </div>
           ) : (
             <Link
               href="/login"
@@ -96,7 +127,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Menu Icon */}
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden"
@@ -106,7 +137,7 @@ export default function Navbar() {
         </motion.button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Dropdown */}
       {isOpen && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -124,36 +155,66 @@ export default function Navbar() {
               {item}
             </Link>
           ))}
-          <div className="flex flex-col space-y-2 pt-2">
+
+          {/* Dashboard Mobile */}
+          {status === "authenticated" && userRole && (
+            <div className="pt-2">
+              <span className="block text-gray-600 dark:text-gray-300 font-semibold">Dashboard</span>
+              {userRole === "educator" && (
+                <Link
+                  href="/educator"
+                  onClick={() => setIsOpen(false)}
+                  className="block pl-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                >
+                  Educator Panel
+                </Link>
+              )}
+              {userRole === "student" && (
+                <Link
+                  href="/student"
+                  onClick={() => setIsOpen(false)}
+                  className="block pl-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+                >
+                  Student Panel
+                </Link>
+              )}
+            </div>
+          )}
+
+          {/* Mobile Search + Bell + Auth */}
+          <div className="pt-4 space-y-3">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full px-3 py-2 rounded-md border dark:bg-gray-800 dark:border-gray-700 dark:text-white text-sm focus:outline-teal-500"
+            />
+            <button className="text-gray-600 dark:text-gray-300 hover:text-teal-500">
+              <Bell size={20} />
+            </button>
             {status === "authenticated" ? (
-              <>
-                <span className="text-sm text-gray-600 dark:text-gray-300">
-                  Welcome, {session?.user?.name?.split(" ")[0]}
-                </span>
+              <div className="flex items-center space-x-3 pt-2">
+                <Image
+                  src={session.user?.image || "/default-profile.png"}
+                  alt="Profile"
+                  width={32}
+                  height={32}
+                  className="rounded-full border-2 border-teal-500"
+                />
                 <button
-                  className="bg-teal-500 text-white rounded-md px-4 py-2 hover:bg-teal-700 transition"
                   onClick={handleSignOut}
+                  className="px-3 py-1 text-sm bg-teal-600 text-white rounded hover:bg-teal-700 transition"
                 >
                   Sign out
                 </button>
-              </>
+              </div>
             ) : (
-              <>
-                <Link
-                  href="/login"
-                  onClick={() => setIsOpen(false)}
-                  className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition text-center"
-                >
-                  Login
-                </Link>
-                <Link
-                  href="/signup"
-                  onClick={() => setIsOpen(false)}
-                  className="px-4 py-2 border border-teal-600 text-teal-600 rounded-md text-center hover:bg-teal-600 hover:text-white transition"
-                >
-                  Sign Up
-                </Link>
-              </>
+              <Link
+                href="/login"
+                onClick={() => setIsOpen(false)}
+                className="block text-center px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition"
+              >
+                Login
+              </Link>
             )}
           </div>
         </motion.div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,7 +11,7 @@ export default function HeroBanner() {
     dots: false,
     infinite: true,
     speed: 600,
-    slidesToShow: 3, // Default for large screens
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2500,
@@ -22,17 +23,27 @@ export default function HeroBanner() {
   };
 
   const features = [
-    { id: 1, text: "AI-Powered Course Generation", color: "bg-blue-500" },
-    { id: 2, text: "Personalized Learning Paths", color: "bg-green-500" },
-    { id: 3, text: "Instant Course Summaries", color: "bg-yellow-500" },
-    { id: 4, text: "Smart Quiz Generator", color: "bg-purple-500" },
-    { id: 5, text: "Interactive Video Lessons", color: "bg-red-500" },
+    { id: 1, text: "AI-Powered Course Generation" },
+    { id: 2, text: "Personalized Learning Paths" },
+    { id: 3, text: "Instant Course Summaries" },
+    { id: 4, text: "Smart Quiz Generator" },
+    { id: 5, text: "Interactive Video Lessons" },
   ];
 
   return (
     <section className="relative flex flex-col items-center justify-center pb-28 pt-32 bg-gradient-to-br from-teal-500 via-cyan-600 to-teal-900 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/banner.jpg"
+          alt="EduGenie Banner"
+          layout="fill"
+          objectFit="cover"
+          className="opacity-20 blur-sm"
+        />
+      </div>
 
-      {/* Floating Animation Background */}
+      {/* Floating Background Effects */}
       <motion.div
         className="absolute inset-0 bg-gradient-to-br from-indigo-900 to-transparent opacity-50"
         initial={{ opacity: 0 }}
@@ -52,19 +63,19 @@ export default function HeroBanner() {
         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
       />
 
-      {/* Hero Content */}
-      <div className="z-10 relative max-w-3xl">
+      {/* Main Content */}
+      <div className="z-10 relative max-w-3xl pt-20 pb-10">
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight"
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 bg-clip-text text-transparent"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1 }}
         >
-          Welcome to <span className="text-yellow-300">EduGenie</span>
+          Welcome to EduGenie
         </motion.h1>
 
         <motion.p
-          className="text-lg sm:text-xl mb-6 px-2 sm:px-6"
+          className="text-lg sm:text-xl mb-6 px-4 sm:px-6"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 1 }}
@@ -80,13 +91,13 @@ export default function HeroBanner() {
         </motion.button>
       </div>
 
-      {/* Moving Slider Section */}
+      {/* Feature Slider */}
       <div className="relative mt-12 w-full max-w-5xl z-10">
         <Slider {...settings}>
           {features.map((feature) => (
             <motion.div
               key={feature.id}
-              className={`p-6 ${feature.color} text-center rounded-xl shadow-2xl mx-2 flex items-center justify-center hover:scale-105 transition-all`}
+              className="p-6 mx-2 text-white text-center rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-xl flex items-center justify-center"
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: feature.id * 0.2 }}

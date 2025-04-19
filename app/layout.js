@@ -22,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} font-sans antialiased bg-gray-900`}>
         <NextAuthProvider>
           <Navbar />
           <main className="min-h-[calc(100svh-230px)]">
