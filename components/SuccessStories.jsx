@@ -22,43 +22,44 @@ export default function SuccessStories() {
       text: "The interactive courses and personalized AI recommendations helped me upskill faster than ever.",
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNsxeqTj16QraEJsrpxM8om5YUn83B2JxOqA&s",
     },
+    
   ];
 
   return (
     <section className="bg-gray-300 py-16 px-6 text-center">
       {/* Section Header */}
       <motion.h2
-        className="text-4xl font-bold text-gray-800 mb-6"
+        className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         Real Stories. Real Impact.
       </motion.h2>
-      <p className="text-lg text-gray-600 mb-10">
+      <p className="text-md sm:text-lg text-gray-600 mb-10 px-4">
         See how EduGenie is transforming lives with AI-powered learning.
       </p>
 
       {/* Statistics */}
-      <div className="flex justify-center gap-8 mb-12">
+      <div className="flex flex-wrap justify-center gap-6 md:gap-8 mb-12">
         {stats.map((stat, index) => (
           <motion.div
             key={index}
-            className="bg-white shadow-md p-6 rounded-lg w-48"
+            className="bg-white shadow-md p-6 rounded-lg w-40 sm:w-48"
             whileHover={{ scale: 1.05 }}
           >
-            <h3 className="text-3xl font-bold text-blue-600">{stat.label}</h3>
+            <h3 className="text-2xl sm:text-3xl font-bold text-blue-600">{stat.label}</h3>
             <p className="text-gray-600">{stat.text}</p>
           </motion.div>
         ))}
       </div>
 
       {/* Success Stories */}
-      <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {testimonials.map((testimonial) => (
           <motion.div
             key={testimonial.id}
-            className="p-6 bg-white shadow-lg rounded-lg flex items-center gap-4"
+            className="p-6 bg-white shadow-lg rounded-lg flex flex-col sm:flex-row items-center gap-4"
             whileHover={{ scale: 1.05 }}
           >
             <img
@@ -66,7 +67,7 @@ export default function SuccessStories() {
               alt={testimonial.name}
               className="w-16 h-16 rounded-full object-cover"
             />
-            <div>
+            <div className="text-center sm:text-left">
               <p className="text-gray-700">"{testimonial.text}"</p>
               <h4 className="font-semibold mt-2 text-blue-600">{testimonial.name}</h4>
             </div>
@@ -75,19 +76,21 @@ export default function SuccessStories() {
       </div>
 
       {/* AI Chat Preview */}
-      <div className="mt-16">
+      <div className="mt-16 px-4">
         <motion.div
           className="max-w-md mx-auto bg-white shadow-lg p-6 rounded-lg relative"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h3 className="text-lg font-bold text-gray-800 mb-4">Meet Your AI Assistant</h3>
-          <p className="text-gray-600">Ask anything about your learning journey !!</p>
+          <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">Meet Your AI Assistant</h3>
+          <p className="text-gray-600 text-sm sm:text-base">
+            Ask anything about your learning journey!
+          </p>
           
           {/* Chat Bubble */}
           <motion.div
-            className="bg-yellow-400 text-gray-900 p-3 rounded-lg mt-4 inline-block text-left"
+            className="bg-yellow-400 text-gray-900 p-3 rounded-lg mt-4 inline-block text-left text-sm sm:text-base"
             whileHover={{ scale: 1.05 }}
           >
             <p>📢 "How can I help you learn today?"</p>
@@ -98,9 +101,9 @@ export default function SuccessStories() {
             <input
               type="text"
               placeholder="Ask something..."
-              className="w-full p-2 outline-none"
+              className="w-full p-2 text-sm sm:text-base outline-none"
             />
-            <button className="bg-yellow-400 text-gray-900 px-4">➤</button>
+            <button className="bg-yellow-400 text-gray-900 px-4 text-sm sm:text-base">➤</button>
           </div>
         </motion.div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function HowItWorks() {
   const steps = [
@@ -52,10 +53,10 @@ export default function HowItWorks() {
   ];
 
   return (
-    <section className="bg-white py-16 px-6">
+    <section className="bg-white px-6 py-16">
       {/* "How It Works" Section */}
       <motion.h2
-        className="text-4xl font-bold text-gray-800 text-center mb-10"
+        className="mb-10 font-bold text-gray-800 text-4xl text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -63,23 +64,25 @@ export default function HowItWorks() {
         How It Works...!
       </motion.h2>
 
-      <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+      <div className="gap-8 grid md:grid-cols-4 mx-auto max-w-6xl">
         {steps.map((step) => (
           <motion.div
             key={step.id}
-            className="p-6 bg-yellow-400 text-black text-center rounded-lg shadow-md"
+            className="p-6 bg-teal-500 text-black text-center rounded-lg shadow-md"
+
+
             whileHover={{ scale: 1.05 }}
           >
             <div className="text-5xl">{step.icon}</div>
-            <h3 className="text-xl font-bold mt-4">{step.title}</h3>
-            <p className="text-gray-600 mt-2">{step.description}</p>
+            <h3 className="mt-4 font-bold text-xl">{step.title}</h3>
+            <p className="mt-2 text-gray-600">{step.description}</p>
           </motion.div>
         ))}
       </div>
 
       {/* Blog Showcase Section */}
       <motion.h2
-        className="text-4xl font-bold text-gray-800 text-center mt-20 mb-10"
+        className="mt-20 mb-10 font-bold text-gray-800 text-4xl text-center"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
@@ -87,7 +90,7 @@ export default function HowItWorks() {
         Featured Blogs
       </motion.h2>
 
-      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div className="gap-8 grid md:grid-cols-3 mx-auto max-w-6xl">
         {blogs.map((blog) => (
           <motion.div
             key={blog.id}
@@ -100,7 +103,7 @@ export default function HowItWorks() {
               className="w-full h-48 object-cover"
             />
             <div className="p-4">
-              <h3 className="text-lg font-bold">{blog.title}</h3>
+              <h3 className="font-bold text-lg">{blog.title}</h3>
               <p className="text-gray-600">{blog.author}</p>
             </div>
           </motion.div>
@@ -108,13 +111,15 @@ export default function HowItWorks() {
       </div>
 
       {/* Write a Blog Button */}
-      <div className="text-center mt-12">
-        <motion.button
-          className="px-6 py-3 bg-yellow-500 text-black rounded-lg font-bold hover:bg-blue-700 transition-all"
-          whileHover={{ scale: 1.05 }}
-        >
-          Write a Blog ✍️
-        </motion.button>
+      <div className="mt-12 text-center">
+        <Link href="/blogs">
+          <motion.button
+            className="bg-teal-500 btn hover:bg-teal-700 px-4 py-6 rounded-lg font-bold text-black transition-all"
+            whileHover={{ scale: 1.05 }}
+          >
+            Write a Blog ✍️
+          </motion.button>
+        </Link>
       </div>
     </section>
   );
