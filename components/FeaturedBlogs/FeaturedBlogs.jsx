@@ -110,4 +110,5 @@ const FeaturedBlogs = () => {
   );
 };
 
+
 export default FeaturedBlogs;

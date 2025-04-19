@@ -4,51 +4,77 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaInstagram } from "react-icons/f
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-br from-blue-600 to-indigo-900 text-white  py-10">
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-8">
-        {/* Column 1 - Logo & Intro */}
+    <footer className="bg-teal-600 text-white py-12">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+        {/* Logo & Tagline */}
         <div>
           <h2 className="text-3xl font-bold text-white">EduGenie</h2>
-          <p className="mt-2 text-yellow-300">AI-powered learning made simple and effective....</p>
+          <p className="mt-3 text-gray-300 text-sm leading-relaxed">
+            Empowering learners through AI-powered personalized education.
+          </p>
         </div>
 
-        {/* Column 2 - Quick Links */}
+        {/* Quick Links */}
         <div>
-          <h3 className="text-lg font-semibold text-white">Quick Links</h3>
-          <ul className="mt-2 space-y-2">
-            <li><a href="#" className="hover:text-blue-400">Home</a></li>
-            <li><a href="#" className="hover:text-blue-400">Courses</a></li>
-            <li><a href="#" className="hover:text-blue-400">Blog</a></li>
-            <li><a href="#" className="hover:text-blue-400">Contact</a></li>
+          <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <a href="/" className="hover:text-yellow-300 transition-colors">Home</a>
+            </li>
+            <li>
+              <a href="/courses" className="hover:text-yellow-300 transition-colors">Courses</a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-yellow-300 transition-colors">Blog</a>
+            </li>
+            <li>
+              <a href="/contact" className="hover:text-yellow-300 transition-colors">Contact</a>
+            </li>
           </ul>
         </div>
 
-        {/* Column 3 - Resources */}
+        {/* Resources */}
         <div>
-          <h3 className="text-lg font-semibold text-white">Resources</h3>
-          <ul className="mt-2 space-y-2">
-            <li><a href="#" className="hover:text-blue-400">FAQs</a></li>
-            <li><a href="#" className="hover:text-blue-400">Support</a></li>
-            <li><a href="#" className="hover:text-blue-400">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-blue-400">Terms of Service</a></li>
+          <h3 className="text-lg font-semibold mb-3">Resources</h3>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <a href="#" className="hover:text-yellow-300 transition-colors">FAQs</a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-yellow-300 transition-colors">Support</a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-yellow-300 transition-colors">Privacy Policy</a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-yellow-300 transition-colors">Terms of Service</a>
+            </li>
           </ul>
         </div>
 
-        {/* Column 4 - Social Media */}
+        {/* Social Media */}
         <div>
-          <h3 className="text-lg font-semibold text-white">Follow Us</h3>
-          <div className="flex space-x-4 mt-3">
-            <a href="#" className="hover:text-blue-400 text-xl"><FaFacebookF /></a>
-            <a href="#" className="hover:text-blue-400 text-xl"><FaTwitter /></a>
-            <a href="#" className="hover:text-blue-400 text-xl"><FaLinkedinIn /></a>
-            <a href="#" className="hover:text-blue-400 text-xl"><FaInstagram /></a>
+          <h3 className="text-lg font-semibold mb-3">Follow Us</h3>
+          <div className="flex space-x-4 mt-2">
+            <a href="#" className="text-xl hover:text-yellow-300 transition-colors">
+              <FaFacebookF />
+            </a>
+            <a href="#" className="text-xl hover:text-yellow-300 transition-colors">
+              <FaTwitter />
+            </a>
+            <a href="#" className="text-xl hover:text-yellow-300 transition-colors">
+              <FaLinkedinIn />
+            </a>
+            <a href="#" className="text-xl hover:text-yellow-300 transition-colors">
+              <FaInstagram />
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Copyright Section */}
-      <div className="border-t border-gray-700 mt-6 pt-4 text-center text-yellow-300">
-        © {new Date().getFullYear()} EduGenie. All Rights Reserved.
+      {/* Copyright */}
+      <div className="mt-10 border-t border-teal-500 pt-6 text-center text-sm text-gray-300">
+        © {new Date().getFullYear()} <span className="font-semibold text-white">EduGenie</span>. All rights reserved.
       </div>
     </footer>
   );
