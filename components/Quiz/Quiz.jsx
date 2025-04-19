@@ -5,7 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
 import 'react-toastify/dist/ReactToastify.css';
 
-//  this is quiz page 
 const Quiz = () => {
   const [questions, setQuestions] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
