@@ -7,7 +7,7 @@ export const metadata = {
 
 const GeneratorCourse = () => {
     return (
-        <div className="py-10">
+        <div className="py-10 px-4">
             <Generator />
         </div>
     );

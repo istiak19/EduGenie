@@ -34,6 +34,10 @@ const AllBlogs = () => {
   };
 
   const handleLike = async (blogId) => {
+    if (!session?.user) {
+      alert("Please login to like!");
+      return;
+    }
     await fetch(`/api/blogs/${blogId}/like`, {
       method: "PATCH",
       body: JSON.stringify({ userEmail }),
@@ -42,6 +46,11 @@ const AllBlogs = () => {
   };
 
   const handleCommentSubmit = async (blogId) => {
+    if (!session?.user) {
+      alert("Please login to comment!");
+      return;
+    }
+
     if (!commentText.trim()) return;
 
     await fetch(`/api/blogs/${blogId}/comment`, {
@@ -58,14 +67,14 @@ const AllBlogs = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-10">
-      <h2 className="text-3xl font-bold mb-6 text-center text-teal-700">
+    <div className="max-w-5xl mx-auto px-4 py-10 bg-gray-900 text-white">
+      <h2 className="text-3xl font-bold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">
         All Blogs
       </h2>
 
       {loading ? (
         <div className="flex justify-center items-center h-40">
-          <div className="text-teal-600 text-lg font-medium animate-pulse">
+          <div className="text-purple-400 text-lg font-medium animate-pulse">
             <Loading />
           </div>
         </div>
@@ -74,19 +83,19 @@ const AllBlogs = () => {
           {blogs.map((blog) => (
             <div
               key={blog._id}
-              className="p-6 bg-white rounded-xl shadow border hover:shadow-md transition"
+              className="p-6 bg-gray-800 rounded-xl shadow border border-gray-700 hover:shadow-lg transition"
             >
-              <h3 className="text-2xl font-semibold mb-2 text-teal-700">
+              <h3 className="text-2xl font-semibold mb-2 text-purple-400">
                 {blog.title}
               </h3>
-              <p className="text-gray-700 leading-relaxed text-justify">
+              <p className="text-gray-400 leading-relaxed text-justify">
                 {blog.content}
               </p>
 
               <div className="flex flex-wrap items-center gap-4 mt-4">
                 <div className="flex items-center gap-2">
                   <button
-                    className="text-blue-600 hover:underline cursor-pointer"
+                    className="text-purple-400 hover:underline cursor-pointer"
                     onClick={() => handleLike(blog._id)}
                   >
                     Like
@@ -97,12 +106,16 @@ const AllBlogs = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <button
-                    className="text-green-600 hover:underline cursor-pointer"
-                    onClick={() =>
+                    className="text-indigo-400 hover:underline cursor-pointer"
+                    onClick={() => {
+                      if (!session?.user) {
+                        alert("Please login to comment!");
+                        return;
+                      }
                       setActiveCommentBlogId(
                         activeCommentBlogId === blog._id ? null : blog._id
-                      )
-                    }
+                      );
+                    }}
                   >
                     Comment
                   </button>
@@ -116,13 +129,13 @@ const AllBlogs = () => {
               {activeCommentBlogId === blog._id && (
                 <div className="mt-4">
                   <textarea
-                    className="w-full border rounded-lg p-3 focus:outline-none focus:ring focus:border-teal-400"
+                    className="w-full border rounded-lg p-3 bg-gray-900 text-gray-400 focus:outline-none focus:ring focus:border-purple-500 placeholder-gray-500"
                     placeholder="Write your comment..."
                     value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
                   />
                   <button
-                    className="mt-2 bg-teal-600 hover:bg-teal-700 text-white px-5 py-2 rounded-md"
+                    className="mt-2 bg-gradient-to-r from-purple-500 to-indigo-600 hover:opacity-90 text-white px-5 py-2 rounded-md transition-all"
                     onClick={() => handleCommentSubmit(blog._id)}
                   >
                     Submit Comment
@@ -133,13 +146,11 @@ const AllBlogs = () => {
               {/* Show Comments */}
               {blog.comments?.length > 0 && (
                 <div className="mt-6">
-                  <h4 className="font-semibold text-gray-800 mb-2">
-                    Comments:
-                  </h4>
-                  <ul className="space-y-2 text-gray-700 text-sm">
+                  <h4 className="font-semibold text-purple-400 mb-2">Comments:</h4>
+                  <ul className="space-y-2 text-gray-400 text-sm">
                     {blog.comments.map((comment, i) => (
                       <li key={i}>
-                        <span className="font-medium text-gray-600">
+                        <span className="font-medium text-indigo-400">
                           {comment.commenter}:
                         </span>{" "}
                         {comment.comment}
