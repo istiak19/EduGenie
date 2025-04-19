@@ -247,7 +247,11 @@ const Generator = () => {
                             onClick={handleGenerate}
                             className="bg-green-600 text-white py-3 px-6 rounded-lg cursor-pointer font-semibold hover:bg-green-700"
                         >
-                            {isGenerating ? "⏳ Generating..." : "Generate Course"}
+                            {isGenerating ? (
+                                <span className="loading loading-spinner text-success"></span>
+                            ) : (
+                                "Generate Course"
+                            )}
                         </button>
                     </div>
                 </div>

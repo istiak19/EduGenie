@@ -7,8 +7,10 @@ import Link from "next/link";
 import { SiLevelsdotfyi } from "react-icons/si";
 import { FaRegClock } from "react-icons/fa";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const Courses = () => {
+  const { data: session } = useSession();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,6 +31,8 @@ const Courses = () => {
     fetchCourses();
   }, []);
 
+  const ownerCourse = courses.filter(course => course?.email === session?.user?.email);
+
   return (
     <div>
       {/* Header Section */}
@@ -45,14 +49,18 @@ const Courses = () => {
       {/* Content */}
       <div className="p-4 max-w-7xl mx-auto">
         {loading ? (
-          <Loading />
+          <div className="animate-pulse">
+            <Loading />
+          </div>
         ) : error ? (
           <p className="text-center text-red-500 text-lg">{error}</p>
-        ) : courses.length === 0 ? (
-          <p className="text-center text-gray-600 text-lg">No courses available.</p>
+        ) : ownerCourse.length === 0 ? (
+          <p className="text-center text-gray-600 text-lg mt-10">
+            You haven't created any courses yet.
+          </p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch py-10">
-            {courses.map((course) => (
+            {ownerCourse.map((course) => (
               <div
                 key={course._id}
                 className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition duration-300 p-4 flex flex-col h-full min-h-[250px]"
@@ -63,7 +71,6 @@ const Courses = () => {
                     alt="Course Image"
                     fill
                     className="object-cover"
-                    // sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
                 <h2 className="text-xl font-semibold text-gray-800 mb-2 hover:text-teal-600 transition">

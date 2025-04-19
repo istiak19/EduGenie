@@ -6,17 +6,19 @@ import { FaChartBar, FaClock, FaBookOpen, FaPlayCircle, FaArrowLeft, FaArrowRigh
 import Loading from "@/components/Loading/Loading";
 import Link from "next/link";
 import Image from "next/image";
+import { GeneratorChapterContent_AI } from "@/aiModel/aiModel";
 
 const image_key = process.env.NEXT_PUBLIC_IMAGE_KEY;
 
 const CourseDetails = () => {
     const [course, setCourse] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { id } = useParams();
 
     const fetchCourse = async () => {
         try {
+            setLoading(true)
             const res = await fetch(`/api/course/${id}`);
             const data = await res.json();
             setCourse(data);
@@ -74,13 +76,40 @@ const CourseDetails = () => {
 
     if (loading)
         return (
-            <div className="py-10">
+            <div className="py-10 animate-pulse">
                 <Loading />
             </div>
         );
     if (error)
         return <div className="text-center py-10 text-red-500">{error}</div>;
     if (!course) return null;
+    // console.log(course)
+
+    const handleGenerateChapterContent = async () => {
+        const chapters = course?.Chapters;
+        if (!chapters || chapters.length === 0) return;
+
+        chapters.forEach(async (chapter, index) => {
+            setLoading(true)
+            const courseName = course?.["Course Name"];
+            const chapterName = chapter?.["Chapter Name"];
+
+            const prompt = `Explain the concept in detail on Topic: '${courseName}', Chapter: '${chapterName}', in JSON format with fields as title, detailed description, and code example (code field in <precode> format) if applicable.`;
+
+            // console.log(`Prompt for Chapter ${index + 1}:`, prompt);
+            // if (index == 0) {
+            try {
+                const result = await GeneratorChapterContent_AI.sendMessage(prompt);
+                const res = result?.response?.text();
+                console.log("ai model-->", JSON.parse(res))
+                setLoading(false)
+            } catch (e) {
+                setLoading(false)
+                console.log(e)
+            }
+            // }
+        });
+    };
 
     return (
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-10">
@@ -88,7 +117,7 @@ const CourseDetails = () => {
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10 bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition duration-300 p-6 md:p-8">
                 {/* Left: Text */}
                 <div className="w-full md:w-1/2 space-y-4 text-center md:text-left">
-                    <h1 className="text-3xl md:text-4xl font-bold text-teal-700">
+                    <h1 className="text-xl md:text-2xl font-bold text-teal-700">
                         {course?.["Course Name"]}
                     </h1>
                     <p className="text-gray-600 text-base md:text-lg text-justify">
@@ -160,8 +189,8 @@ const CourseDetails = () => {
                 >
                     <FaArrowLeft /> Back to Courses
                 </Link>
-                <button className="bg-teal-500 hover:bg-teal-700 text-white rounded-md flex items-center gap-2 px-4 py-2 transition duration-200">
-                    Finished <FaArrowRight />
+                <button onClick={handleGenerateChapterContent} className="bg-teal-500 hover:bg-teal-700 text-white rounded-md flex items-center gap-2 px-4 py-2 transition duration-200">
+                    Generate Course Content <FaArrowRight />
                 </button>
             </div>
         </div>
