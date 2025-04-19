@@ -58,34 +58,37 @@ export default function CourseCarousel() {
       ? courses
       : courses.filter((course) => course.category === activeCategory);
 
+  // Dynamically adjust slidesToShow based on the number of filtered courses
+  const slidesToShow = Math.min(3, filteredCourses.length || 1);
+
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: filteredCourses.length > 1, // Only enable infinite scrolling if there's more than one slide
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: filteredCourses.length > 1, // Only autoplay if there's more than one slide
     autoplaySpeed: 2500,
     cssEase: "linear",
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: Math.min(2, filteredCourses.length || 1),
         },
       },
       {
         breakpoint: 640,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: Math.min(1, filteredCourses.length || 1),
         },
       },
     ],
   };
 
   return (
-    <section className="py-16 bg-gray-100 text-center">
-      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal-700 mb-8 px-4">
+    <section className="py-16 bg-[#1B1833] text-center text-white">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600 mb-8 px-4">
         Explore Our Courses
       </h2>
 
@@ -94,10 +97,11 @@ export default function CourseCarousel() {
         {categories.map((category) => (
           <motion.button
             key={category}
-            className={`px-4 py-2 rounded-lg font-medium transition-all text-sm sm:text-base btn ${activeCategory === category
-                ? "bg-teal-600 text-white"
-                : "bg-gray-200 text-gray-800"
-              }`}
+            className={`px-4 py-2 rounded-lg font-medium transition-all text-sm sm:text-base ${
+              activeCategory === category
+                ? "bg-gradient-to-r from-purple-500 to-indigo-600 text-white"
+                : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+            }`}
             onClick={() => setActiveCategory(category)}
             whileHover={{ scale: 1.05 }}
           >
@@ -108,17 +112,18 @@ export default function CourseCarousel() {
 
       {/* Course Slider */}
       <div className="max-w-6xl mx-auto px-4">
-        <Slider {...settings}>
+        {/* Key Prop Added Here */}
+        <Slider {...settings} key={activeCategory}>
           {filteredCourses.map((course) => (
             <motion.div
               key={course.id}
-              className="px-2"
+              className="px-2 max-w-2xl"
               whileHover={{ scale: 1.03, y: -5 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              <div className="relative group bg-white shadow-md rounded-2xl overflow-hidden border border-transparent hover:border-teal-600 transition duration-300">
+              <div className="relative group bg-gray-800 shadow-md overflow-hidden hover:border-b-purple-500 hover:border-b-4 transition duration-300">
                 {/* Category Badge */}
-                <span className="absolute top-2 left-2 bg-teal-600 text-white text-xs font-medium px-3 py-1 rounded-full z-10">
+                <span className="absolute top-4 left-2 bg-purple-500 text-white text-xs font-medium px-3 py-1 rounded-full z-10">
                   {course.category}
                 </span>
 
@@ -131,8 +136,8 @@ export default function CourseCarousel() {
 
                 {/* Course Info */}
                 <div className="p-4 space-y-2">
-                  <h3 className="text-lg font-semibold text-gray-800">{course.title}</h3>
-                  <p className="text-yellow-500 text-sm">⭐ {course.rating}</p>
+                  <h3 className="text-lg font-semibold text-white">{course.title}</h3>
+                  <p className="text-yellow-400 text-sm">⭐ {course.rating}</p>
                 </div>
               </div>
             </motion.div>

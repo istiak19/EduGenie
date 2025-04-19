@@ -6,22 +6,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
+import { usePathname } from "next/navigation"; // Import usePathname for active route detection
 
 export default function Navbar() {
-  // const [users, setUsers] = useState([]);
-  // useEffect(() => {
-  //     const fetchUser = async () => {
-  //         const res = await fetch('/api/user');
-  //         const data = await res.json();
-  //         setUsers(data);
-  //     }
-  //     fetchUser()
-  // }, []);
-
-  // const roleUser = users.find(user => user?.email === session?.user?.email)
-
   const [isOpen, setIsOpen] = useState(false);
   const { data: session, status } = useSession();
+  const pathname = usePathname(); // Get the current route
 
   const menuItems = ["Home", "Courses", "Generator", "Dashboard", "Contact", "Blogs"];
 
@@ -33,7 +23,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 left-0 w-full bg-white shadow-md dark:bg-gray-900 z-50 transition-all">
+    <nav className="sticky top-0 left-0 w-full bg-gray-900 shadow-md z-50 transition-all">
       <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
@@ -49,38 +39,50 @@ export default function Navbar() {
               height={40}
             />
           </motion.div>
-          <span className="text-2xl font-bold text-teal-600 dark:text-white">
+          <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600">
             EduGenie
           </span>
         </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6">
-          {menuItems.map((item, index) => (
-            <motion.li
-              key={index}
-              whileHover={{ scale: 1.1 }}
-              transition={{ duration: 0.2 }}
-            >
-              <Link
-                href={getRoute(item)}
-                className="text-gray-800 dark:text-gray-300 hover:text-teal-600 transition-colors"
+          {menuItems.map((item, index) => {
+            const isActive = pathname === getRoute(item); // Check if the current route matches the menu item
+            return (
+              <motion.li
+                key={index}
+                whileHover={{ scale: 1.1 }}
+                transition={{ duration: 0.2 }}
               >
-                {item}
-              </Link>
-            </motion.li>
-          ))}
+                <Link
+                  href={getRoute(item)}
+                  className={`relative text-gray-400 hover:text-purple-400 transition-colors ${
+                    isActive ? "text-purple-400" : ""
+                  }`}
+                >
+                  {item}
+                  {/* Underline for active item */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="underline" // Unique ID for smooth transitions
+                      className="absolute left-0 right-0 top-5 h-[2px] bg-purple-400 rounded-full"
+                    />
+                  )}
+                </Link>
+              </motion.li>
+            );
+          })}
         </ul>
 
         {/* Authentication (Desktop) */}
         <div className="hidden md:flex items-center space-x-4">
           {status === "authenticated" ? (
             <>
-              <span className="text-sm text-gray-600 dark:text-gray-300">
+              <span className="text-sm text-gray-400">
                 Welcome, {session?.user?.name?.split(" ")[0]}
               </span>
               <button
-                className="bg-teal-600 text-white rounded-md px-4 py-2 hover:bg-teal-700 transition"
+                className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-md px-4 py-2 hover:opacity-90 transition"
                 onClick={handleSignOut}
               >
                 Sign out
@@ -89,7 +91,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-700 transition"
+              className="px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-md hover:opacity-90 transition"
             >
               Login
             </Link>
@@ -99,7 +101,7 @@ export default function Navbar() {
         {/* Mobile Menu Toggle */}
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden"
+          className="md:hidden text-white"
           whileTap={{ scale: 0.9 }}
         >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -111,27 +113,40 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="md:hidden bg-white dark:bg-gray-800 px-6 py-4 space-y-4 shadow-lg"
+          className="md:hidden bg-gray-800 px-6 py-4 space-y-4 shadow-lg"
         >
-          {menuItems.map((item, index) => (
-            <Link
-              key={index}
-              href={getRoute(item)}
-              onClick={() => setIsOpen(false)}
-              className="block text-gray-800 dark:text-gray-300 hover:text-teal-600 transition"
-            >
-              {item}
-            </Link>
-          ))}
+          {menuItems.map((item, index) => {
+            const isActive = pathname === getRoute(item); // Check if the current route matches the menu item
+            return (
+              <Link
+                key={index}
+                href={getRoute(item)}
+                onClick={() => setIsOpen(false)}
+                className={`block relative text-gray-400 hover:text-purple-400 transition ${
+                  isActive ? "text-purple-400" : ""
+                }`}
+              >
+                {item}
+                {/* Underline for active item */}
+                {isActive && (
+                  <motion.span
+                    layoutId="underline" // Unique ID for smooth transitions
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-purple-400 rounded-full"
+                  />
+                )}
+              </Link>
+            );
+          })}
           <div className="flex flex-col space-y-2 pt-2">
             {status === "authenticated" ? (
               <>
-                <span className="text-sm text-gray-600 dark:text-gray-300">
+                <span className="text-sm text-gray-400">
                   Welcome, {session?.user?.name?.split(" ")[0]}
                 </span>
                 <button
-                  className="bg-teal-500 text-white rounded-md px-4 py-2 hover:bg-teal-700 transition"
+                  className="bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-md px-4 py-2 hover:opacity-90 transition"
                   onClick={handleSignOut}
                 >
                   Sign out
@@ -142,14 +157,14 @@ export default function Navbar() {
                 <Link
                   href="/login"
                   onClick={() => setIsOpen(false)}
-                  className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition text-center"
+                  className="px-4 py-2 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-md hover:opacity-90 transition text-center"
                 >
                   Login
                 </Link>
                 <Link
                   href="/signup"
                   onClick={() => setIsOpen(false)}
-                  className="px-4 py-2 border border-teal-600 text-teal-600 rounded-md text-center hover:bg-teal-600 hover:text-white transition"
+                  className="px-4 py-2 border border-purple-500 text-purple-500 rounded-md text-center hover:bg-purple-500 hover:text-white transition"
                 >
                   Sign Up
                 </Link>
