@@ -13,29 +13,33 @@ const Sidebar = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await fetch("https://genie-one-xi.vercel.app/api/user");
+                const res = await fetch("/api/user");
                 const data = await res.json();
                 setUsers(data);
-                setLoading(false);
             } catch (err) {
                 console.error("Failed to fetch users", err);
+            } finally {
+                setLoading(false);
             }
         };
+
         fetchUser();
     }, []);
 
     if (status === "loading" || loading) {
-        return <div className="p-4 text-white">Loading sidebar...</div>;
+        return <div className="p-4 text-white"><span className="loading loading-ring loading-xl"></span></div>;
     }
 
     const roleUser = users.find(user => user?.email === session?.user?.email);
 
     return (
-        <div className="text-white">
-            <ul className="menu p-4">
-                {roleUser?.role === "educator" && <EducatorPanel />}
-                {roleUser?.role === "student" && <StudentPanel />}
-            </ul>
+        <div className="text-white w-full">
+            {
+                roleUser?.role === "educator" && <EducatorPanel />
+            }
+            {
+                roleUser?.role === "student" && <StudentPanel />
+            }
         </div>
     );
 };
