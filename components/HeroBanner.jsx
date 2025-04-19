@@ -1,13 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function HeroBanner() {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 600,
     slidesToShow: 3,
@@ -22,40 +23,50 @@ export default function HeroBanner() {
   };
 
   const features = [
-    { id: 1, text: "AI-Powered Course Generation", icon: "📚" },
-    { id: 2, text: "Personalized Learning Paths", icon: "🎯" },
-    { id: 3, text: "Instant Course Summaries", icon: "⚡" },
-    { id: 4, text: "Smart Quiz Generator", icon: "📝" },
-    { id: 5, text: "Interactive Video Lessons", icon: "🎥" },
+    { id: 1, text: "AI-Powered Course Generation" },
+    { id: 2, text: "Personalized Learning Paths" },
+    { id: 3, text: "Instant Course Summaries" },
+    { id: 4, text: "Smart Quiz Generator" },
+    { id: 5, text: "Interactive Video Lessons" },
   ];
 
   return (
-    <section className="relative flex flex-col items-center justify-center py-20 bg-gray-900 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
+    <section className="relative flex flex-col items-center justify-center pb-28 pt-32 bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-950 text-white text-center px-6 md:px-12 lg:px-24 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src="/banner.jpg"
+          alt="EduGenie Banner"
+          layout="fill"
+          objectFit="cover"
+          className="opacity-20 blur-sm"
+        />
+      </div>
 
-      {/* Floating Animation Background */}
+      {/* Floating Background Effects */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-purple-900 via-indigo-800 to-gray-900 opacity-50"
+        className="absolute inset-0 bg-gradient-to-br from-purple-950 to-transparent opacity-50"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       />
 
       <motion.div
-        className="absolute top-1/3 left-1/4 w-16 h-16 bg-purple-500 opacity-30 rounded-full blur-3xl"
-        animate={{ y: [0, -10, 0], x: [0, 10, 0] }}
+        className="absolute top-1/3 left-1/4 w-16 md:w-24 h-16 md:h-24 bg-purple-400 opacity-30 rounded-full blur-3xl"
+        animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
       />
 
       <motion.div
-        className="absolute bottom-1/3 right-1/4 w-16 h-16 bg-indigo-500 opacity-30 rounded-full blur-3xl"
-        animate={{ y: [0, 10, 0], x: [0, -10, 0] }}
+        className="absolute bottom-1/3 right-1/4 w-24 md:w-32 h-24 md:h-32 bg-pink-400 opacity-20 rounded-full blur-3xl"
+        animate={{ y: [0, 20, 0], x: [0, -10, 0] }}
         transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
       />
 
-      {/* Hero Content */}
-      <div className="z-10 relative max-w-3xl">
+      {/* Main Content */}
+      <div className="z-10 relative max-w-3xl pt-20 pb-10">
         <motion.h1
-          className="text-4xl sm:text-5xl font-bold mb-4 tracking-tight leading-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-600"
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 tracking-tight leading-tight bg-gradient-to-r from-pink-400 via-purple-500 to-indigo-400 bg-clip-text text-transparent"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1 }}
@@ -64,37 +75,38 @@ export default function HeroBanner() {
         </motion.h1>
 
         <motion.p
-          className="text-lg sm:text-xl mb-6 text-gray-300 px-2 sm:px-6"
+          className="text-lg sm:text-xl mb-6 px-4 sm:px-6 text-gray-300"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 1 }}
         >
-          Empowering learners with AI-driven education solutions.
+          Revolutionizing learning with AI-powered course generation.
         </motion.p>
 
         <motion.button
-          className="px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg font-bold hover:opacity-90 transition-all shadow-md"
+          className="px-6 sm:px-8 py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg font-bold hover:from-pink-500 hover:to-purple-500 transition-all shadow-xl hover:scale-105"
           whileHover={{ scale: 1.05 }}
         >
           Get Started
         </motion.button>
       </div>
 
-      {/* Moving Slider Section */}
+      {/* Feature Slider */}
       <div className="relative mt-12 w-full max-w-5xl z-10">
         <Slider {...settings}>
           {features.map((feature) => (
-            <div
+            <motion.div
               key={feature.id}
-              className="p-6 bg-gray-800 text-center shadow-md transition-all duration-300 flex flex-col items-center justify-center border-l-10 border-l-blue-900"
+              className="p-6 mx-2 text-white text-center rounded-2xl backdrop-blur-md bg-opacity-10 border border-white/20 shadow-xl flex items-center justify-center"
+              style={{ backgroundColor: "rgba(255, 255, 255, 0.05)" }}
+              initial={{ y: 30, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: feature.id * 0.2 }}
             >
-              <span className="text-4xl sm:text-5xl mb-4 text-purple-500">
-                {feature.icon}
-              </span>
-              <p className="text-base sm:text-lg font-semibold text-white mt-5">
+              <p className="text-base sm:text-lg font-semibold text-white">
                 {feature.text}
               </p>
-            </div>
+            </motion.div>
           ))}
         </Slider>
       </div>
