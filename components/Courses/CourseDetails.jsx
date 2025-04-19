@@ -2,14 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import {
-    FaChartBar,
-    FaClock,
-    FaBookOpen,
-    FaPlayCircle,
-    FaArrowLeft,
-    FaArrowRight,
-} from "react-icons/fa";
+import { FaChartBar, FaClock, FaBookOpen, FaPlayCircle, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Loading from "@/components/Loading/Loading";
 import Link from "next/link";
 import Image from "next/image";
@@ -94,7 +87,7 @@ const CourseDetails = () => {
             {/* Header */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-10 bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition duration-300 p-6 md:p-8">
                 {/* Left: Text */}
-                <div className="w-full md:w-1/2 space-y-4 text-center md:text-left text-start">
+                <div className="w-full md:w-1/2 space-y-4 text-center md:text-left">
                     <h1 className="text-3xl md:text-4xl font-bold text-teal-700">
                         {course?.["Course Name"]}
                     </h1>

@@ -55,6 +55,7 @@ const HomePage = () => {
       <EducatorAndSubscription />
      
 
+      
     </div>
   );
 };
