@@ -38,5 +38,40 @@ export const GeneratorCourseLayout_AI = model.startChat({
     ],
 });
 
-// const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
-// console.log(result.response.text());
+export const GeneratorChapterContent_AI = model.startChat({
+    history: [
+        {
+            role: "user",
+            parts: [
+                {
+                    text: `Explain the concept in Detail on Topic: Python Basic,
+  Chapter:Variables and Data Types, in JSON Format with list of array
+  with field as title, explanation on give chapter in detail , Code
+  Example(Code field in <precode> format) if applicable`,
+                },
+            ],
+        },
+        {
+            role: "model",
+            parts: [
+                {
+                    text: `{
+    "title": "Python Basics: Variables and Data Types",
+    "chapters": [
+      {
+        "title": "Introduction to Variables",
+        "explanation": "Variables are used to store data...",
+        "code": "<precode>name = \\"Alice\\"\\nage = 30</precode>"
+      },
+      {
+        "title": "Naming Variables",
+        "explanation": "Rules for naming...",
+        "code": "<precode>valid_name = 123</precode>"
+      }
+    ]
+  }`,
+                },
+            ],
+        },
+    ],
+});  

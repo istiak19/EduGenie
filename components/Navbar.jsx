@@ -64,6 +64,7 @@ export default function Navbar() {
             </Link>
           ))}
 
+          {/* updated */}
           {/* Dashboard Dropdown */}
           {status === "authenticated" && userRole && (
             <div className="relative group cursor-pointer">
