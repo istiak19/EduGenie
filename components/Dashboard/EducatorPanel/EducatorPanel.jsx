@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
 import { FaHome, FaMicroblog } from "react-icons/fa";
+import { GiPowerGenerator } from "react-icons/gi";
 import { MdOutlineQuiz } from "react-icons/md";
 
 const EducatorPanel = () => {
@@ -19,6 +20,11 @@ const EducatorPanel = () => {
             href: "/dashboard/profile",
             label: "Profile",
             icon: <CgProfile className="text-lg" />,
+        },
+        {
+            href: "/dashboard/generator",
+            label: "Generator",
+            icon: <GiPowerGenerator className="text-lg" />,
         },
         {
             href: "/dashboard/educatorCreateBlog",
