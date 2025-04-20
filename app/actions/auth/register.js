@@ -3,7 +3,8 @@ import dbConnect, { collectionNames } from "@/lib/dbConnect";
 import { hash } from "bcryptjs";
 
 export const register = async (payload) => {
-    const userCollection = await dbConnect(collectionNames.userCollection);
+    const db = await dbConnect();
+    const userCollection = await db.collection(collectionNames.userCollection);
     const user = await userCollection.findOne({ email: payload.email });
     const hashedPassword = await hash(payload.password, 10);
     if (!user) {

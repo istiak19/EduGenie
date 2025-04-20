@@ -1,12 +1,14 @@
 import dbConnect, { collectionNames } from "@/lib/dbConnect";
 import { NextResponse } from "next/server";
 
+const db = await dbConnect();
+
 export async function POST(req) {
   try {
     const body = await req.json();
     const { firstName, lastName, email, tel, message } = body;
 
-   const result = await dbConnect(collectionNames.messageCollection).insertOne({
+   const result = await db.collection(collectionNames.messageCollection).insertOne({
       firstName,
       lastName,
       email,

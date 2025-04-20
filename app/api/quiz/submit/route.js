@@ -3,6 +3,7 @@ import dbConnect, { collectionNames } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
+const db = await dbConnect();
 export async function POST(req) {
   try {
     const body = await req.json();
@@ -16,7 +17,7 @@ export async function POST(req) {
     const resultDetails = [];
 
     for (let ans of answers) {
-      const question = await dbConnect(collectionNames.quizCollection).findOne({
+      const question = await db.collection(collectionNames.quizCollection).findOne({
         _id: new ObjectId(ans.questionId),
       });
 
@@ -45,7 +46,7 @@ export async function POST(req) {
       createdAt: new Date(),
     };
 
-    const res = await dbConnect(collectionNames.resultCollections).insertOne(userResults);
+    const res = await db.collection(collectionNames.resultCollections).insertOne(userResults);
 
     return NextResponse.json({
       insertedId: res.insertedId.toString(),

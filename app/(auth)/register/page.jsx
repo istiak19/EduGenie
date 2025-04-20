@@ -176,7 +176,7 @@ const Register = () => {
                                         </FormItem>
                                     )}
                                 />
-                                <Button className="w-full bg-teal-600 hover:bg-teal-700" type="submit">
+                                <Button className="w-full cursor-pointer bg-teal-600 hover:bg-teal-700" type="submit">
                                     Sign Up
                                 </Button>
                             </form>

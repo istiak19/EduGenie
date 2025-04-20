@@ -2,12 +2,14 @@
 import dbConnect, { collectionNames } from "@/lib/dbConnect";
 import { NextResponse } from "next/server";
 
+const db = await dbConnect();
+
 export async function GET(req) {
     const { searchParams } = new URL(req.url);
     const category = searchParams.get("category");
 
     try {
-        const questions = await dbConnect(collectionNames.quizCollection).aggregate([
+        const questions = await db.collection(collectionNames.quizCollection).aggregate([
             { $match: { category } },
             { $sample: { size: 10 } }
         ]).toArray();

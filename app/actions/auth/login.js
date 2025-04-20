@@ -5,8 +5,9 @@ import { compare } from "bcryptjs";
 
 export const login = async (payload) => {
     const { email, password } = payload;
+    const db = await dbConnect();
 
-    const userCollection = await dbConnect(collectionNames.userCollection);
+    const userCollection = await db.collection(collectionNames.userCollection);
     const user = await userCollection.findOne({ email });
 
     if (!user) return null;

@@ -82,6 +82,32 @@ const CourseDetails = () => {
         return <div className="text-center py-10 text-red-500">{error}</div>;
     if (!course) return null;
 
+    const handleGenerateChapterContent = () => {
+        const chapters = course?.Chapters;
+        if (!chapters || chapters.length === 0) return;
+        chapters.forEach(async (chapter, index) => {
+            setLoading(true)
+            const courseName = course?.["Course Name"];
+            const chapterName = chapter?.["Chapter Name"];
+
+            const prompt = `Explain the concept in detail on Topic: '${courseName}', Chapter: '${chapterName}', in JSON format with fields as title, detailed description, and code example (code field in <precode> format) if applicable.`;
+
+            // console.log(Prompt for Chapter ${index + 1}:, prompt);
+            // if (index == 0) {
+            try {
+                const result = await GeneratorChapterContent_AI.sendMessage(prompt);
+                const res = result?.response?.text();
+                console.log("ai model-->", JSON.parse(res))
+                setLoading(false)
+            } catch (e) {
+                setLoading(false)
+                console.log(e)
+            }
+            // }
+        });
+    }
+
+
     return (
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-10">
             {/* Header */}
@@ -160,8 +186,8 @@ const CourseDetails = () => {
                 >
                     <FaArrowLeft /> Back to Courses
                 </Link>
-                <button className="bg-teal-500 hover:bg-teal-700 text-white rounded-md flex items-center gap-2 px-4 py-2 transition duration-200">
-                    Finished <FaArrowRight />
+                <button onClick={handleGenerateChapterContent} className="bg-teal-500 hover:bg-teal-700 text-white rounded-md flex items-center gap-2 px-4 py-2 transition duration-200">
+                    Generate Chapter Content <FaArrowRight />
                 </button>
             </div>
         </div>

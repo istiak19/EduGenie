@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 
 // Get by course info
 export async function GET(req) {
-    const result = await dbConnect(collectionNames.userCollection).find().toArray();
+    const db = await dbConnect();
+    const result = await db.collection(collectionNames.userCollection).find().toArray();
     return NextResponse.json(result);
 };

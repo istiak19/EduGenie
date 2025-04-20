@@ -116,7 +116,7 @@ const LoginPage = () => {
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full bg-teal-500 text-white hover:bg-teal-700">
+                <Button type="submit" className="w-full bg-teal-500 text-white cursor-pointer hover:bg-teal-700">
                   Sign In
                 </Button>
               </form>

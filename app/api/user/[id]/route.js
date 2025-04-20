@@ -2,10 +2,12 @@ import dbConnect, { collectionNames } from "@/lib/dbConnect";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
+const db = await dbConnect();
+
 export async function GET(req, { params }) {
     const p = await params;
     const query = { _id: new ObjectId(p.id) };
-    const result = await dbConnect(collectionNames.userCollection).findOne(query);
+    const result = await db.collection(collectionNames.userCollection).findOne(query);
     return NextResponse.json(result);
 };
 
@@ -21,6 +23,6 @@ export async function PATCH(req, { params }) {
           photo:userInfo.photo
         },
       };
-    const result = await dbConnect(collectionNames.userCollection).updateOne(filter, updateUser, options);;
+    const result = await db.collection(collectionNames.userCollection).updateOne(filter, updateUser, options);;
     return NextResponse.json(result);
 };
