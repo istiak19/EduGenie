@@ -18,7 +18,11 @@ export default function Navbar() {
     setIsClient(true);
   }, []);
 
-  const menuItems = ["Home", "Courses", "Dashboard", "Blogs", "Contact"];
+  const staticMenuItems = ["Home", "Courses", "Blogs", "Contact"];
+  const menuItems =
+    status === "authenticated"
+      ? [...staticMenuItems.slice(0, 2), "Dashboard", ...staticMenuItems.slice(2)]
+      : staticMenuItems;
 
   const getRoute = (item) => {
     switch (item) {

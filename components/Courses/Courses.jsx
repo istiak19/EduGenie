@@ -7,8 +7,10 @@ import Link from "next/link";
 import { SiLevelsdotfyi } from "react-icons/si";
 import { FaRegClock } from "react-icons/fa";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 const Courses = () => {
+  const { data: session } = useSession();
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,6 +31,8 @@ const Courses = () => {
     fetchCourses();
   }, []);
 
+  const ownCourses = courses.filter(course => course?.email === session?.user?.email);
+
   return (
     <div>
       {/* Header Section */}
@@ -48,11 +52,27 @@ const Courses = () => {
           <Loading />
         ) : error ? (
           <p className="text-center text-red-500 text-lg">{error}</p>
-        ) : courses.length === 0 ? (
-          <p className="text-center text-gray-600 text-lg">No courses available.</p>
+        ) : ownCourses.length === 0 ? (
+          <div className="text-center py-8 flex flex-col items-center justify-center">
+            <Image
+              src="/empty.jpg"
+              alt="No courses"
+              width={200}
+              height={200}
+              className="mb-6 rounded-xl"
+            />
+            <h2 className="text-2xl font-semibold text-gray-700 mb-2">No Courses Created Yet</h2>
+            <p className="text-gray-500 mb-6">Start creating your own AI-powered courses today!</p>
+            <Link
+              href="/dashboard/generator"
+              className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-md text-sm font-medium transition"
+            >
+              Generate Your First Course
+            </Link>
+          </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch py-10">
-            {courses.map((course) => (
+            {ownCourses.map((course) => (
               <div
                 key={course._id}
                 className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition duration-300 p-4 flex flex-col h-full min-h-[250px]"
@@ -63,7 +83,6 @@ const Courses = () => {
                     alt="Course Image"
                     fill
                     className="object-cover"
-                    // sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
                 <h2 className="text-xl font-semibold text-gray-800 mb-2 hover:text-teal-600 transition">
