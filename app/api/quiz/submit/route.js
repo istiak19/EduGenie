@@ -4,6 +4,12 @@ import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 const db = await dbConnect();
+
+export async function GET(req) {
+  const result = await db.collection(collectionNames.resultCollections).find().toArray();
+  return NextResponse.json(result);
+};
+
 export async function POST(req) {
   try {
     const body = await req.json();
