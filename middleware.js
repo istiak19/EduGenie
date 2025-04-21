@@ -23,7 +23,7 @@ export async function middleware(req) {
 export const config = {
     matcher: [
         "/courses/:id",
-        "/generator",
+        "/dashboard/generator",
         "/dashboard/:path*",
         "/profile/:path*",
     ],

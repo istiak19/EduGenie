@@ -7,8 +7,12 @@ export const metadata = {
 
 const page = () => {
     return (
-        <div>
-            <Contact/>
+        <div className="w-full flex min-h-screen items-center justify-center bg-cover bg-center flex-col"
+            style={{
+                backgroundImage: "url('/assets/background.jpg')",
+                backgroundAttachment: "fixed",
+            }}>
+            <Contact />
         </div>
     );
 };

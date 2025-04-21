@@ -22,53 +22,53 @@ export default function SuccessStories() {
       text: "The interactive courses and personalized AI recommendations helped me upskill faster than ever.",
       image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNsxeqTj16QraEJsrpxM8om5YUn83B2JxOqA&s",
     },
-    
+
   ];
 
   return (
-    <section className="bg-gray-300 py-16 px-6 text-center">
+    <section className="bg-gray-100 py-20 px-4 sm:px-6 lg:px-8 text-center">
       {/* Section Header */}
       <motion.h2
-        className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6"
+        className="text-4xl sm:text-5xl font-bold text-gray-800 mb-4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        Real Stories. Real Impact.
+        🎉 Real Stories. Real Impact.
       </motion.h2>
-      <p className="text-md sm:text-lg text-gray-600 mb-10 px-4">
+      <p className="text-base sm:text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
         See how EduGenie is transforming lives with AI-powered learning.
       </p>
 
       {/* Statistics */}
-      <div className="flex flex-wrap justify-center gap-6 md:gap-8 mb-12">
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mb-16">
         {stats.map((stat, index) => (
           <motion.div
             key={index}
-            className="bg-white shadow-md p-6 rounded-lg w-40 sm:w-48"
+            className="bg-white shadow-md px-6 py-8 rounded-2xl w-40 sm:w-48"
             whileHover={{ scale: 1.05 }}
           >
-            <h3 className="text-2xl sm:text-3xl font-bold text-blue-600">{stat.label}</h3>
-            <p className="text-gray-600">{stat.text}</p>
+            <h3 className="text-3xl font-bold text-blue-600">{stat.label}</h3>
+            <p className="text-gray-700 mt-1 text-sm">{stat.text}</p>
           </motion.div>
         ))}
       </div>
 
       {/* Success Stories */}
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mb-20 px-2">
         {testimonials.map((testimonial) => (
           <motion.div
             key={testimonial.id}
-            className="p-6 bg-white shadow-lg rounded-lg flex flex-col sm:flex-row items-center gap-4"
-            whileHover={{ scale: 1.05 }}
+            className="p-6 bg-white shadow-md rounded-2xl flex flex-col sm:flex-row items-center gap-4 text-left"
+            whileHover={{ scale: 1.03 }}
           >
             <img
               src={testimonial.image}
               alt={testimonial.name}
               className="w-16 h-16 rounded-full object-cover"
             />
-            <div className="text-center sm:text-left">
-              <p className="text-gray-700">"{testimonial.text}"</p>
+            <div>
+              <p className="text-gray-700 text-sm sm:text-base">"{testimonial.text}"</p>
               <h4 className="font-semibold mt-2 text-blue-600">{testimonial.name}</h4>
             </div>
           </motion.div>
@@ -76,34 +76,34 @@ export default function SuccessStories() {
       </div>
 
       {/* AI Chat Preview */}
-      <div className="mt-16 px-4">
+      <div className="mt-20 px-2">
         <motion.div
-          className="max-w-md mx-auto bg-white shadow-lg p-6 rounded-lg relative"
+          className="max-w-lg mx-auto bg-white shadow-lg p-6 sm:p-8 rounded-2xl"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4">Meet Your AI Assistant</h3>
+          <h3 className="text-xl font-bold text-gray-800 mb-3">💬 Meet Your AI Assistant</h3>
           <p className="text-gray-600 text-sm sm:text-base">
             Ask anything about your learning journey!
           </p>
-          
+
           {/* Chat Bubble */}
           <motion.div
-            className="bg-yellow-400 text-gray-900 p-3 rounded-lg mt-4 inline-block text-left text-sm sm:text-base"
+            className="bg-teal-500 text-white p-3 rounded-lg mt-4 inline-block text-left text-sm sm:text-base shadow-sm"
             whileHover={{ scale: 1.05 }}
           >
             <p>📢 "How can I help you learn today?"</p>
           </motion.div>
 
           {/* Chat Input Preview */}
-          <div className="mt-4 flex border rounded-lg overflow-hidden">
+          <div className="mt-4 flex border rounded-lg overflow-hidden shadow-sm">
             <input
               type="text"
               placeholder="Ask something..."
-              className="w-full p-2 text-sm sm:text-base outline-none"
+              className="w-full p-3 text-sm sm:text-base outline-none"
             />
-            <button className="bg-yellow-400 text-gray-900 px-4 text-sm sm:text-base">➤</button>
+            <button className="bg-teal-500 text-white px-5 text-sm sm:text-base font-medium">➤</button>
           </div>
         </motion.div>
       </div>

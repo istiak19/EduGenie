@@ -47,73 +47,79 @@ const Courses = () => {
       </div>
 
       {/* Content */}
-      <div className="p-4 max-w-7xl mx-auto">
-        {loading ? (
-          <Loading />
-        ) : error ? (
-          <p className="text-center text-red-500 text-lg">{error}</p>
-        ) : ownCourses.length === 0 ? (
-          <div className="text-center py-8 flex flex-col items-center justify-center">
-            <Image
-              src="/empty.jpg"
-              alt="No courses"
-              width={200}
-              height={200}
-              className="mb-6 rounded-xl"
-            />
-            <h2 className="text-2xl font-semibold text-gray-700 mb-2">No Courses Created Yet</h2>
-            <p className="text-gray-500 mb-6">Start creating your own AI-powered courses today!</p>
-            <Link
-              href="/dashboard/generator"
-              className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-md text-sm font-medium transition"
-            >
-              Generate Your First Course
-            </Link>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch py-10">
-            {ownCourses.map((course) => (
-              <div
-                key={course._id}
-                className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition duration-300 p-4 flex flex-col h-full min-h-[250px]"
+      <div className="w-full flex min-h-screen items-center justify-center bg-cover bg-center flex-col"
+        style={{
+          backgroundImage: "url('/assets/background.jpg')",
+          backgroundAttachment: "fixed",
+        }}>
+        <div className="p-4 max-w-7xl mx-auto">
+          {loading ? (
+            <Loading />
+          ) : error ? (
+            <p className="text-center text-red-500 text-lg">{error}</p>
+          ) : ownCourses.length === 0 ? (
+            <div className="text-center py-8 flex flex-col items-center justify-center">
+              <Image
+                src="/empty.jpg"
+                alt="No courses"
+                width={200}
+                height={200}
+                className="mb-6 rounded-xl"
+              />
+              <h2 className="text-2xl font-semibold text-gray-700 mb-2">No Courses Created Yet</h2>
+              <p className="text-gray-500 mb-6">Start creating your own AI-powered courses today!</p>
+              <Link
+                href="/dashboard/generator"
+                className="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-md text-sm font-medium transition"
               >
-                <div className="relative h-36 bg-gray-200 rounded-lg mb-4 overflow-hidden">
-                  <Image
-                    src={course?.photo || "/course.jpg"}
-                    alt="Course Image"
-                    fill
-                    className="object-cover"
-                  />
+                Generate Your First Course
+              </Link>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch py-10">
+              {ownCourses.map((course) => (
+                <div
+                  key={course._id}
+                  className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition duration-300 p-4 flex flex-col h-full min-h-[250px]"
+                >
+                  <div className="relative h-36 bg-gray-200 rounded-lg mb-4 overflow-hidden">
+                    <Image
+                      src={course?.photo || "/course.jpg"}
+                      alt="Course Image"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <h2 className="text-xl font-semibold text-gray-800 mb-2 hover:text-teal-600 transition">
+                    {course["Course Name"]}
+                  </h2>
+                  <p className="text-gray-600 mb-2">
+                    {course.Description?.slice(0, 100)}...
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-auto justify-between *:text-xs">
+                    <span className="flex items-center gap-2">
+                      <SiLevelsdotfyi /> {course.Level}
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <MdTopic className="text-xl" /> {course.Topic}
+                    </span>
+                    <span className="flex items-center gap-2">
+                      <FaRegClock /> {course?.Duration}
+                    </span>
+                  </div>
+                  <div>
+                    <Link
+                      href={`/courses/${course?._id}`}
+                      className="btn w-full mt-3 bg-teal-500 hover:bg-teal-700 border-none rounded-md text-white"
+                    >
+                      Start
+                    </Link>
+                  </div>
                 </div>
-                <h2 className="text-xl font-semibold text-gray-800 mb-2 hover:text-teal-600 transition">
-                  {course["Course Name"]}
-                </h2>
-                <p className="text-gray-600 mb-2">
-                  {course.Description?.slice(0, 100)}...
-                </p>
-                <div className="flex flex-wrap gap-2 mt-auto justify-between *:text-xs">
-                  <span className="flex items-center gap-2">
-                    <SiLevelsdotfyi /> {course.Level}
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <MdTopic className="text-xl" /> {course.Topic}
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <FaRegClock /> {course?.Duration}
-                  </span>
-                </div>
-                <div>
-                  <Link
-                    href={`/courses/${course?._id}`}
-                    className="btn w-full mt-3 bg-teal-500 hover:bg-teal-700 border-none rounded-md text-white"
-                  >
-                    Start
-                  </Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
