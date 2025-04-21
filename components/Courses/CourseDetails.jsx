@@ -6,12 +6,14 @@ import { FaChartBar, FaClock, FaBookOpen, FaPlayCircle, FaArrowLeft, FaArrowRigh
 import Loading from "@/components/Loading/Loading";
 import Link from "next/link";
 import Image from "next/image";
+import { GeneratorChapterContent_AI } from "@/aiModel/aiModel";
 
 const image_key = process.env.NEXT_PUBLIC_IMAGE_KEY;
 
 const CourseDetails = () => {
     const [course, setCourse] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [spinner, setSpinner] = useState(true);
     const [error, setError] = useState(null);
     const { id } = useParams();
 
@@ -82,30 +84,38 @@ const CourseDetails = () => {
         return <div className="text-center py-10 text-red-500">{error}</div>;
     if (!course) return null;
 
-    const handleGenerateChapterContent = () => {
+    const handleGenerateChapterContent = async () => {
+        console.clear();
         const chapters = course?.Chapters;
         if (!chapters || chapters.length === 0) return;
+
+        setSpinner(true);
+
         chapters.forEach(async (chapter, index) => {
-            setLoading(true)
             const courseName = course?.["Course Name"];
             const chapterName = chapter?.["Chapter Name"];
 
             const prompt = `Explain the concept in detail on Topic: '${courseName}', Chapter: '${chapterName}', in JSON format with fields as title, detailed description, and code example (code field in <precode> format) if applicable.`;
 
-            // console.log(Prompt for Chapter ${index + 1}:, prompt);
-            // if (index == 0) {
+            // console.log(`Prompt for Chapter ${index + 1}: ${prompt}`);
+
             try {
                 const result = await GeneratorChapterContent_AI.sendMessage(prompt);
                 const res = result?.response?.text();
-                console.log("ai model-->", JSON.parse(res))
-                setLoading(false)
+
+                const cleanJson = res
+                    .replace(/```json/g, '')
+                    .replace(/```/g, '')
+                    .trim();
+
+                console.log("ai model-->", JSON.parse(cleanJson));
             } catch (e) {
-                setLoading(false)
-                console.log(e)
+                console.log(`Error in chapter ${index + 1}:`, e);
             }
-            // }
-        });
-    }
+        })
+        setSpinner(false);
+    };
+
 
 
     return (
@@ -129,12 +139,18 @@ const CourseDetails = () => {
                             htmlFor="image"
                             className="block w-full h-full relative cursor-pointer"
                         >
-                            <Image
-                                src={course?.photo || "/course.jpg"}
-                                alt="Course Image"
-                                fill
-                                className="object-cover"
-                            />
+                            {course?.photo ? (
+                                <Image
+                                    src={course?.photo}
+                                    alt="Course Image"
+                                    fill
+                                    className="object-cover"
+                                />
+                            ) : (
+                                <div className="w-full h-full flex border border-teal-300 items-center justify-center bg-gray-100 text-gray-500 text-lg">
+                                    Click To Upload Course Image
+                                </div>
+                            )}
                             <input
                                 type="file"
                                 name="image"
@@ -182,12 +198,18 @@ const CourseDetails = () => {
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-10">
                 <Link
                     href="/courses"
-                    className="bg-teal-500 hover:bg-teal-700 text-white rounded-md flex items-center gap-2 px-4 py-2 transition duration-200"
+                    className="bg-teal-500 hover:bg-teal-700 cursor-pointer text-white rounded-md flex items-center gap-2 px-4 py-2 transition duration-200"
                 >
                     <FaArrowLeft /> Back to Courses
                 </Link>
-                <button onClick={handleGenerateChapterContent} className="bg-teal-500 hover:bg-teal-700 text-white rounded-md flex items-center gap-2 px-4 py-2 transition duration-200">
-                    Generate Chapter Content <FaArrowRight />
+                <button onClick={handleGenerateChapterContent} className="bg-teal-500 hover:bg-teal-700 text-white cursor-pointer rounded-md flex items-center gap-2 px-4 py-2 transition duration-200">
+                    {spinner ? (
+                        <>
+                            Generate Chapter Content <FaArrowRight />
+                        </>
+                    ) : (
+                        <span className="loading loading-spinner text-neutral"></span>
+                    )}
                 </button>
             </div>
         </div>
@@ -196,7 +218,7 @@ const CourseDetails = () => {
 
 const InfoCard = ({ icon, label, value }) => (
     <div className="flex items-center gap-4">
-        <div className="text-purple-600 text-2xl">{icon}</div>
+        <div className="text-teal-600 text-2xl">{icon}</div>
         <div>
             <p className="text-sm text-gray-500">{label}</p>
             <p className="text-base font-semibold">{value}</p>
