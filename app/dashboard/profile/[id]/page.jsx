@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/Loading/Loading";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
@@ -12,6 +13,7 @@ const EditProfile = () => {
     const [user, setUser] = useState(null);
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [submitting, setSubmitting] = useState(false);
+    const [loading, setLoading] = useState(true);
     const params = useParams();
 
     useEffect(() => {
@@ -22,6 +24,8 @@ const EditProfile = () => {
                 setUser(data);
             } catch (error) {
                 Swal.fire("Error", "Failed to fetch user data", "error");
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -87,75 +91,87 @@ const EditProfile = () => {
     };
 
     return (
-        <div className="flex justify-center items-center px-4 py-8">
-            <div className="bg-white shadow-lg border border-teal-300 rounded-xl p-8 w-full max-w-md">
-                <h2 className="text-3xl font-semibold text-center mb-6">Edit Profile</h2>
-                {
-                    user && (
-                        <>
-                            <div className="flex justify-center items-center">
-                                <Image
-                                    src={user?.photo || "/assets/profile.png"}
-                                    alt="User"
-                                    width={112}
-                                    height={112}
-                                    className="rounded-full border w-28 h-28"
-                                />
-                            </div>
-                            <form onSubmit={handleProfile} className="space-y-4">
-                                <div>
-                                    <label className="block mb-1 font-medium text-gray-700">Name</label>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        defaultValue={user?.name}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block mb-1 font-medium text-gray-700">Photo</label>
-                                    <input
-                                        name="photo"
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={(e) => setSelectedPhoto(e.target.files[0])}
-                                        className="w-full p-2 border border-gray-300 rounded"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block mb-1 font-medium text-gray-700">Email</label>
-                                    <input
-                                        type="email"
-                                        value={user.email}
-                                        readOnly
-                                        className="w-full p-2 border border-gray-300 rounded bg-gray-100 text-gray-500"
-                                    />
-                                </div>
-                                <div className="flex gap-3">
-                                    <button
-                                        type="submit"
-                                        disabled={submitting}
-                                        className={`w-full py-2 rounded-lg font-medium ${submitting
-                                            ? "bg-green-300 cursor-not-allowed"
-                                            : "bg-green-500 hover:bg-green-600 text-white"
-                                            }`}
-                                    >
-                                        {submitting ? "Updating..." : "Update Profile"}
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={() => router.back()}
-                                        className="w-full py-2 rounded-lg bg-teal-500 hover:bg-teal-700 font-medium"
-                                    >
-                                        Cancel
-                                    </button>
-                                </div>
-                            </form>
-                        </>
-                    )
-                }
-            </div>
+        <div className="w-full flex min-h-screen items-center justify-center rounded-md bg-cover bg-center flex-col"
+            style={{
+                backgroundImage: "url('/assets/background.jpg')",
+                backgroundAttachment: "fixed",
+            }}>
+            {
+                loading ? (
+                    <div className="text-center text-xl font-semibold text-teal-600">
+                        <Loading />
+                    </div>
+                ) : (
+                    <div className="bg-white shadow-lg border border-teal-300 rounded-xl p-8 w-full max-w-md">
+                        <h2 className="text-3xl font-semibold text-center mb-6">Edit Profile</h2>
+                        {
+                            user && (
+                                <>
+                                    <div className="flex justify-center items-center">
+                                        <Image
+                                            src={user?.photo || "/assets/profile.png"}
+                                            alt="User"
+                                            width={112}
+                                            height={112}
+                                            className="rounded-full border w-28 h-28"
+                                        />
+                                    </div>
+                                    <form onSubmit={handleProfile} className="space-y-4">
+                                        <div>
+                                            <label className="block mb-1 font-medium text-gray-700">Name</label>
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                defaultValue={user?.name}
+                                                className="w-full p-2 border border-gray-300 rounded"
+                                                required
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block mb-1 font-medium text-gray-700">Photo</label>
+                                            <input
+                                                name="photo"
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={(e) => setSelectedPhoto(e.target.files[0])}
+                                                className="w-full p-2 border border-gray-300 rounded"
+                                            />
+                                        </div>
+                                        <div>
+                                            <label className="block mb-1 font-medium text-gray-700">Email</label>
+                                            <input
+                                                type="email"
+                                                value={user.email}
+                                                readOnly
+                                                className="w-full p-2 border border-gray-300 rounded bg-gray-100 text-gray-500"
+                                            />
+                                        </div>
+                                        <div className="flex gap-3">
+                                            <button
+                                                type="submit"
+                                                disabled={submitting}
+                                                className={`w-full py-2 rounded-lg font-medium ${submitting
+                                                    ? "bg-green-300 cursor-not-allowed"
+                                                    : "bg-green-500 hover:bg-green-600 text-white"
+                                                    }`}
+                                            >
+                                                {submitting ? "Updating..." : "Update Profile"}
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => router.back()}
+                                                className="w-full py-2 rounded-lg bg-teal-500 hover:bg-teal-700 font-medium"
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </>
+                            )
+                        }
+                    </div>
+                )
+            }
         </div>
     );
 };

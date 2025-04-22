@@ -1,31 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EduGenie – Smart Learning. Smarter Teaching.
 
-## Getting Started
+EduGenie is a cutting-edge AI-powered educational platform designed to transform the way students learn and educators teach. Through a **role-based dashboard system**, students can generate custom course content tailored to their interests and goals, while educators have access to tools for creating and approving educational blogs, as well as managing quizzes.
 
-First, run the development server:
+With features like dynamic content generation, profile editing, and a clean user experience, **EduGenie bridges the gap between AI and modern education**—making learning more efficient, personalized, and engaging.
+
+🌐 **Live Demo**: [https://genies-two.vercel.app/](https://genies-two.vercel.app/)
+
+---
+
+## 📑 Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Dependencies](#dependencies)
+- [Configuration](#configuration)
+- [Development Scripts](#development-scripts)
+- [Contributors](#contributors)
+- [License](#license)
+
+---
+
+## ✨ Features
+
+- 🔮 AI Integration with Google Generative AI
+- 🧠 Student Dashboard for AI-powered course generation
+- 🧑‍🏫 Educator Dashboard to manage blogs and quizzes
+- 👥 Role-based access control
+- 🛠️ Profile editing and user management
+- 📚 Form validation with React Hook Form and Zod
+- 💫 Clean animations with Framer Motion
+- 📦 MongoDB backend for content and user data
+- 🎉 Enhanced UI with TailwindCSS, DaisyUI, and SweetAlert2
+
+---
+
+## ⚙️ Installation
 
 ```bash
+# Clone the repository
+git clone <your-repo-url>
+cd edugenie
+
+# Install dependencies
+npm install
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open []() with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🚀 Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Once the development server is running, go to:
 
-## Learn More
+```
+http://localhost:3000
+```
 
-To learn more about Next.js, take a look at the following resources:
+- **Students** can register, update their profiles, and generate custom learning materials.
+- **Educators** can log in to create blog posts, quizzes, and review AI-generated content.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📦 Dependencies
 
+### Runtime
+
+- `next` `^15.3.1`
+- `react` `^19.0.0`
+- `next-auth` `^4.24.11`
+- `@google/generative-ai` `^0.24.0`
+- `mongodb` `^6.15.0`
+- `axios`, `bcryptjs`, `zod`, `react-hook-form`, `framer-motion`, `sweetalert2`, and more
+
+### Dev
+
+- `eslint` `^9`
+- `tailwindcss` `^4`
+- `daisyui` `^5.0.2`
+
+---
+
+## 🛠️ Development Scripts
+
+- `npm run dev` – Launch dev server
+- `npm run build` – Build for production
+- `npm run start` – Start production server
+- `npm run lint` – Run linter checks
+
+---
+
+## 👨‍💻 Contributors
+
+- **Istiak Ahamed**
+- **Showrov Kumar Ghosh**
+- **Md Jane Alam**
+- **Ambia Khatun Ela**
+- **Tahsina Tanvin**
