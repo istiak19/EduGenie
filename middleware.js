@@ -26,5 +26,6 @@ export const config = {
         "/dashboard/generator",
         "/dashboard/:path*",
         "/profile/:path*",
+        "/chapters/:path*",
     ],
 };
