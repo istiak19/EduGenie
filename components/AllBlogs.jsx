@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Loading from "./Loading/Loading";
+import Image from "next/image";
 
 const AllBlogs = () => {
   const { data: session } = useSession();
@@ -14,6 +15,7 @@ const AllBlogs = () => {
 
   const userEmail = session?.user?.email;
   const commenter = session?.user?.name;
+  const commenterImage = session?.user?.image;
 
   const fetchBlogs = async () => {
     setLoading(true);
@@ -49,7 +51,7 @@ const AllBlogs = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userEmail, commenter, comment: commentText }),
+      body: JSON.stringify({ userEmail, commenter, commenterImage, comment: commentText }),
     });
 
     setCommentText("");
@@ -60,98 +62,163 @@ const AllBlogs = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold mb-6 text-center text-teal-700">
-        All Blogs
+        Explore Latest Blogs
       </h2>
-
-      {loading ? (
-        <div className="flex justify-center items-center h-40">
-          <div className="text-teal-600 text-lg font-medium animate-pulse">
-            <Loading />
-          </div>
-        </div>
-      ) : (
-        <div className="space-y-6">
-          {blogs.map((blog) => (
-            <div
-              key={blog._id}
-              className="p-6 bg-white rounded-xl shadow border hover:shadow-md transition"
-            >
-              <h3 className="text-2xl font-semibold mb-2 text-teal-700">
-                {blog.title}
-              </h3>
-              <p className="text-gray-700 leading-relaxed text-justify">
-                {blog.content}
-              </p>
-
-              <div className="flex flex-wrap items-center gap-4 mt-4">
-                <div className="flex items-center gap-2">
-                  <button
-                    className="text-blue-600 hover:underline cursor-pointer"
-                    onClick={() => handleLike(blog._id)}
-                  >
-                    Like
-                  </button>
-                  <span className="text-gray-500 text-sm">
-                    ({blog.likes?.length || 0})
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <button
-                    className="text-green-600 hover:underline cursor-pointer"
-                    onClick={() =>
-                      setActiveCommentBlogId(
-                        activeCommentBlogId === blog._id ? null : blog._id
-                      )
-                    }
-                  >
-                    Comment
-                  </button>
-                  <span className="text-gray-500 text-sm">
-                    ({blog.comments?.length || 0})
-                  </span>
-                </div>
-              </div>
-
-              {/* Comment Input */}
-              {activeCommentBlogId === blog._id && (
-                <div className="mt-4">
-                  <textarea
-                    className="w-full border rounded-lg p-3 focus:outline-none focus:ring focus:border-teal-400"
-                    placeholder="Write your comment..."
-                    value={commentText}
-                    onChange={(e) => setCommentText(e.target.value)}
-                  />
-                  <button
-                    className="mt-2 bg-teal-600 hover:bg-teal-700 text-white px-5 py-2 rounded-md"
-                    onClick={() => handleCommentSubmit(blog._id)}
-                  >
-                    Submit Comment
-                  </button>
-                </div>
-              )}
-
-              {/* Show Comments */}
-              {blog.comments?.length > 0 && (
-                <div className="mt-6">
-                  <h4 className="font-semibold text-gray-800 mb-2">
-                    Comments:
-                  </h4>
-                  <ul className="space-y-2 text-gray-700 text-sm">
-                    {blog.comments.map((comment, i) => (
-                      <li key={i}>
-                        <span className="font-medium text-gray-600">
-                          {comment.commenter}:
-                        </span>{" "}
-                        {comment.comment}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+      {
+        loading ? (
+          <div className="flex justify-center items-center h-40">
+            <div className="text-teal-600 text-lg font-medium animate-pulse">
+              <Loading />
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {
+              blogs.map((blog) => (
+                <div
+                  key={blog._id}
+                  className="p-6 bg-white rounded-xl shadow border hover:shadow-md transition"
+                >
+                  <Image
+                    src={blog?.photo}
+                    alt={blog?.title}
+                    width={800}
+                    height={50}
+                    className="w-full h-80 rounded-lg mb-4"
+                  />
+                  <h3 className="text-2xl font-semibold mb-2 text-teal-700">
+                    {blog.title}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed text-xs text-justify">
+                    {blog.content}
+                  </p>
+
+                  <div className="flex flex-wrap items-center gap-6 mt-4">
+                    {/* Like Section */}
+                    <div className="flex items-center gap-3">
+                      <button
+                        className="flex items-center text-blue-600 text-sm hover:text-blue-700 cursor-pointer transition-all duration-200 ease-in-out"
+                        onClick={() => handleLike(blog._id)}
+                      >
+                        <svg
+                          className="w-5 h-5 mr-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M5 15l7-7 7 7"
+                          />
+                        </svg>
+                        Like
+                      </button>
+                      <span className="text-gray-600 text-sm">
+                        ({blog.likes?.length || 0})
+                      </span>
+                    </div>
+
+                    {/* Comment Section */}
+                    <div className="flex items-center gap-3">
+                      <button
+                        className="flex items-center text-green-600 text-sm hover:text-green-700 cursor-pointer transition-all duration-200 ease-in-out"
+                        onClick={() =>
+                          setActiveCommentBlogId(
+                            activeCommentBlogId === blog._id ? null : blog._id
+                          )
+                        }
+                      >
+                        <svg
+                          className="w-5 h-5 mr-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M8 12h.01M12 12h.01M16 12h.01M4 4h16v16H4z"
+                          />
+                        </svg>
+                        Comment
+                      </button>
+                      <span className="text-gray-600 text-sm">
+                        ({blog.comments?.length || 0})
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Comment Input */}
+                  {activeCommentBlogId === blog._id && (
+                    <div className="mt-6 p-6 bg-gray-50 rounded-lg shadow-lg transition-all duration-300 ease-in-out">
+                      <textarea
+                        className="w-full border border-teal-300 rounded-lg p-4 focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all ease-in-out"
+                        placeholder="Write your comment..."
+                        value={commentText}
+                        onChange={(e) => setCommentText(e.target.value)}
+                        rows={4}
+                      />
+                      <button
+                        className="mt-4 cursor-pointer bg-teal-600 hover:bg-teal-700 text-white px-6 py-2 rounded-md w-full sm:w-auto transition-all duration-300 ease-in-out"
+                        onClick={() => handleCommentSubmit(blog._id)}
+                      >
+                        Submit Comment
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Show Comments */}
+                  {blog.comments?.length > 0 && (
+                    <div className="mt-6 bg-gray-50 border border-teal-200 p-6 rounded-lg shadow-xl transition-all duration-300 ease-in-out">
+                      <h4 className="font-semibold text-xl text-teal-700 mb-4">Comments:</h4>
+                      <ul className="space-y-6">
+                        {blog.comments.map((comment, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-4 p-4 rounded-lg bg-white shadow-md transition-all duration-200 ease-in-out"
+                          >
+                            {/* Avatar */}
+                            <div className="w-16 h-16 bg-teal-300 rounded-full flex-shrink-0 border-2 border-teal-600">
+                              {/* Optionally, replace the placeholder with the commenter's avatar image */}
+                              {comment?.commenterImage ? (
+                                <img
+                                  src={comment?.commenterImage}
+                                  alt={comment?.commenter}
+                                  className="w-full h-full rounded-full"
+                                />
+                              ) : (
+                                <div className="flex items-center justify-center w-full h-full text-white">
+                                  {/* Check if commenter exists and has a name before accessing the first character */}
+                                  {comment.commenter ? comment.commenter[0].toUpperCase() : ""}
+                                </div>
+                              )}
+                            </div>
+                            <div className="flex-1">
+                              {/* Commenter Name */}
+                              <div className="text-gray-800 font-semibold text-md">{comment.commenter}</div>
+                              {/* Comment Text */}
+                              <p className="text-gray-700 text-sm mt-2">{comment.comment}</p>
+                              {/* Created At Timestamp */}
+                              <div className="text-gray-500 text-xs mt-2">
+                                {new Date(comment.createdAt).toLocaleString()}
+                              </div>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))
+            }
+          </div>
+        )
+      }
     </div>
   );
 };

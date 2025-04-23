@@ -4,19 +4,21 @@ import { NextResponse } from "next/server";
 
 export async function POST(req, { params }) {
   try {
-    const { userEmail, comment, commenter } = await req.json();
+    const { userEmail, comment, commenter, commenterImage } = await req.json();
     const blogId = params.id;
 
-    const db = await dbConnect(collectionNames.blogsCollection);
+    const db = await dbConnect();
+    const collection = db.collection(collectionNames.blogsCollection);
 
     const newComment = {
       commenter,
       userEmail,
       comment,
+      commenterImage,
       createdAt: new Date(),
     };
 
-    await db.updateOne(
+    await collection.updateOne(
       { _id: new ObjectId(blogId) },
       { $push: { comments: newComment } }
     );
