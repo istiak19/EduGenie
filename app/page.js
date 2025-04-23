@@ -13,7 +13,7 @@ import EidGreeting from "@/components/EidGreeting/EidGreeting";
 export default function Home() {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <HeroBanner />
       <EidGreeting />
       <CourseCarousel />
