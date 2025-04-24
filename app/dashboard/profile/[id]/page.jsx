@@ -7,7 +7,11 @@ export const metadata = {
 
 const Page = () => {
     return (
-        <div>
+        <div className="w-full flex min-h-screen items-center justify-center rounded-md bg-cover bg-center flex-col"
+            style={{
+                backgroundImage: "url('/assets/background.jpg')",
+                backgroundAttachment: "fixed",
+            }}>
             <EditProfile />
         </div>
     );

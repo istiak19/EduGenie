@@ -16,15 +16,15 @@ const StudentPanel = () => {
             icon: <FaHome className="text-lg" />,
         },
         {
-            href: "/dashboard/generator",
-            label: "Generator",
-            icon: <GiPowerGenerator className="text-lg" />,
-        },
-        {
             href: "/dashboard/profile",
             label: "Profile",
             icon: <CgProfile className="text-lg" />,
         },
+        {
+            href: "/dashboard/generator",
+            label: "Generator",
+            icon: <GiPowerGenerator className="text-lg" />,
+        }
     ];
 
     return (

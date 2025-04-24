@@ -7,7 +7,11 @@ export const metadata = {
 
 const page = () => {
     return (
-        <div>
+        <div className="w-full rounded-xl bg-cover bg-center flex-col"
+            style={{
+                backgroundImage: "url('/assets/background.jpg')",
+                backgroundAttachment: "fixed",
+            }}>
             <QuizAddForm />
         </div>
     );

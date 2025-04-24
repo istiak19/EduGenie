@@ -43,13 +43,21 @@ const Profile = () => {
                 ) : singleUser ? (
                     <div className="bg-white border border-teal-300 shadow-xl rounded-xl p-8 max-w-md w-full text-center">
                         <div className="flex justify-center items-center">
-                            <Image
-                                src={singleUser?.photo || "/assets/profile.png"}
-                                alt="User"
-                                width={112}
-                                height={112}
-                                className="rounded-full border w-28 h-28"
-                            />
+                            {
+                                singleUser?.photo ? (
+                                    <Image
+                                        src={singleUser.photo}
+                                        alt="User"
+                                        width={112}
+                                        height={112}
+                                        className="rounded-full border w-28 h-28 object-cover"
+                                    />
+                                ) : (
+                                    <div className="w-28 h-28 flex items-center justify-center rounded-full border border-teal-500 bg-gray-200 text-teal-600 font-bold text-3xl">
+                                        {singleUser?.name?.[0]?.toUpperCase() ?? ""}
+                                    </div>
+                                )
+                            }
                         </div>
                         <h2 className="text-2xl font-bold text-gray-800 mt-4">{singleUser?.name}</h2>
                         <p className="text-sm text-gray-600">{singleUser?.email}</p>

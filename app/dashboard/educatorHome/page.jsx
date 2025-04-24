@@ -7,7 +7,7 @@ export const metadata = {
 
 const page = () => {
     return (
-        <div className="w-full flex items-center justify-center bg-cover bg-center flex-col"
+        <div className="w-full flex items-center justify-center rounded-xl bg-cover bg-center flex-col"
             style={{
                 backgroundImage: "url('/assets/background.jpg')",
                 backgroundAttachment: "fixed",

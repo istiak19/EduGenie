@@ -8,7 +8,11 @@ export const metadata = {
 
 const EducatorCreateBlog = () => {
     return (
-        <div>
+        <div className="w-full min-h-screen rounded-xl bg-cover bg-center flex-col"
+            style={{
+                backgroundImage: "url('/assets/background.jpg')",
+                backgroundAttachment: "fixed",
+            }}>
             <Blogs />
         </div>
     );

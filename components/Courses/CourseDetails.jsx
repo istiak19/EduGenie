@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { FaChartBar, FaClock, FaBookOpen, FaPlayCircle, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Loading from "@/components/Loading/Loading";
 import Link from "next/link";
@@ -13,7 +13,6 @@ import Swal from "sweetalert2";
 const image_key = process.env.NEXT_PUBLIC_IMAGE_KEY;
 
 const CourseDetails = () => {
-    const router = useRouter();
     const [chapters, setChapters] = useState([]);
     const [course, setCourse] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -72,10 +71,8 @@ const CourseDetails = () => {
                 alert("Image Upload Failed");
                 return;
             }
-
             const result = await response.json();
             const photo = result.data.url;
-
             const responsePhoto = await fetch(`/api/course/${course._id}`, {
                 method: "PATCH",
                 headers: {
@@ -83,7 +80,6 @@ const CourseDetails = () => {
                 },
                 body: JSON.stringify({ photo }),
             });
-
             const updated = await responsePhoto.json();
             if (updated.modifiedCount > 0) {
                 fetchCourse();
@@ -112,7 +108,6 @@ const CourseDetails = () => {
                 },
                 body: JSON.stringify(chapterContent)
             });
-
             const result = await response.json();
             return result;
         } catch (error) {
@@ -124,16 +119,12 @@ const CourseDetails = () => {
         console.clear();
         const chapters = course?.Chapters;
         if (!chapters || chapters.length === 0) return;
-
         setSpinner(true);
-
         for (let index = 0; index < chapters.length; index++) {
             const chapter = chapters[index];
             const courseName = course?.["Course Name"];
             const chapterName = chapter?.["Chapter Name"];
-
             const prompt = `Explain the concept in detail on Topic: '${courseName}', Chapter: '${chapterName}', in JSON format with fields as title, detailed description, and code example (code field in <precode> format) if applicable.`;
-
             try {
                 const result = await GeneratorChapterContent_AI.sendMessage(prompt);
                 const videos = await getVideos(`${courseName}:${chapterName}`);
@@ -144,23 +135,21 @@ const CourseDetails = () => {
                     .replace(/```json/g, '')
                     .replace(/```/g, '')
                     .trim();
-
                 const parsed = JSON.parse(cleanJson);
-
                 const chapterContent = {
                     courseId: course._id,
                     courseName,
                     chapterName,
                     videoId,
+                    Category: course.Category,
+                    Topic: course.Topic,
                     ...parsed
                 };
-
                 await saveChapterContentToDB(chapterContent);
             } catch (e) {
                 console.log(`Error in chapter ${index + 1}:`, e);
             }
         }
-
         setSpinner(false);
         Swal.fire({
             position: "top",

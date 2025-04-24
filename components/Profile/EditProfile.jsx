@@ -91,11 +91,7 @@ const EditProfile = () => {
     };
 
     return (
-        <div className="w-full flex min-h-screen items-center justify-center rounded-md bg-cover bg-center flex-col"
-            style={{
-                backgroundImage: "url('/assets/background.jpg')",
-                backgroundAttachment: "fixed",
-            }}>
+        <div>
             {
                 loading ? (
                     <div className="text-center text-xl font-semibold text-teal-600">
@@ -108,13 +104,21 @@ const EditProfile = () => {
                             user && (
                                 <>
                                     <div className="flex justify-center items-center">
-                                        <Image
-                                            src={user?.photo || "/assets/profile.png"}
-                                            alt="User"
-                                            width={112}
-                                            height={112}
-                                            className="rounded-full border w-28 h-28"
-                                        />
+                                        {
+                                            user?.photo ? (
+                                                <Image
+                                                    src={user.photo}
+                                                    alt="User"
+                                                    width={112}
+                                                    height={112}
+                                                    className="rounded-full border w-28 h-28 object-cover"
+                                                />
+                                            ) : (
+                                                <div className="w-28 h-28 flex items-center justify-center rounded-full border border-teal-500 bg-gray-200 text-teal-600 font-bold text-3xl">
+                                                    {user?.name?.[0]?.toUpperCase() ?? ""}
+                                                </div>
+                                            )
+                                        }
                                     </div>
                                     <form onSubmit={handleProfile} className="space-y-4">
                                         <div>
@@ -150,7 +154,7 @@ const EditProfile = () => {
                                             <button
                                                 type="submit"
                                                 disabled={submitting}
-                                                className={`w-full py-2 rounded-lg font-medium ${submitting
+                                                className={`w-full cursor-pointer py-2 rounded-lg font-medium ${submitting
                                                     ? "bg-green-300 cursor-not-allowed"
                                                     : "bg-green-500 hover:bg-green-600 text-white"
                                                     }`}
@@ -160,7 +164,7 @@ const EditProfile = () => {
                                             <button
                                                 type="button"
                                                 onClick={() => router.back()}
-                                                className="w-full py-2 rounded-lg bg-teal-500 hover:bg-teal-700 font-medium"
+                                                className="w-full cursor-pointer py-2 rounded-lg bg-teal-500 hover:bg-teal-700 font-medium"
                                             >
                                                 Cancel
                                             </button>

@@ -95,13 +95,21 @@ export default function Navbar() {
           {status === "authenticated" ? (
             <div className="flex items-center space-x-3">
               <div className="relative group">
-                <Image
-                  src={session?.user?.image ?? "/profile.png"}
-                  alt={session?.user?.name ?? "User Profile"}
-                  width={40}
-                  height={40}
-                  className="rounded-full border-2 border-teal-500 object-cover transition-transform duration-300 group-hover:scale-110 shadow-md"
-                />
+                {
+                  session?.user?.image ? (
+                    <Image
+                      src={session.user.image}
+                      alt={session.user.name ?? "User Profile"}
+                      width={40}
+                      height={40}
+                      className="rounded-full cursor-pointer border border-teal-500 object-cover transition-transform duration-300 group-hover:scale-110 shadow-md"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 flex items-center justify-center rounded-full border cursor-pointer border-teal-500 bg-gray-100 text-teal-700 font-semibold transition-transform duration-300 group-hover:scale-110 shadow-md">
+                      {session?.user?.name?.[0]?.toUpperCase() ?? ""}
+                    </div>
+                  )
+                }
                 <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1 bg-gray-800 text-white text-xs rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 whitespace-nowrap">
                   {session?.user?.name ?? "User"}
                 </div>
@@ -164,13 +172,21 @@ export default function Navbar() {
             {status === "authenticated" ? (
               <div className="flex items-center space-x-3 pt-2">
                 <div className="relative group">
-                  <Image
-                    src={session?.user?.image ?? "/profile.png"}
-                    alt={session?.user?.name ?? "User Profile"}
-                    width={40}
-                    height={40}
-                    className="rounded-full border-2 border-teal-500 object-cover transition-transform duration-300 group-hover:scale-110 shadow-md"
-                  />
+                  {
+                    session?.user?.image ? (
+                      <Image
+                        src={session.user.image}
+                        alt={session.user.name ?? "User Profile"}
+                        width={40}
+                        height={40}
+                        className="rounded-full cursor-pointer border border-teal-500 object-cover transition-transform duration-300 group-hover:scale-110 shadow-md"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer border border-teal-500 bg-gray-100 text-teal-700 font-semibold transition-transform duration-300 group-hover:scale-110 shadow-md">
+                        {session?.user?.name?.[0]?.toUpperCase() ?? ""}
+                      </div>
+                    )
+                  }
                   <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1 bg-gray-800 text-white text-xs rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 whitespace-nowrap">
                     {session?.user?.name ?? "User"}
                   </div>
