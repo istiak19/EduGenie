@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
 import { FaHome, FaMicroblog } from "react-icons/fa";
 import { GiPowerGenerator } from "react-icons/gi";
-import { MdOutlineQuiz } from "react-icons/md";
+import { MdMessage, MdOutlineQuiz } from "react-icons/md";
 
 const EducatorPanel = () => {
     const pathname = usePathname();
@@ -20,6 +20,11 @@ const EducatorPanel = () => {
             href: "/dashboard/profile",
             label: "Profile",
             icon: <CgProfile className="text-lg" />,
+        },
+        {
+            href: "/dashboard/educatorMessage",
+            label: "Message",
+            icon: <MdMessage className="text-lg" />,
         },
         {
             href: "/dashboard/generator",
