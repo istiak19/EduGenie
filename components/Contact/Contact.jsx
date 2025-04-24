@@ -12,16 +12,13 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       });
 
@@ -41,80 +38,109 @@ const Contact = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto my-28 px-4">
+    <div className="max-w-6xl mx-auto my-10 px-4">
       <ToastContainer />
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-3xl md:text-5xl font-bold text-center text-emerald-500 mb-8">
-          Contact Us
+      <div className="bg-white rounded-xl shadow-lg overflow-hidden p-6 md:p-12">
+        <h2 className="text-4xl md:text-5xl font-bold text-center text-emerald-600 mb-12">
+          Get In Touch With Us
         </h2>
 
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* First Name */}
-          <div>
-            <label className="block text-lg font-medium mb-2 text-gray-800">First Name</label>
-            <Input
-              type="text"
-              name="firstName"
-              placeholder="Your first name"
-              required
-              className="text-lg border-gray-300 focus:ring-emerald-500"
-            />
+        <div className="flex flex-col md:flex-row gap-12">
+          {/* Address Section */}
+          <div className="md:w-1/2 space-y-6 text-gray-700">
+            <h3 className="text-2xl font-semibold text-emerald-600">Our Office</h3>
+            <p><strong>📍 Address:</strong> 1234 Emerald Street, Green City, EG 56789</p>
+            <p><strong>📧 Email:</strong> edugenie@example.com</p>
+            <p><strong>📞 Phone:</strong> +880 1234 567 890</p>
+            <div>
+              <strong>🕒 Opening Hours:</strong>
+              <div className="ml-5 mt-2 space-y-1">
+                <p>Sun - Thu: 9:00 AM - 6:00 PM</p>
+                <p>Saturday: 10:00 AM - 2:00 PM</p>
+                <p>Friday: Closed</p>
+              </div>
+            </div>
+            <p>
+              <strong>🌍 Location:</strong>{" "}
+              <a
+                href="https://maps.app.goo.gl/mUnCPz9LAKjbZAF57"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-emerald-600 underline hover:text-emerald-800 transition"
+              >
+                View on Google Maps
+              </a>
+            </p>
           </div>
 
-          {/* Last Name */}
-          <div>
-            <label className="block text-lg font-medium mb-2 text-gray-800">Last Name</label>
-            <Input
-              type="text"
-              name="lastName"
-              placeholder="Your last name"
-              required
-              className="text-lg border-gray-300 focus:ring-emerald-500"
-            />
-          </div>
+          {/* Divider */}
+          <div className="hidden md:block w-px bg-gray-300"></div>
 
-          {/* Email */}
-          <div>
-            <label className="block text-lg font-medium mb-2 text-gray-800">Email</label>
-            <Input
-              type="email"
-              name="email"
-              placeholder="you@example.com"
-              required
-              className="text-lg border-gray-300 focus:ring-emerald-500"
-            />
+          {/* Contact Form Section */}
+          <div className="md:w-1/2 space-y-6">
+            <h3 className="text-2xl font-semibold text-emerald-600">Send a Message</h3>
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-base font-medium mb-2">First Name</label>
+                <Input
+                  type="text"
+                  name="firstName"
+                  placeholder="Your first name"
+                  required
+                  className="text-base"
+                />
+              </div>
+              <div>
+                <label className="block text-base font-medium mb-2">Last Name</label>
+                <Input
+                  type="text"
+                  name="lastName"
+                  placeholder="Your last name"
+                  required
+                  className="text-base"
+                />
+              </div>
+              <div>
+                <label className="block text-base font-medium mb-2">Email</label>
+                <Input
+                  type="email"
+                  name="email"
+                  placeholder="you@example.com"
+                  required
+                  className="text-base"
+                />
+              </div>
+              <div>
+                <label className="block text-base font-medium mb-2">Phone</label>
+                <Input
+                  type="tel"
+                  name="tel"
+                  placeholder="+8801XXXXXXXXX"
+                  required
+                  className="text-base"
+                />
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-base font-medium mb-2">Message</label>
+                <Textarea
+                  name="message"
+                  placeholder="Type your message here..."
+                  required
+                  className="h-36 text-base"
+                />
+              </div>
+              <div className="md:col-span-2">
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-emerald-500 hover:bg-emerald-700 text-white text-lg"
+                >
+                  {loading ? "Sending..." : "Send Message"}
+                </Button>
+              </div>
+            </form>
           </div>
-
-          {/* Phone */}
-          <div>
-            <label className="block text-lg font-medium mb-2 text-gray-800">Phone</label>
-            <Input
-              type="tel"
-              name="tel"
-              placeholder="+8801XXXXXXXXX"
-              required
-              className="text-lg border-gray-300 focus:ring-emerald-500"
-            />
-          </div>
-
-          {/* Message */}
-          <div className="md:col-span-2">
-            <label className="block text-lg font-medium mb-2 text-gray-800">Message</label>
-            <Textarea
-              name="message"
-              placeholder="Type your message here..."
-              required
-              className="text-lg border-gray-300 focus:ring-emerald-500 h-32"
-            />
-          </div>
-
-          {/* Submit Button */}
-          <div className="md:col-span-2 text-center">
-            <Button type="submit" disabled={loading} className="bg-emerald-500 hover:bg-emerald-700 text-white w-full">
-              {loading ? "Sending..." : "Send Message"}
-            </Button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );

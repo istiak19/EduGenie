@@ -144,7 +144,7 @@ const ChapterPage = () => {
                     <div className="mt-10 flex flex-col sm:flex-row justify-between items-center gap-4">
                         <button
                             onClick={handlePreviousChapter}
-                            className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300 disabled:opacity-50"
+                            className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-6 rounded-lg transition cursor-pointer duration-300 disabled:opacity-50"
                             disabled={chapters.findIndex(ch => ch._id === selectedChapter?._id) === 0}
                         >
                             Previous Chapter
@@ -152,7 +152,7 @@ const ChapterPage = () => {
 
                         <button
                             onClick={handleNextChapter}
-                            className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300"
+                            className="bg-teal-600 cursor-pointer hover:bg-teal-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300"
                         >
                             {chapters.findIndex(ch => ch._id === selectedChapter?._id) < chapters.length - 1
                                 ? "Next Chapter"

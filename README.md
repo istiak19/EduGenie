@@ -1,8 +1,6 @@
 # EduGenie – Smart Learning. Smarter Teaching.
 
-EduGenie is a cutting-edge AI-powered educational platform designed to transform the way students learn and educators teach. Through a **role-based dashboard system**, students can generate custom course content tailored to their interests and goals, while educators have access to tools for creating and approving educational blogs, as well as managing quizzes.
-
-With features like dynamic content generation, profile editing, and a clean user experience, **EduGenie bridges the gap between AI and modern education**—making learning more efficient, personalized, and engaging.
+EduGenie is a cutting-edge AI-powered educational platform designed to revolutionize modern learning experiences for both students and educators. Through a dynamic role-based dashboard, students can generate custom course content based on their chosen topic, difficulty level, and duration—empowering them to learn at their own pace with AI-generated chapters, videos, and code examples. Educators, on the other hand, are provided with tools to publish and approve educational blogs, create quizzes, and manage their profiles seamlessly. The platform focuses on interactivity and accessibility with a clean, responsive UI, built using Next.js, Tailwind CSS, and integrated with MongoDB for persistent data storage. Authenticated via NextAuth.js, EduGenie ensures secure access and smooth transitions across devices. Whether you're a curious student or a passionate teacher, EduGenie makes learning more personalized, efficient, and enjoyable by merging the power of artificial intelligence with modern education.
 
 🌐 **Live Demo**: [https://genies-two.vercel.app/](https://genies-two.vercel.app/)
 
@@ -17,6 +15,7 @@ With features like dynamic content generation, profile editing, and a clean user
 - [Configuration](#configuration)
 - [Development Scripts](#development-scripts)
 - [Contributors](#contributors)
+- [Showcase & Video Description](#showcase--video-description)
 - [License](#license)
 
 ---
@@ -32,6 +31,15 @@ With features like dynamic content generation, profile editing, and a clean user
 - 💫 Clean animations with Framer Motion
 - 📦 MongoDB backend for content and user data
 - 🎉 Enhanced UI with TailwindCSS, DaisyUI, and SweetAlert2
+
+---
+
+## 🛠️ Tech Stack Used:
+- Frontend: Next.js, Tailwind CSS, DaisyUI, React Slick, Framer Motion  
+- Backend: Node.js API Routes, MongoDB
+- Authentication: NextAuth.js  
+- Image Upload: ImgBB API  
+- Hosting: Vercel & MongoDB Atlas
 
 ---
 

@@ -28,3 +28,14 @@ export async function POST(req) {
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
+
+// GET: Retrieve all messages
+// export async function GET() {
+//   try {
+//     const messages = await dbConnect(collectionNames.messageCollection).find().sort({ createdAt: -1 }).toArray();
+
+//     return NextResponse.json(messages);
+//   } catch (error) {
+//     return NextResponse.json({ error: "Failed to fetch messages" }, { status: 500 });
+//   }
+// }
