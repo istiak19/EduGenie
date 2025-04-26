@@ -47,12 +47,14 @@ const Courses = () => {
       </div>
 
       {/* Content */}
-      <div className="w-full flex min-h-screen items-center justify-center bg-cover bg-center flex-col"
+      <div
+        className="w-full flex min-h-[80vh] items-center justify-center bg-cover bg-center flex-col"
         style={{
           backgroundImage: "url('/assets/background.jpg')",
-          backgroundAttachment: "fixed",
-        }}>
-        <div className="p-4 max-w-7xl mx-auto">
+          backgroundAttachment: "fixed"
+        }}
+      >
+        <div className="container mx-auto p-4">
           {loading ? (
             <Loading />
           ) : error ? (
@@ -76,21 +78,23 @@ const Courses = () => {
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch py-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch py-10">
               {ownCourses.map((course) => (
                 <div
                   key={course._id}
                   className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-lg transition duration-300 p-4 flex flex-col h-full min-h-[250px]"
                 >
-                  <div className="relative h-36 bg-gray-200 rounded-lg mb-4 overflow-hidden">
+                  <div className="relative h-40 sm:h-48 md:h-36 bg-gray-200 rounded-lg mb-4 overflow-hidden">
                     <Image
                       src={course?.photo || "/course.jpg"}
                       alt="Course Image"
                       fill
                       className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority
                     />
                   </div>
-                  <h2 className="text-xl font-semibold text-gray-800 mb-2 hover:text-teal-600 transition">
+                  <h2 className="text-xl font-semibold text-gray-800 mb-2 hover:text-teal-600 transition break-words">
                     {course["Course Name"]}
                   </h2>
                   <p className="text-gray-600 mb-2">

@@ -74,25 +74,27 @@ const ApprovalBlog = () => {
     };
 
     return (
-        <div className="p-7">
-            <h2 className="text-2xl font-semibold mb-6 text-center">All Blogs (Approval Panel)</h2>
+        <div className="p-4 md:p-6 lg:p-8">
+            <h2 className="text-xl md:text-2xl font-semibold mb-5 text-center text-teal-700">
+                All Blogs (Approval Panel)
+            </h2>
 
             {loading ? (
                 <div>
                     <Loading />
                 </div>
             ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
                     {blogs.map((blog) => (
                         <div
                             key={blog._id}
-                            className="flex flex-col justify-between p-6 bg-white rounded shadow border min-h-[280px]"
+                            className="flex flex-col justify-between p-5 bg-white rounded-lg shadow-md border min-h-[300px]"
                         >
                             <div className="mb-4">
-                                <h3 className="text-xl font-bold text-blue-700">{blog.title}</h3>
-                                <p className="text-gray-700 text-sm mt-2 text-justify">{blog.content}</p>
+                                <h3 className="text-lg md:text-xl font-bold text-blue-700">{blog.title}</h3>
+                                <p className="text-gray-700 text-sm mt-3 text-justify">{blog.content}</p>
                             </div>
-                            <div className="flex flex-wrap gap-2 mt-auto justify-between">
+                            <div className="flex flex-wrap gap-3 mt-auto justify-between">
                                 {blog.approval ? (
                                     <button
                                         onClick={() => handleStatusChange(blog._id, false)}

@@ -7,7 +7,7 @@ export const metadata = {
 
 const GeneratorCourse = () => {
     return (
-        <div className="w-full py-10 rounded-xl bg-cover bg-center flex-col"
+        <div className="w-full p-10 rounded-xl bg-cover bg-center flex-col"
             style={{
                 backgroundImage: "url('/assets/background.jpg')",
                 backgroundAttachment: "fixed",

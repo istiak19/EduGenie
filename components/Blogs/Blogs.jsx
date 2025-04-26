@@ -18,7 +18,6 @@ const Blogs = () => {
 
         let photoURL = "";
 
-        // Upload the photo if selected
         if (selectedPhoto) {
             const formData = new FormData();
             formData.append("image", selectedPhoto);
@@ -80,14 +79,16 @@ const Blogs = () => {
     };
 
     return (
-        <div className="py-8 px-4 max-w-4xl mx-auto">
-            <div className="bg-white p-8 rounded-xl shadow-md border border-gray-200">
-                <h2 className="text-3xl font-bold text-teal-700 mb-6 text-center">
+        <div className="py-10 px-4 md:px-6 lg:px-8 max-w-5xl mx-auto">
+            <div className="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-md border border-gray-200">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-teal-600 mb-8">
                     Create a Blog
                 </h2>
-                <form onSubmit={handleSubmit} className="space-y-5">
+
+                <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Blog Title */}
                     <div>
-                        <label htmlFor="title" className="block text-gray-700 font-medium mb-2">
+                        <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-700">
                             Blog Title
                         </label>
                         <input
@@ -96,11 +97,13 @@ const Blogs = () => {
                             name="title"
                             placeholder="Enter blog title"
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-teal-400"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-300 focus:border-teal-400 transition"
                         />
                     </div>
+
+                    {/* Blog Image */}
                     <div>
-                        <label htmlFor="photo" className="block text-gray-700 font-medium mb-2">
+                        <label htmlFor="photo" className="block mb-2 text-sm font-medium text-gray-700">
                             Blog Cover Image
                         </label>
                         <input
@@ -109,12 +112,13 @@ const Blogs = () => {
                             type="file"
                             accept="image/*"
                             onChange={(e) => setSelectedPhoto(e.target.files[0])}
-                            className="w-full p-2 border border-gray-300 rounded"
+                            className="w-full p-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-300 focus:border-teal-400 transition"
                         />
                     </div>
 
+                    {/* Blog Content */}
                     <div>
-                        <label htmlFor="content" className="block text-gray-700 font-medium mb-2">
+                        <label htmlFor="content" className="block mb-2 text-sm font-medium text-gray-700">
                             Blog Content
                         </label>
                         <textarea
@@ -122,16 +126,17 @@ const Blogs = () => {
                             name="content"
                             placeholder="Enter blog content"
                             required
-                            className="w-full px-4 py-2 border border-gray-300 rounded-md h-40 resize-none focus:outline-none focus:ring focus:border-teal-400"
+                            className="w-full px-4 py-3 border border-gray-300 rounded-md h-40 md:h-52 resize-none focus:outline-none focus:ring-2 focus:ring-teal-300 focus:border-teal-400 transition"
                         />
                     </div>
 
+                    {/* Submit Button */}
                     <button
                         type="submit"
                         disabled={submitting}
-                        className={`w-full py-3 cursor-pointer rounded-md font-semibold transition ${submitting
-                                ? "bg-teal-300 cursor-not-allowed"
-                                : "bg-teal-600 hover:bg-teal-700 text-white"
+                        className={`w-full py-3 rounded-md font-semibold text-white transition cursor-pointer ${submitting
+                            ? "bg-teal-300 cursor-not-allowed"
+                            : "bg-teal-600 hover:bg-teal-700"
                             }`}
                     >
                         {submitting ? "Creating..." : "Create Blog"}

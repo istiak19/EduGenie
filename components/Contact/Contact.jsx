@@ -1,5 +1,6 @@
 'use client';
-import React, { useState } from "react";
+
+import { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,10 +39,10 @@ const Contact = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto my-10 px-4">
+    <div className="max-w-6xl mx-auto my-10 px-4 sm:px-6 lg:px-8">
       <ToastContainer />
       <div className="bg-white rounded-xl shadow-lg overflow-hidden p-6 md:p-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-center text-emerald-600 mb-12">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-emerald-600 mb-8 md:mb-12">
           Get In Touch With Us
         </h2>
 
@@ -79,7 +80,7 @@ const Contact = () => {
           {/* Contact Form Section */}
           <div className="md:w-1/2 space-y-6">
             <h3 className="text-2xl font-semibold text-emerald-600">Send a Message</h3>
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
                 <label className="block text-base font-medium mb-2">First Name</label>
                 <Input
@@ -87,7 +88,7 @@ const Contact = () => {
                   name="firstName"
                   placeholder="Your first name"
                   required
-                  className="text-base"
+                  className="text-base w-full"
                 />
               </div>
               <div>
@@ -97,7 +98,7 @@ const Contact = () => {
                   name="lastName"
                   placeholder="Your last name"
                   required
-                  className="text-base"
+                  className="text-base w-full"
                 />
               </div>
               <div>
@@ -107,7 +108,7 @@ const Contact = () => {
                   name="email"
                   placeholder="you@example.com"
                   required
-                  className="text-base"
+                  className="text-base w-full"
                 />
               </div>
               <div>
@@ -117,19 +118,19 @@ const Contact = () => {
                   name="tel"
                   placeholder="+8801XXXXXXXXX"
                   required
-                  className="text-base"
+                  className="text-base w-full"
                 />
               </div>
-              <div className="md:col-span-2">
+              <div className="sm:col-span-2">
                 <label className="block text-base font-medium mb-2">Message</label>
                 <Textarea
                   name="message"
                   placeholder="Type your message here..."
                   required
-                  className="h-36 text-base"
+                  className="h-36 text-base w-full"
                 />
               </div>
-              <div className="md:col-span-2">
+              <div className="sm:col-span-2">
                 <Button
                   type="submit"
                   disabled={loading}

@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import loginPic from "../../../public/assets/login.jpg";
 import Image from "next/image";
@@ -14,7 +14,6 @@ import SocialAuth from "@/components/SocialAuth/SocialAuth";
 import { signIn } from "next-auth/react";
 import Swal from "sweetalert2";
 import { login } from "@/app/actions/auth/login";
-
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email format." }),
@@ -68,24 +67,32 @@ const LoginPage = () => {
 
   return (
     <div
-      className="w-full min-h-screen flex items-center justify-center bg-cover bg-center"
+      className="w-full min-h-screen flex items-center justify-center bg-cover bg-center p-4 md:p-8"
       style={{
         backgroundImage: "url('/assets/background.jpg')",
         backgroundAttachment: "fixed",
       }}
     >
-      <div className="w-11/12 mx-auto py-10">
-        <div className="hero-content gap-8 flex-col lg:flex-row">
-          <Image
-            src={loginPic}
-            alt="Login"
-            width={500}
-            height={500}
-            className="rounded-lg"
-            priority
-          />
-          <div className="w-full max-w-2xl">
-            <h2 className="mb-5 font-bold text-center text-3xl">Sign In</h2>
+      <div className="w-full max-w-6xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-5">
+          {/* Image Section */}
+          <div className="w-full md:w-2/3 lg:w-1/2">
+            <Image
+              src={loginPic}
+              alt="Login"
+              width={600}
+              height={600}
+              className="rounded-lg w-full object-cover"
+              priority
+            />
+          </div>
+
+          {/* Form Section */}
+          <div className="w-full md:w-2/3 lg:w-1/2  p-6 md:p-10">
+            <h2 className="mb-6 text-2xl md:text-3xl font-bold text-center text-gray-800">
+              Sign In
+            </h2>
+
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 {/* Email Field */}
@@ -96,12 +103,18 @@ const LoginPage = () => {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your email" type="email" {...field} />
+                        <Input
+                          placeholder="Enter your email"
+                          type="email"
+                          {...field}
+                          className="bg-white"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+
                 {/* Password Field */}
                 <FormField
                   control={form.control}
@@ -110,22 +123,39 @@ const LoginPage = () => {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input placeholder="Your password" type="password" {...field} />
+                        <Input
+                          placeholder="Enter your password"
+                          type="password"
+                          {...field}
+                          className="bg-white"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-                <Button type="submit" className="w-full bg-teal-500 text-white cursor-pointer hover:bg-teal-700">
+
+                <Button
+                  type="submit"
+                  className="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 rounded cursor-pointer"
+                >
                   Sign In
                 </Button>
               </form>
             </Form>
-            <p className="text-center py-5 font-medium">Or Sign In With</p>
+
+            {/* Divider */}
+            <div className="my-6 flex items-center justify-center">
+              <span className="text-gray-500 text-sm">Or Sign In With</span>
+            </div>
+
+            {/* Social Authentication */}
             <SocialAuth />
-            <p className="text-xs text-center pt-5">
+
+            {/* Sign Up Link */}
+            <p className="text-center text-sm text-gray-600 mt-6">
               Don’t have an account?{" "}
-              <Link href="/register" className="text-teal-600 hover:underline">
+              <Link href="/register" className="text-teal-600 font-semibold hover:underline">
                 Sign Up
               </Link>
             </p>
