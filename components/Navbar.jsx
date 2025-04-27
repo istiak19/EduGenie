@@ -52,7 +52,7 @@ export default function Navbar() {
 
   return (
     <nav className="sticky top-0 left-0 w-full bg-white dark:bg-gray-900 shadow z-50 transition-all">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto py-4 flex justify-between items-center">
         {/* Logo & Brand Name */}
         <Link href="/" className="flex items-center space-x-2">
           <motion.div
