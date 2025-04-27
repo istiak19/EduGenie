@@ -81,6 +81,7 @@ const QuizAddForm = () => {
                             <option value="Blockchain">Blockchain</option>
                             <option value="Cybersecurity">Cybersecurity</option>
                             <option value="Programming">programming</option>
+                            <option value="SEO">SEO</option>
                         </select>
                     </div>
 

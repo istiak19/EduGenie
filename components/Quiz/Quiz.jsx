@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,11 +12,25 @@ const Quiz = () => {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(false);
   const [quizLoaded, setQuizLoaded] = useState(false); // Add this
-
+  const [chapter, setChapter] =useState();
+  const { id  } = useParams();
+  console.log(chapter);
   const searchParams = useSearchParams();
   const category = searchParams.get('category') || 'web-development';
   const { data: session } = useSession();
   const email = session?.user?.email;
+
+
+  // chapter data get 
+  useEffect(()=>{
+    const chapter = async () => {
+      const res = await fetch(`/api/chapter?courseId=${id}`);
+      const data = await res.json();
+      setChapter(data);
+      setQuizLoaded(true); 
+    };
+    chapter();
+  },[])
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -24,7 +38,6 @@ const Quiz = () => {
       const data = await res.json();
       setQuestions(data);
       setQuizLoaded(true); 
-      setLoading(true)
     };
     fetchQuestions();
   }, [category]);

@@ -13,6 +13,7 @@ export async function GET(req) {
             { $match: { category } },
             { $sample: { size: 10 } }
         ]).toArray();
+        // const questions = await db.collection(collectionNames.quizCollection).find().toArray();
 
         return NextResponse.json(questions);
     } catch (error) {
