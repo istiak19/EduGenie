@@ -42,7 +42,7 @@ const ChapterPage = () => {
         if (currentIndex < chapters.length - 1) {
             setSelectedChapter(chapters[currentIndex + 1]);
         } else {
-            router.push(`/quiz?category=${selectedChapter?.Topic}`);
+            router.push(`/quiz?category=${selectedChapter?.Category}&topic=${selectedChapter?.Topic}`);
         }
     };
 

@@ -14,33 +14,39 @@ const Quiz = () => {
   const [quizLoaded, setQuizLoaded] = useState(false);
   const [chapter, setChapter] = useState([]);
   const { id } = useParams();
-  console.log(chapter);
+
   const searchParams = useSearchParams();
   const category = searchParams.get('category') || 'Programming';
+  const topic = searchParams.get('topic') || 'Python';
+
   const { data: session } = useSession();
   const email = session?.user?.email;
 
-
-  // chapter data get 
+  // Fetch chapter info (optional)
   useEffect(() => {
-    const chapter = async () => {
+    const fetchChapter = async () => {
       const res = await fetch(`/api/chapter?courseId=${id}`);
       const data = await res.json();
       setChapter(data);
       setQuizLoaded(true);
     };
-    chapter();
-  }, [])
+    fetchChapter();
+  }, [id]);
 
+  // Fetch questions by category and topic
   useEffect(() => {
     const fetchQuestions = async () => {
-      const res = await fetch(`/api/quiz/questions?category=${category}`);
-      const data = await res.json();
-      setQuestions(data);
-      setQuizLoaded(true);
+      try {
+        const res = await fetch(`/api/quiz/questions?category=${category}&topic=${topic}`);
+        const data = await res.json();
+        setQuestions(data);
+        setQuizLoaded(true);
+      } catch (err) {
+        toast.error('Failed to load quiz questions');
+      }
     };
     fetchQuestions();
-  }, [category]);
+  }, [category, topic]);
 
   const handleOptionSelect = (questionId, option) => {
     setUserAnswers({ ...userAnswers, [questionId]: option });
@@ -57,7 +63,7 @@ const Quiz = () => {
       const res = await fetch('/api/quiz/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, category, answers })
+        body: JSON.stringify({ email, category, topic, answers })
       });
 
       const data = await res.json();
@@ -77,11 +83,13 @@ const Quiz = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-4">
-      {/* <h2 className="text-2xl font-bold mb-6 text-center">Quiz - {category}</h2> */}
-
       {quizLoaded && questions.length === 0 ? (
-        <p className="text-center text-red-500 font-medium">No quiz found in this category.</p>
-      ) : (<h2 className="text-2xl font-bold mb-6 text-center">Quiz - {category}</h2>)}
+        <p className="text-center text-red-500 font-medium">No quiz found in this category/topic.</p>
+      ) : (
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          Quiz - {category} ({topic})
+        </h2>
+      )}
 
       {questions.map((q, i) => (
         <div key={q._id} className="mb-6">
