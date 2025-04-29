@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,8 +13,10 @@ const Quiz = () => {
   const [loading, setLoading] = useState(false);
   const [quizLoaded, setQuizLoaded] = useState(false);
   const [chapter, setChapter] = useState([]);
-  const { id } = useParams();
+  const [showAnswers, setShowAnswers] = useState(false); 
 
+  const { id } = useParams();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const category = searchParams.get('category') || 'Programming';
   const topic = searchParams.get('topic') || 'Python';
@@ -22,7 +24,6 @@ const Quiz = () => {
   const { data: session } = useSession();
   const email = session?.user?.email;
 
-  // Fetch chapter info (optional)
   useEffect(() => {
     const fetchChapter = async () => {
       const res = await fetch(`/api/chapter?courseId=${id}`);
@@ -33,7 +34,6 @@ const Quiz = () => {
     fetchChapter();
   }, [id]);
 
-  // Fetch questions by category and topic
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
@@ -70,12 +70,12 @@ const Quiz = () => {
       if (res.ok) {
         setScore(data.score);
         setSubmitted(true);
-        toast.success(`🎉 Quiz Submitted! Your score is ${data.score}/${questions.length}`);
+        toast.success(` Quiz Submitted! Your score is ${data.score}/${questions.length}`);
       } else {
-        toast.error(data.error || '❌ Something went wrong!');
+        toast.error(data.error || 'Something went wrong!');
       }
     } catch (error) {
-      toast.error('❌ Failed to submit quiz!');
+      toast.error('Failed to submit quiz!');
     } finally {
       setLoading(false);
     }
@@ -94,19 +94,36 @@ const Quiz = () => {
       {questions.map((q, i) => (
         <div key={q._id} className="mb-6">
           <p className="font-medium mb-2">{i + 1}. {q.question}</p>
-          {q.options.map((option, index) => (
-            <label key={index} className="block cursor-pointer">
-              <input
-                type="radio"
-                name={`question-${q._id}`}
-                value={option}
-                checked={userAnswers[q._id] === option}
-                onChange={() => handleOptionSelect(q._id, option)}
-                disabled={submitted}
-              />
-              <span className="ml-2">{option}</span>
-            </label>
-          ))}
+          {q.options.map((option, index) => {
+            const isSelected = userAnswers[q._id] === option;
+            const isCorrect = q.correctAnswer === option;
+            const userSelectedWrong = isSelected && !isCorrect;
+
+            let optionStyle = '';
+            if (submitted && showAnswers) {
+              if (isCorrect) {
+                optionStyle = 'text-green-600 font-semibold';
+              } else if (userSelectedWrong) {
+                optionStyle = 'text-red-500';
+              } else {
+                optionStyle = 'text-gray-700';
+              }
+            }
+
+            return (
+              <label key={index} className={`block cursor-pointer ${optionStyle}`}>
+                <input
+                  type="radio"
+                  name={`question-${q._id}`}
+                  value={option}
+                  checked={userAnswers[q._id] === option}
+                  onChange={() => handleOptionSelect(q._id, option)}
+                  disabled={submitted}
+                />
+                <span className="ml-2">{option}</span>
+              </label>
+            );
+          })}
         </div>
       ))}
 
@@ -121,8 +138,24 @@ const Quiz = () => {
       )}
 
       {submitted && (
-        <div className="text-center mt-6">
+        <div className="text-center mt-6 space-y-4">
           <h3 className="text-xl font-semibold">Your Score: {score} / {questions.length}</h3>
+
+          {!showAnswers && (
+            <button
+              onClick={() => setShowAnswers(true)}
+              className="cursor-pointer bg-yellow-500 text-white px-6 py-2 rounded hover:bg-yellow-600"
+            >
+              Show Correct Answers
+            </button>
+          )}
+
+          <button
+            onClick={() => router.push('/')}
+            className="cursor-pointer bg-teal-600 text-white px-6 py-2 rounded hover:bg-teal-600"
+          >
+            Go to Home
+          </button>
         </div>
       )}
 
