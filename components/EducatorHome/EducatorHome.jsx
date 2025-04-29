@@ -57,18 +57,18 @@ const EducatorHome = () => {
     };
 
     return (
-        <div className="max-w-7xl mx-auto px-4 py-20">
+        <div className="w-full px-4 md:px-6 lg:px-8 py-10 md:py-16 lg:py-20">
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white rounded-xl shadow-lg p-6 md:p-10 border border-teal-300"
+                className="bg-white rounded-2xl shadow-lg p-6 md:p-10 border border-teal-300 max-w-7xl mx-auto"
             >
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-8 text-center leading-snug">
                     Welcome to your dashboard, {singleUser?.name?.split(" ")[0]}!
                 </h1>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Users */}
                     <motion.div
                         variants={cardVariants}
@@ -76,14 +76,14 @@ const EducatorHome = () => {
                         animate="visible"
                         transition={{ duration: 0.6 }}
                         whileHover={{ scale: 1.05 }}
-                        className="bg-blue-100 border-l-4 border-blue-500 p-6 rounded-lg shadow hover:shadow-md transition"
+                        className="bg-blue-100 border-l-4 border-blue-500 p-5 sm:p-6 rounded-lg shadow hover:shadow-md transition"
                     >
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm text-gray-600 font-medium">Total Users</p>
-                                <p className="text-3xl font-bold text-blue-700">{users.length}</p>
+                                <p className="text-xs sm:text-sm text-gray-600 font-medium">Total Users</p>
+                                <p className="text-2xl sm:text-3xl font-bold text-blue-700">{users.length}</p>
                             </div>
-                            <FaUser className="text-4xl text-blue-500" />
+                            <FaUser className="text-3xl sm:text-4xl text-blue-500" />
                         </div>
                     </motion.div>
 
@@ -94,14 +94,14 @@ const EducatorHome = () => {
                         animate="visible"
                         transition={{ duration: 0.7 }}
                         whileHover={{ scale: 1.05 }}
-                        className="bg-green-100 border-l-4 border-green-500 p-6 rounded-lg shadow hover:shadow-md transition"
+                        className="bg-green-100 border-l-4 border-green-500 p-5 sm:p-6 rounded-lg shadow hover:shadow-md transition"
                     >
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm text-gray-600 font-medium">Total Courses</p>
-                                <p className="text-3xl font-bold text-green-700">{courses.length}</p>
+                                <p className="text-xs sm:text-sm text-gray-600 font-medium">Total Courses</p>
+                                <p className="text-2xl sm:text-3xl font-bold text-green-700">{courses.length}</p>
                             </div>
-                            <FaBookOpen className="text-4xl text-green-500" />
+                            <FaBookOpen className="text-3xl sm:text-4xl text-green-500" />
                         </div>
                     </motion.div>
 
@@ -112,14 +112,14 @@ const EducatorHome = () => {
                         animate="visible"
                         transition={{ duration: 0.8 }}
                         whileHover={{ scale: 1.05 }}
-                        className="bg-yellow-100 border-l-4 border-yellow-500 p-6 rounded-lg shadow hover:shadow-md transition"
+                        className="bg-yellow-100 border-l-4 border-yellow-500 p-5 sm:p-6 rounded-lg shadow hover:shadow-md transition"
                     >
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm text-gray-600 font-medium">Total Blogs</p>
-                                <p className="text-3xl font-bold text-yellow-700">{blog.length}</p>
+                                <p className="text-xs sm:text-sm text-gray-600 font-medium">Total Blogs</p>
+                                <p className="text-2xl sm:text-3xl font-bold text-yellow-700">{blog.length}</p>
                             </div>
-                            <FaBlogger className="text-4xl text-yellow-500" />
+                            <FaBlogger className="text-3xl sm:text-4xl text-yellow-500" />
                         </div>
                     </motion.div>
 
@@ -130,14 +130,14 @@ const EducatorHome = () => {
                         animate="visible"
                         transition={{ duration: 0.9 }}
                         whileHover={{ scale: 1.05 }}
-                        className="bg-red-100 border-l-4 border-red-500 p-6 rounded-lg shadow hover:shadow-md transition"
+                        className="bg-red-100 border-l-4 border-red-500 p-5 sm:p-6 rounded-lg shadow hover:shadow-md transition"
                     >
                         <div className="flex items-center justify-between">
                             <div>
-                                <p className="text-sm text-gray-600 font-medium">Messages</p>
-                                <p className="text-3xl font-bold text-red-700">{contact.length}</p>
+                                <p className="text-xs sm:text-sm text-gray-600 font-medium">Messages</p>
+                                <p className="text-2xl sm:text-3xl font-bold text-red-700">{contact.length}</p>
                             </div>
-                            <FaEnvelope className="text-4xl text-red-500" />
+                            <FaEnvelope className="text-3xl sm:text-4xl text-red-500" />
                         </div>
                     </motion.div>
                 </div>

@@ -30,19 +30,20 @@ const Profile = () => {
     const singleUser = users.find(user => user?.email === session?.user?.email);
 
     return (
-        <div className="w-full flex min-h-screen items-center justify-center bg-cover bg-center flex-col"
+        <div className="w-full min-h-screen flex flex-col items-center justify-center bg-cover bg-center p-4 sm:p-6 md:p-8"
             style={{
                 backgroundImage: "url('/assets/background.jpg')",
                 backgroundAttachment: "fixed",
             }}>
+            <h1 className="text-3xl font-semibold text-gray-800 mb-6">User Profile</h1>
             {
                 loading ? (
                     <div className="text-xl text-teal-600 font-semibold">
                         <Loading />
                     </div>
                 ) : singleUser ? (
-                    <div className="bg-white border border-teal-300 shadow-xl rounded-xl p-8 max-w-md w-full text-center">
-                        <div className="flex justify-center items-center">
+                    <div className="bg-white border border-teal-300 shadow-2xl rounded-2xl p-6 sm:p-8 md:p-10 max-w-[400px] w-full flex flex-col items-center">
+                        <div className="w-28 h-28 flex items-center justify-center rounded-full overflow-hidden border-2 border-teal-500 bg-gray-100">
                             {
                                 singleUser?.photo ? (
                                     <Image
@@ -50,25 +51,25 @@ const Profile = () => {
                                         alt="User"
                                         width={112}
                                         height={112}
-                                        className="rounded-full border w-28 h-28 object-cover"
+                                        className="object-cover w-full h-full"
                                     />
                                 ) : (
-                                    <div className="w-28 h-28 flex items-center justify-center rounded-full border border-teal-500 bg-gray-200 text-teal-600 font-bold text-3xl">
+                                    <span className="text-3xl font-bold text-teal-600">
                                         {singleUser?.name?.[0]?.toUpperCase() ?? ""}
-                                    </div>
+                                    </span>
                                 )
                             }
                         </div>
-                        <h2 className="text-2xl font-bold text-gray-800 mt-4">{singleUser?.name}</h2>
-                        <p className="text-sm text-gray-600">{singleUser?.email}</p>
+                        <h2 className="text-2xl font-bold text-gray-800 mt-4 text-center break-words">{singleUser?.name}</h2>
+                        <p className="text-sm text-gray-600 mt-1 text-center break-words">{singleUser?.email}</p>
                         <Link href={`profile/${singleUser?._id}`}
-                            className="mt-6 inline-block px-6 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-700"
+                            className="mt-6 w-full text-center px-6 py-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 transition duration-300"
                         >
                             Edit Profile
                         </Link>
                     </div>
                 ) : (
-                    <div className="text-red-500 font-medium">User not found</div>
+                    <div className="text-red-500 font-medium text-center">User not found</div>
                 )
             }
         </div>

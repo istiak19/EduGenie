@@ -8,13 +8,9 @@ const Sidebar = () => {
     const { data: session } = useSession();
 
     return (
-        <div className="text-white w-full">
-            {
-                session?.user?.role === "educator" && <EducatorPanel />
-            }
-            {
-                session?.user?.role === "student" && <StudentPanel />
-            }
+        <div className="w-full">
+            {session?.user?.role === "educator" && <EducatorPanel />}
+            {session?.user?.role === "student" && <StudentPanel />}
         </div>
     );
 };

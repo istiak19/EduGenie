@@ -13,6 +13,7 @@ const ChapterPage = () => {
     const [selectedChapter, setSelectedChapter] = useState(null);
     console.log(selectedChapter);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchChapters = async () => {
@@ -24,11 +25,10 @@ const ChapterPage = () => {
                     setChapters(data);
                     setSelectedChapter(data[0]);
                 } else {
-                    console.error("API did not return an array:", data);
-                    setChapters([]);
+                    throw new Error("API did not return an array.");
                 }
             } catch (error) {
-                console.error("Failed to fetch chapters:", error);
+                setError(error.message);
             } finally {
                 setLoading(false);
             }
@@ -55,27 +55,39 @@ const ChapterPage = () => {
 
     if (loading) {
         return (
-            <div className="py-10">
+            <div className="py-10 min-h-screen flex justify-center items-center">
                 <Loading />
             </div>
         );
     }
 
+    if (error) {
+        return (
+            <div className="py-10 min-h-screen flex justify-center items-center text-red-500">
+                {`Error: ${error}`}
+            </div>
+        );
+    }
+
     return (
-        <div className="flex flex-col lg:flex-row max-w-7xl mx-auto px-4 py-10 gap-8">
+        <div className="flex flex-col lg:flex-row max-w-7xl mx-auto px-4 py-10 gap-5 min-h-screen">
             {/* Sidebar */}
-            <aside className="w-full lg:w-64 bg-gray-50 p-5 rounded-xl shadow-md">
-                <h3 className="text-xl font-bold mb-5 text-teal-700">Chapters</h3>
+            <aside className="w-full lg:w-72 bg-white p-4 rounded-2xl shadow-lg max-h-[80vh] overflow-y-auto border border-teal-100">
+                <h3 className="text-xl font-bold mb-5 flex items-center gap-2 text-teal-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6l4 2m4-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Chapters
+                </h3>
                 <ul className="space-y-2">
                     {Array.isArray(chapters) && chapters.map((chapter, idx) => (
                         <li
                             key={chapter._id}
                             onClick={() => setSelectedChapter(chapter)}
-                            className={`cursor-pointer px-3 py-2 rounded-lg transition 
-                        ${selectedChapter?._id === chapter._id
-                                    ? "bg-teal-200 font-semibold text-teal-900"
-                                    : "hover:bg-teal-100 text-gray-700"
-                                }`}
+                            className={`cursor-pointer px-4 py-2 rounded-lg text-sm font-medium transition-all ${selectedChapter?._id === chapter._id
+                                ? "bg-teal-100 text-teal-900 border-teal-300 border shadow-lg font-semibold text-lg"
+                                : "hover:bg-teal-50 text-gray-700 hover:shadow-sm"}`}
+                            role="button" aria-label={`Select ${chapter.chapterName}`}
                         >
                             {idx + 1}. {chapter.chapterName}
                         </li>
@@ -99,9 +111,9 @@ const ChapterPage = () => {
 
                     {selectedChapter?.videoId && (
                         <div className="mb-8">
-                            <div className="relative w-full pb-[56.25%] h-0 overflow-hidden rounded-lg shadow-lg">
+                            <div className="relative w-full aspect-video overflow-hidden rounded-lg shadow-lg">
                                 <iframe
-                                    className="absolute top-0 left-0 w-full h-full rounded-lg"
+                                    className="absolute top-0 left-0 w-full h-full"
                                     src={`https://www.youtube.com/embed/${selectedChapter.videoId}`}
                                     title="Chapter Video"
                                     frameBorder="0"
@@ -116,11 +128,11 @@ const ChapterPage = () => {
                     {selectedChapter?.chapters?.map((item, idx) => (
                         <div key={idx} className="mt-6 border-t pt-6">
                             <p className="text-gray-800 font-semibold mb-2">Description:</p>
-                            <p className="text-sm text-gray-600 text-justify leading-relaxed">
+                            <p className="text-base text-gray-600 text-justify leading-relaxed">
                                 {item.description}
                             </p>
                             {item.code && (
-                                <pre className="mt-4 bg-gray-100 text-sm p-4 overflow-auto rounded-md text-gray-800 whitespace-pre-wrap">
+                                <pre className="mt-4 bg-gray-100 text-sm p-4 overflow-auto rounded-md text-gray-800 whitespace-pre-wrap break-words">
                                     {item.code}
                                 </pre>
                             )}
@@ -132,7 +144,7 @@ const ChapterPage = () => {
                                             <p className="font-medium text-gray-800 mb-1">
                                                 {example?.title}
                                             </p>
-                                            <pre className="bg-gray-100 text-sm p-4 overflow-auto rounded-md text-gray-800 whitespace-pre-wrap">
+                                            <pre className="bg-gray-100 text-sm p-4 overflow-auto rounded-md text-gray-800 whitespace-pre-wrap break-words">
                                                 {example?.code?.replace(/<precode>|<\/precode>/g, "")}
                                             </pre>
                                         </div>
@@ -143,18 +155,20 @@ const ChapterPage = () => {
                     ))}
 
                     {/* Navigation Buttons */}
-                    <div className="mt-10 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div className="mt-10 flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
                         <button
                             onClick={handlePreviousChapter}
-                            className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-6 rounded-lg transition cursor-pointer duration-300 disabled:opacity-50"
+                            className="w-full cursor-pointer sm:w-auto bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300 disabled:opacity-50"
                             disabled={chapters.findIndex(ch => ch._id === selectedChapter?._id) === 0}
+                            aria-label="Go to previous chapter"
                         >
                             Previous Chapter
                         </button>
 
                         <button
                             onClick={handleNextChapter}
-                            className="bg-teal-600 cursor-pointer hover:bg-teal-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300"
+                            className="w-full sm:w-auto cursor-pointer bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-300"
+                            aria-label="Go to next chapter or finish the course"
                         >
                             {chapters.findIndex(ch => ch._id === selectedChapter?._id) < chapters.length - 1
                                 ? "Next Chapter"

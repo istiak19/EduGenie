@@ -29,18 +29,19 @@ const StudentPanel = () => {
 
     return (
         <div className="w-full">
-            <ul className="menu p-4 space-y-1 text-sm">
+            <ul className="flex flex-col gap-1 p-2 sm:p-4">
                 {navItems.map((item) => (
                     <li key={item.href}>
                         <Link
                             href={item.href}
-                            className={`flex items-center gap-2 p-2 rounded-md cursor-pointer transition-all duration-200
-                                ${pathname === item.href
-                                    ? "text-white/80 font-medium"
-                                    : "text-gray-700 hover:text-teal-500"
-                                }`}
+                            className={`flex items-center gap-3 p-2 rounded-lg transition-all duration-200
+                                 ${pathname === item.href
+                                    ? "bg-hidden text-white font-semibold"
+                                    : "text-black/80 bg-hidden hover:text-black"}
+                                  
+                            `}
                         >
-                            {item.icon}
+                            <span className="text-lg">{item.icon}</span>
                             <span>{item.label}</span>
                         </Link>
                     </li>

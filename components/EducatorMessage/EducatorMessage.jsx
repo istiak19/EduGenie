@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { toast } from "react-toastify";
 import Loading from "../Loading/Loading";
 import Swal from "sweetalert2";
 
@@ -29,16 +28,22 @@ const EducatorMessage = () => {
         fetchMessage();
     }, []);
 
-    const replyPendingMessages = messages.filter(message => !message.reply);
+    const replyPendingMessages = messages.filter((message) => !message.reply);
 
     const handleReplyChange = (id, value) => {
-        setReplies(prev => ({ ...prev, [id]: value }));
+        setReplies((prev) => ({ ...prev, [id]: value }));
     };
 
     const handleReplySubmit = async (id) => {
         const replyMessage = replies[id];
         if (!replyMessage) {
-            toast.error("Please write a reply before submitting.");
+            Swal.fire({
+                position: "top",
+                icon: "warning",
+                title: "Please write a reply before submitting.",
+                showConfirmButton: false,
+                timer: 1500,
+            });
             return;
         }
 
@@ -46,9 +51,9 @@ const EducatorMessage = () => {
             const res = await fetch(`/api/contact/${id}`, {
                 method: "PATCH",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ reply: replyMessage })
+                body: JSON.stringify({ reply: replyMessage }),
             });
 
             const result = await res.json();
@@ -58,9 +63,9 @@ const EducatorMessage = () => {
                     icon: "success",
                     title: "Reply sent successfully!",
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1500,
                 });
-                setReplies(prev => ({ ...prev, [id]: "" }));
+                setReplies((prev) => ({ ...prev, [id]: "" }));
                 await fetchMessage();
             }
         } catch (error) {
@@ -70,42 +75,53 @@ const EducatorMessage = () => {
                 icon: "error",
                 title: "Something went wrong while sending reply.",
                 showConfirmButton: false,
-                timer: 1500
+                timer: 1500,
             });
         }
     };
 
     return (
-        <div className="max-w-5xl mx-auto px-4 py-8">
-            <h2 className="text-2xl md:text-4xl font-bold text-center text-emerald-600 mb-8">Message Inbox</h2>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <h2 className="text-3xl sm:text-4xl font-bold text-center text-emerald-600 mb-10">
+                Message Inbox
+            </h2>
 
             {isLoading ? (
-                <div className="text-center text-gray-500">
+                <div className="flex justify-center items-center min-h-[200px]">
                     <Loading />
                 </div>
             ) : replyPendingMessages.length === 0 ? (
-                <p className="text-center text-gray-500">No messages found.</p>
+                <p className="text-center text-gray-500 text-lg">No pending messages found.</p>
             ) : (
-                <div className="grid gap-6 md:grid-cols-2">
+                <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {replyPendingMessages.map((msg) => (
-                        <div key={msg._id} className="border rounded-xl p-5 shadow-md space-y-3 bg-white text-left">
-                            <div><strong>Name:</strong> {msg.firstName} {msg.lastName}</div>
-                            <div><strong>Email:</strong> {msg.email}</div>
-                            <div><strong>Phone:</strong> {msg.tel}</div>
-                            <div><strong>Message:</strong> {msg.message}</div>
-                            <div className="text-sm text-gray-500"><strong>Received:</strong> {new Date(msg.createdAt).toLocaleString()}</div>
+                        <div
+                            key={msg._id}
+                            className="border rounded-2xl p-6 bg-white shadow-md flex flex-col justify-between hover:shadow-lg transition-all"
+                        >
+                            <div className="space-y-2 text-gray-700">
+                                <div><span className="font-semibold">Name:</span> {msg.firstName} {msg.lastName}</div>
+                                <div><span className="font-semibold">Email:</span> {msg.email}</div>
+                                <div><span className="font-semibold">Phone:</span> {msg.tel}</div>
+                                <div><span className="font-semibold">Message:</span> {msg.message}</div>
+                                <div className="text-xs text-gray-400">
+                                    <strong>Received:</strong> {new Date(msg.createdAt).toLocaleString()}
+                                </div>
+                            </div>
 
-                            <div className="mt-4">
-                                <label className="block mb-1 font-medium text-sm">Reply</label>
+                            <div className="mt-5">
+                                <label className="block mb-2 text-sm font-medium text-gray-800">
+                                    Reply
+                                </label>
                                 <Textarea
                                     placeholder="Write your reply..."
                                     value={replies[msg._id] || ""}
                                     onChange={(e) => handleReplyChange(msg._id, e.target.value)}
-                                    className="mb-2 w-full min-h-[80px]"
+                                    className="w-full min-h-[100px] mb-4 resize-none"
                                 />
                                 <Button
                                     onClick={() => handleReplySubmit(msg._id)}
-                                    className="bg-teal-500 text-white hover:bg-teal-700 w-full cursor-pointer md:w-auto"
+                                    className="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 cursor-pointer"
                                 >
                                     Send Reply
                                 </Button>

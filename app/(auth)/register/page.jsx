@@ -15,19 +15,15 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { register } from "@/app/actions/auth/register";
 
-// Zod schema validation with password matching
+// Zod validation
 const formSchema = z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters." }),
     email: z.string().email({ message: "Invalid email format." }),
     password: z.string()
         .min(6, { message: "Password must be at least 6 characters." })
-        .regex(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-            {
-                message:
-                    "Password must include uppercase, lowercase, number, and special character.",
-            }
-        ),
+        .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/, {
+            message: "Password must include uppercase, lowercase, number, and special character.",
+        }),
     cPassword: z.string().min(6, { message: "Password must be at least 6 characters." }),
 }).refine((data) => data.password === data.cPassword, {
     message: "Passwords don't match!",
@@ -49,15 +45,12 @@ const Register = () => {
     const onSubmit = async (data) => {
         try {
             console.clear();
-            console.log("Submitted Data:", data);
             const userInfo = {
                 name: data.name,
                 email: data.email,
-                password: data.password,
-                role: 'student'
+                password: data.password
             };
 
-            console.log("User Info:", userInfo);
             const registerResponse = await register(userInfo);
 
             if (registerResponse?.success) {
@@ -88,25 +81,32 @@ const Register = () => {
     };
 
     return (
-        <div className="flex justify-center items-center bg-cover bg-center w-full min-h-screen"
+        <div className="flex justify-center items-center bg-cover bg-center min-h-screen w-full px-4 sm:px-6 lg:px-8"
             style={{
                 backgroundImage: "url('/assets/background.jpg')",
                 backgroundAttachment: "fixed",
-            }}>
-            <div className="mx-auto py-10 w-11/12">
-                <div className="lg:flex-row flex-col gap-8 hero-content">
-                    <Image
-                        src={loginPic}
-                        alt="Login Picture"
-                        width={500}
-                        height={500}
-                        className="rounded-lg"
-                        priority
-                    />
-                    <div className="w-full max-w-2xl">
-                        <h2 className="mb-5 font-bold text-3xl text-center">Sign Up</h2>
+            }}
+        >
+            <div className="w-full max-w-6xl mx-auto">
+                <div className="flex flex-col lg:flex-row items-center justify-center gap-5 py-12">
+                    {/* Left Image Section */}
+                    <div className="w-full lg:w-1/2 flex justify-center">
+                        <Image
+                            src={loginPic}
+                            alt="Login Picture"
+                            width={600}
+                            height={600}
+                            className="rounded-xl object-cover w-full"
+                            priority
+                        />
+                    </div>
+
+                    {/* Right Form Section */}
+                    <div className="w-full md:w-2/3 lg:w-1/2  p-6 md:p-10">
+                        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Sign Up</h2>
+
                         <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                                 <FormField
                                     control={form.control}
                                     name="name"
@@ -127,29 +127,12 @@ const Register = () => {
                                         <FormItem>
                                             <FormLabel>Email</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="Your email" type="email" {...field} />
+                                                <Input placeholder="Your Email" type="email" {...field} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
-                                {/* <FormField
-                                    control={form.control}
-                                    name="photo"
-                                    render={({ field: { onChange } }) => (
-                                        <FormItem>
-                                            <FormLabel>Upload Photo</FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    type="file"
-                                                    accept="image/*"
-                                                    onChange={(e) => onChange(e.target.files)}
-                                                />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                /> */}
                                 <FormField
                                     control={form.control}
                                     name="password"
@@ -157,7 +140,7 @@ const Register = () => {
                                         <FormItem>
                                             <FormLabel>Password</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="Your password" type="password" {...field} />
+                                                <Input placeholder="Your Password" type="password" {...field} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
@@ -170,26 +153,26 @@ const Register = () => {
                                         <FormItem>
                                             <FormLabel>Confirm Password</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="Your password" type="password" {...field} />
+                                                <Input placeholder="Confirm Password" type="password" {...field} />
                                             </FormControl>
                                             <FormMessage />
                                         </FormItem>
                                     )}
                                 />
-                                <Button className="w-full cursor-pointer bg-teal-600 hover:bg-teal-700" type="submit">
+                                <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700 cursor-pointer">
                                     Sign Up
                                 </Button>
                             </form>
                         </Form>
-                        <p className="py-5 font-medium text-center">Or Sign Up With</p>
-                        <div>
-                            <SocialAuth />
-                        </div>
-                        <p className="pt-5 text-gray-600 text-xs text-center">
+
+                        <p className="text-center py-5 font-medium text-gray-700">Or Sign Up With</p>
+                        <SocialAuth />
+
+                        <p className="pt-5 text-center text-sm text-gray-600">
                             Already have an account?{" "}
-                            <span className="text-teal-600 hover:underline">
-                                <Link href="/login">Login</Link>
-                            </span>
+                            <Link href="/login" className="text-teal-600 font-semibold hover:underline">
+                                Sign In
+                            </Link>
                         </p>
                     </div>
                 </div>

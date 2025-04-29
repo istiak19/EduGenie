@@ -91,19 +91,19 @@ const EditProfile = () => {
     };
 
     return (
-        <div>
+        <div className="w-full flex justify-center items-center p-4 sm:p-6 md:p-8">
             {
                 loading ? (
                     <div className="text-center text-xl font-semibold text-teal-600">
                         <Loading />
                     </div>
                 ) : (
-                    <div className="bg-white shadow-lg border border-teal-300 rounded-xl p-8 w-full max-w-md">
+                    <div className="bg-white shadow-lg border border-teal-300 rounded-xl p-8 w-full max-w-[400px] sm:max-w-[450px] md:max-w-[500px] lg:max-w-[600px]">
                         <h2 className="text-3xl font-semibold text-center mb-6">Edit Profile</h2>
                         {
                             user && (
                                 <>
-                                    <div className="flex justify-center items-center">
+                                    <div className="flex justify-center items-center mb-6">
                                         {
                                             user?.photo ? (
                                                 <Image
@@ -127,7 +127,7 @@ const EditProfile = () => {
                                                 type="text"
                                                 name="name"
                                                 defaultValue={user?.name}
-                                                className="w-full p-2 border border-gray-300 rounded"
+                                                className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-500"
                                                 required
                                             />
                                         </div>
@@ -138,7 +138,7 @@ const EditProfile = () => {
                                                 type="file"
                                                 accept="image/*"
                                                 onChange={(e) => setSelectedPhoto(e.target.files[0])}
-                                                className="w-full p-2 border border-gray-300 rounded"
+                                                className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-teal-500"
                                             />
                                         </div>
                                         <div>
@@ -150,7 +150,7 @@ const EditProfile = () => {
                                                 className="w-full p-2 border border-gray-300 rounded bg-gray-100 text-gray-500"
                                             />
                                         </div>
-                                        <div className="flex gap-3">
+                                        <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
                                             <button
                                                 type="submit"
                                                 disabled={submitting}

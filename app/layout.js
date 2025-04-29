@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes"; // <-- Added for theme system
 import NextAuthProvider from "@/provider/NextAuthProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -21,15 +22,17 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en" suppressHydrationWarning> {/* <-- optional to avoid warning */}
       <body className={`${inter.variable} font-sans antialiased`}>
-        <NextAuthProvider>
-          <Navbar />
-          <main className="min-h-[calc(100svh-230px)]">
-            {children}
-          </main>
-          <Footer></Footer>
-        </NextAuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={true}>
+          <NextAuthProvider>
+            <Navbar />
+            <main className="min-h-[calc(100svh-230px)]">
+              {children}
+            </main>
+            <Footer />
+          </NextAuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

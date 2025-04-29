@@ -1,4 +1,5 @@
 "use server";
+
 import dbConnect, { collectionNames } from "@/lib/dbConnect";
 import { hash } from "bcryptjs";
 
@@ -11,8 +12,8 @@ export const register = async (payload) => {
         const result = await userCollection.insertOne({
             ...payload,
             password: hashedPassword,
+            role: 'student'
         });
-        // const { _id } = result;
         return { success: true, _id: result.insertedId.toString() };
     }
     return null;
