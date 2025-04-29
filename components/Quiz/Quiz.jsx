@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,17 +11,33 @@ const Quiz = () => {
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(false);
-
+  const [quizLoaded, setQuizLoaded] = useState(false); // Add this
+  const [chapter, setChapter] =useState();
+  const { id  } = useParams();
+  console.log(chapter);
   const searchParams = useSearchParams();
   const category = searchParams.get('category') || 'web-development';
   const { data: session } = useSession();
   const email = session?.user?.email;
+
+
+  // chapter data get 
+  useEffect(()=>{
+    const chapter = async () => {
+      const res = await fetch(`/api/chapter?courseId=${id}`);
+      const data = await res.json();
+      setChapter(data);
+      setQuizLoaded(true); 
+    };
+    chapter();
+  },[])
 
   useEffect(() => {
     const fetchQuestions = async () => {
       const res = await fetch(`/api/quiz/questions?category=${category}`);
       const data = await res.json();
       setQuestions(data);
+      setQuizLoaded(true); 
     };
     fetchQuestions();
   }, [category]);
@@ -59,11 +75,13 @@ const Quiz = () => {
     }
   };
 
-  if (!questions.length) return <p className="text-center mt-10">Loading questions...</p>;
-
   return (
     <div className="max-w-3xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-6 text-center">Quiz - {category}</h2>
+      {/* <h2 className="text-2xl font-bold mb-6 text-center">Quiz - {category}</h2> */}
+
+      {quizLoaded && questions.length === 0 ? (
+        <p className="text-center text-red-500 font-medium">No quiz found in this category.</p>
+      ): (<h2 className="text-2xl font-bold mb-6 text-center">Quiz - {category}</h2>) }
 
       {questions.map((q, i) => (
         <div key={q._id} className="mb-6">
@@ -84,7 +102,7 @@ const Quiz = () => {
         </div>
       ))}
 
-      {!submitted ? (
+      {!submitted && questions.length > 0 && (
         <button
           onClick={handleSubmit}
           disabled={loading}
@@ -92,7 +110,9 @@ const Quiz = () => {
         >
           {loading ? 'Submitting...' : 'Submit Quiz'}
         </button>
-      ) : (
+      )}
+
+      {submitted && (
         <div className="text-center mt-6">
           <h3 className="text-xl font-semibold">Your Score: {score} / {questions.length}</h3>
         </div>

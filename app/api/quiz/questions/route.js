@@ -14,6 +14,7 @@ export async function GET(req) {
             { $match: { category } },
             { $sample: { size: 10 } }
         ]).toArray();
+        
 
         return NextResponse.json(questions);
     } catch (error) {

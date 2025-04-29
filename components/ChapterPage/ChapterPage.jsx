@@ -5,11 +5,13 @@ import { useParams, useRouter } from "next/navigation";
 import Loading from "@/components/Loading/Loading";
 
 const ChapterPage = () => {
-    const { id } = useParams();
+    const { id  } = useParams();
     const router = useRouter();
 
     const [chapters, setChapters] = useState([]);
+   
     const [selectedChapter, setSelectedChapter] = useState(null);
+    console.log(selectedChapter);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -40,7 +42,7 @@ const ChapterPage = () => {
         if (currentIndex < chapters.length - 1) {
             setSelectedChapter(chapters[currentIndex + 1]);
         } else {
-            router.push(`/quiz`);
+            router.push(`/quiz?category=${selectedChapter?.Topic}`);
         }
     };
 

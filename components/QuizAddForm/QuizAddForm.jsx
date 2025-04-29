@@ -97,6 +97,21 @@ const QuizAddForm = () => {
                             className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-teal-400"
                             required
                         >
+                            <option>Category</option>
+                            <option value="Python">Python</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="React">React</option>
+                            <option value="UI/UX">UI/UX</option>
+                            <option value="Node.js">Node.js</option>
+                            <option value="Machine Learning">Machine Learning</option>
+                            <option value="Web Development">Web Development</option>
+                            <option value="Digital Marketing">Digital Marketing</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="Artificial Intelligence">Artificial Intelligence</option>
+                            <option value="Blockchain">Blockchain</option>
+                            <option value="Cybersecurity">Cybersecurity</option>
+                            <option value="Programming">programming</option>
+                            <option value="SEO">SEO</option>
                             <option value="">Select Category</option>
                             {Object.keys(courseTopics).map((category, idx) => (
                                 <option key={idx} value={category}>
