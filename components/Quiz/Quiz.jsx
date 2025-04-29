@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams, useSearchParams, useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,34 +13,40 @@ const Quiz = () => {
   const [loading, setLoading] = useState(false);
   const [quizLoaded, setQuizLoaded] = useState(false);
   const [chapter, setChapter] = useState([]);
+  const [showAnswers, setShowAnswers] = useState(false); 
+
   const { id } = useParams();
-  console.log(chapter);
+  const router = useRouter();
   const searchParams = useSearchParams();
   const category = searchParams.get('category') || 'Programming';
+  const topic = searchParams.get('topic') || 'Python';
+
   const { data: session } = useSession();
   const email = session?.user?.email;
 
-
-  // chapter data get 
   useEffect(() => {
-    const chapter = async () => {
+    const fetchChapter = async () => {
       const res = await fetch(`/api/chapter?courseId=${id}`);
       const data = await res.json();
       setChapter(data);
       setQuizLoaded(true);
     };
-    chapter();
-  }, [])
+    fetchChapter();
+  }, [id]);
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const res = await fetch(`/api/quiz/questions?category=${category}`);
-      const data = await res.json();
-      setQuestions(data);
-      setQuizLoaded(true);
+      try {
+        const res = await fetch(`/api/quiz/questions?category=${category}&topic=${topic}`);
+        const data = await res.json();
+        setQuestions(data);
+        setQuizLoaded(true);
+      } catch (err) {
+        toast.error('Failed to load quiz questions');
+      }
     };
     fetchQuestions();
-  }, [category]);
+  }, [category, topic]);
 
   const handleOptionSelect = (questionId, option) => {
     setUserAnswers({ ...userAnswers, [questionId]: option });
@@ -57,19 +63,19 @@ const Quiz = () => {
       const res = await fetch('/api/quiz/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, category, answers })
+        body: JSON.stringify({ email, category, topic, answers })
       });
 
       const data = await res.json();
       if (res.ok) {
         setScore(data.score);
         setSubmitted(true);
-        toast.success(`🎉 Quiz Submitted! Your score is ${data.score}/${questions.length}`);
+        toast.success(` Quiz Submitted! Your score is ${data.score}/${questions.length}`);
       } else {
-        toast.error(data.error || '❌ Something went wrong!');
+        toast.error(data.error || 'Something went wrong!');
       }
     } catch (error) {
-      toast.error('❌ Failed to submit quiz!');
+      toast.error('Failed to submit quiz!');
     } finally {
       setLoading(false);
     }
@@ -77,28 +83,47 @@ const Quiz = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-4">
-      {/* <h2 className="text-2xl font-bold mb-6 text-center">Quiz - {category}</h2> */}
-
       {quizLoaded && questions.length === 0 ? (
-        <p className="text-center text-red-500 font-medium">No quiz found in this category.</p>
-      ) : (<h2 className="text-2xl font-bold mb-6 text-center">Quiz - {category}</h2>)}
+        <p className="text-center text-red-500 font-medium">No quiz found in this category/topic.</p>
+      ) : (
+        <h2 className="text-2xl font-bold mb-6 text-center">
+          Quiz - {category} ({topic})
+        </h2>
+      )}
 
       {questions.map((q, i) => (
         <div key={q._id} className="mb-6">
           <p className="font-medium mb-2">{i + 1}. {q.question}</p>
-          {q.options.map((option, index) => (
-            <label key={index} className="block cursor-pointer">
-              <input
-                type="radio"
-                name={`question-${q._id}`}
-                value={option}
-                checked={userAnswers[q._id] === option}
-                onChange={() => handleOptionSelect(q._id, option)}
-                disabled={submitted}
-              />
-              <span className="ml-2">{option}</span>
-            </label>
-          ))}
+          {q.options.map((option, index) => {
+            const isSelected = userAnswers[q._id] === option;
+            const isCorrect = q.correctAnswer === option;
+            const userSelectedWrong = isSelected && !isCorrect;
+
+            let optionStyle = '';
+            if (submitted && showAnswers) {
+              if (isCorrect) {
+                optionStyle = 'text-green-600 font-semibold';
+              } else if (userSelectedWrong) {
+                optionStyle = 'text-red-500';
+              } else {
+                optionStyle = 'text-gray-700';
+              }
+            }
+
+            return (
+              <label key={index} className={`block cursor-pointer ${optionStyle}`}>
+                <input
+                  type="radio"
+                  name={`question-${q._id}`}
+                  value={option}
+                  checked={userAnswers[q._id] === option}
+                  onChange={() => handleOptionSelect(q._id, option)}
+                  disabled={submitted}
+                />
+                <span className="ml-2">{option}</span>
+              </label>
+            );
+          })}
         </div>
       ))}
 
@@ -113,8 +138,24 @@ const Quiz = () => {
       )}
 
       {submitted && (
-        <div className="text-center mt-6">
+        <div className="text-center mt-6 space-y-4">
           <h3 className="text-xl font-semibold">Your Score: {score} / {questions.length}</h3>
+
+          {!showAnswers && (
+            <button
+              onClick={() => setShowAnswers(true)}
+              className="cursor-pointer bg-yellow-500 text-white px-6 py-2 rounded hover:bg-yellow-600"
+            >
+              Show Correct Answers
+            </button>
+          )}
+
+          <button
+            onClick={() => router.push('/')}
+            className="cursor-pointer bg-teal-600 text-white px-6 py-2 rounded hover:bg-teal-600"
+          >
+            Go to Home
+          </button>
         </div>
       )}
 
