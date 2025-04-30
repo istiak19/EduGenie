@@ -54,7 +54,7 @@ const Courses = () => {
           backgroundAttachment: "fixed"
         }}
       >
-        <div className="container mx-auto p-4">
+        <div className="max-w-7xl mx-auto py-4">
           {loading ? (
             <Loading />
           ) : error ? (
