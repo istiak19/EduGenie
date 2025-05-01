@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const Chatbot = () => {
@@ -8,6 +8,7 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([{ text: 'Hi! How can I help you today?', fromBot: true }]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef(null);
 
   const toggleChat = () => setIsOpen(!isOpen);
 
@@ -19,7 +20,7 @@ const Chatbot = () => {
   const handleSend = () => {
     if (!input.trim()) return;
     const userMessage = { text: input, fromBot: false };
-    setMessages([...messages, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     playSound();
 
     setInput('');
@@ -27,91 +28,101 @@ const Chatbot = () => {
 
     const botResponse = getBotResponse(input);
     setTimeout(() => {
-      setMessages([...messages, userMessage, botResponse]);
+      setMessages((prev) => [...prev, botResponse]);
       setIsTyping(false);
       playSound();
     }, 1000);
   };
 
   const getBotResponse = (input) => {
-    if (input.toLowerCase().includes('course')) {
-      return { text: 'Looking for courses? I’d recommend checking out our Web Development or Data Science tracks!', fromBot: true };
+    const lower = input.toLowerCase();
+    if (lower.includes('course')) {
+      return { text: 'Looking for courses? Check out our Web Development or Data Science tracks!', fromBot: true };
     }
-    if (input.toLowerCase().includes('faq')) {
-      return { text: 'You can check out our Frequently Asked Questions in the Help section of our website for more details.', fromBot: true };
+    if (lower.includes('faq')) {
+      return { text: 'Visit our FAQ section for more information.', fromBot: true };
     }
-    if (input.toLowerCase().includes('support')) {
-      return {
-        text: 'How can I assist you with support? You can choose:\n1. Technical Support\n2. Account Help\n3. General Inquiry',
-        fromBot: true
-      };
+    if (lower.includes('support')) {
+      return { text: 'How can I assist you? 1. Technical Support 2. Account Help 3. General Inquiry', fromBot: true };
     }
-    if (input.toLowerCase().includes('technical support')) {
-      return { text: 'Having technical issues? Please describe the issue, and I’ll help you resolve it as soon as possible.', fromBot: true };
+    if (lower.includes('technical support')) {
+      return { text: 'Describe your technical issue and I’ll assist you.', fromBot: true };
     }
-    if (input.toLowerCase().includes('account help')) {
-      return { text: 'For account-related issues like login problems, password reset, or account recovery, please follow these steps...', fromBot: true };
+    if (lower.includes('account help')) {
+      return { text: 'For account issues like password reset, follow the instructions in the Help section.', fromBot: true };
     }
-    return { text: 'That’s a bit beyond my reach, but I’d love to help with something else! What can I assist you with?', fromBot: true };
-
+    return { text: 'I’m not sure about that. Let me know if I can help with anything else!', fromBot: true };
   };
 
   const quickReplies = ['Courses', 'FAQ', 'Support'];
 
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
+
   return (
-    <div className="right-4 bottom-4 z-50 fixed">
+    <div className="fixed bottom-6 right-6 z-50">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 20 }}
-        className={`bg-white shadow-lg rounded-2xl w-64 p-4 transition-all duration-300 ${isOpen ? '' : 'hidden'}`}
+        className={`bg-white shadow-2xl rounded-3xl w-80 p-5 transition-all duration-300 ${isOpen ? '' : 'hidden'} flex flex-col`}
       >
-        <div className="mb-4 h-48 overflow-y-auto">
+        <div className="mb-4 h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-teal-300 scrollbar-track-gray-100 pr-2">
           {messages.map((msg, index) => (
-            <div key={index} className={`my-2 flex ${msg.fromBot ? 'justify-start' : 'justify-end'}`}> 
-              {msg.fromBot && <div className="mr-2">🤖</div>}
+            <div key={index} className={`my-2 flex ${msg.fromBot ? 'justify-start' : 'justify-end'}`}>
+              {msg.fromBot && <div className="mr-2 text-lg">🤖</div>}
               <div
-                className={`inline-block p-3 rounded-xl ${msg.fromBot ? 'bg-teal-100' : 'bg-green-100'} text-gray-800`}
-                style={{ maxWidth: '80%' }}
+                className={`p-3 rounded-2xl text-sm ${msg.fromBot ? 'bg-blue-100 text-blue-900' : 'bg-green-200 text-green-900'} max-w-[75%]`}
               >
-                {msg.text}
+                {msg.text.split('\n').map((line, i) => (
+                  <p key={i}>{line}</p>
+                ))}
               </div>
-              {!msg.fromBot && <div className="ml-2">🧑</div>}
+              {!msg.fromBot && <div className="ml-2 text-lg">🧑</div>}
             </div>
           ))}
-          {isTyping && <div className="text-gray-500 text-sm">🤖 is typing...</div>}
+          {isTyping && <div className="text-gray-500 text-sm">🤖 Typing...</div>}
+          <div ref={messagesEndRef} />
         </div>
-        <div className="flex mt-2">
+
+        <div className="flex items-center gap-2 mt-2">
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Ask me anything..."
-            className="p-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 w-full text-gray-800"
+            placeholder="Type a message..."
+            className="flex-1 p-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-teal-400 text-sm"
           />
           <button
             onClick={handleSend}
-            className="bg-teal-400 hover:bg-teal-500 ml-2 p-3 rounded-xl text-white transition-colors duration-200"
+            className="bg-teal-400 hover:bg-teal-500 p-3 rounded-full text-white text-sm flex items-center justify-center transition"
           >
-            Send
+            ➤
           </button>
         </div>
-        <div className="flex gap-2 mt-2">
+
+        <div className="flex flex-wrap gap-2 mt-4">
           {quickReplies.map((reply) => (
             <button
               key={reply}
               onClick={() => setInput(reply)}
-              className="bg-gray-200 p-2 rounded-xl text-gray-800 text-sm"
+              className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs transition"
             >
               {reply}
             </button>
           ))}
         </div>
       </motion.div>
+
       <button
         onClick={toggleChat}
-        className="right-4 bottom-4 fixed bg-teal-400 hover:bg-teal-500 p-4 rounded-full text-white transition-colors duration-200"
+        className="fixed bottom-6 cursor-pointer right-6 bg-teal-500 hover:bg-teal-600 p-4 rounded-full text-white text-xl shadow-lg transition"
       >
-        {isOpen ? '❌' : '💬'}
+        {isOpen ? '✖' : '💬'}
       </button>
     </div>
   );
