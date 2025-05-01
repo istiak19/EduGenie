@@ -4,6 +4,7 @@ import HeroBanner from "@/components/HeroBanner";
 import HowItWorks from "@/components/HowItWorks";
 import EidGreeting from "@/components/EidGreeting/EidGreeting";
 import NewBanner from "@/components/NewBanner/NewBanner";
+import StudentFeedback from "@/components/StudentFeedback/StudentFeedback";
 
 export default function Home() {
   return (
