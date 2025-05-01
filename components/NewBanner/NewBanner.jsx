@@ -9,7 +9,7 @@ const NewBanner = () => {
 
   return (
     <section className="w-full bg-white py-12 md:py-24 px-4 md:px-12 lg:px-24 flex flex-col md:flex-row items-center justify-between">
-      {/* Left side*/}
+      {/* Left*/}
       <div className="md:w-1/2 space-y-6 text-center md:text-left">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
           Learn with AI-Enhanced{' '}
