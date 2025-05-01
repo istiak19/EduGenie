@@ -3,7 +3,7 @@ import { MdVerifiedUser } from 'react-icons/md';
 
 const StudentFeedback = () => {
     return (
-        <section className="relative bg-gray-100 py-40 px-8 md:px-40 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-gray-100 to-white py-40 px-8 md:px-40 overflow-hidden">
             {/* Decorative Circle */}
             <div className="absolute top-[20px] left-[20px] pt-5 w-72 h-72 bg-[#EFCED3] rounded-full z-0"></div>
 
@@ -27,14 +27,14 @@ const StudentFeedback = () => {
 
                     {/* Floating Rating Card */}
                     <div
-                        className="absolute hidden sm:block top-[200px] left-[300px] text-white p-2 rounded-xl w-48 shadow-lg text-center text-sm"
+                        className="absolute hidden sm:block top-[180px] left-[300px] text-white p-2 rounded-xl w-48 shadow-lg text-center text-sm"
                         style={{
                             backgroundImage: "url('/contour-pattern.jpg')",
                             backgroundColor: "#1e3a8a",
                             backgroundSize: 'cover',
                         }}
                     >
-                        <p className="text-xl font-bold">4.8/5.0</p>
+                        <p className="text-xl font-semibold">4.8/5.0</p>
                         <div className="text-yellow-400 mb-1">⭐⭐⭐⭐⭐</div>
                         <p>Based on 5000+ verified reviews</p>
                     </div>
