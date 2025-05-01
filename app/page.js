@@ -11,7 +11,7 @@ export default function Home() {
     <div>
       {/* <HeroBanner /> */}
       <NewBanner/>
-      <EidGreeting />
+      {/* <EidGreeting /> */}
       <CourseCarousel />
       <HowItWorks />
       {/* <SuccessStories /> */}
