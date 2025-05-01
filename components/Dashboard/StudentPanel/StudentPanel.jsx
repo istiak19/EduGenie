@@ -22,7 +22,7 @@ const StudentPanel = () => {
         },
         {
             href: "/dashboard/generator",
-            label: "Generator",
+            label: "Course Generator",
             icon: <GiPowerGenerator className="text-lg" />,
         }
     ];

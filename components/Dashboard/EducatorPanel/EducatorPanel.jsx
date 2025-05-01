@@ -27,11 +27,6 @@ const EducatorPanel = () => {
             icon: <MdMessage className="text-lg" />,
         },
         {
-            href: "/dashboard/generator",
-            label: "Generator",
-            icon: <GiPowerGenerator className="text-lg" />,
-        },
-        {
             href: "/dashboard/educatorCreateBlog",
             label: "Create Blog",
             icon: <FaMicroblog className="text-lg" />,
@@ -45,6 +40,11 @@ const EducatorPanel = () => {
             href: "/dashboard/quizAddForm",
             label: "Add New Quiz",
             icon: <MdOutlineQuiz className="text-lg" />,
+        },
+        {
+            href: "/dashboard/generator",
+            label: "Course Generator",
+            icon: <GiPowerGenerator className="text-lg" />,
         },
     ];
 

@@ -22,7 +22,7 @@ const StudentFeedback = () => {
                         <p className="text-sm text-gray-600 mb-3">
                             "EduGenie has made learning so much more engaging and tailored to my needs. The AI-generated courses are spot-on and have helped me stay motivated and organized!"
                         </p>
-                        <div className="text-yellow-400 text-lg">⭐⭐⭐⭐⭐</div>
+                        <div className="text-yellow-400">⭐⭐⭐⭐⭐</div>
                     </div>
 
                     {/* Floating Rating Card */}
@@ -34,8 +34,8 @@ const StudentFeedback = () => {
                             backgroundSize: 'cover',
                         }}
                     >
-                        <p className="text-xl font-semibold">4.8/5.0</p>
-                        <div className="text-yellow-400 mb-1">⭐⭐⭐⭐⭐</div>
+                        <p className="text-xl font-medium">4.8/5.0</p>
+                        <div className="text-yellow-400 text-xs mb-1">⭐⭐⭐⭐⭐</div>
                         <p>Based on 5000+ verified reviews</p>
                     </div>
 
@@ -51,7 +51,7 @@ const StudentFeedback = () => {
                         <p className="text-sm text-gray-600 mb-3">
                             "Thanks to EduGenie, I was able to find the right mentors and personalized content that boosted my confidence and academic performance tremendously."
                         </p>
-                        <div className="text-yellow-400 text-lg">⭐⭐⭐⭐½</div>
+                        <div className="text-yellow-400">⭐⭐⭐⭐½</div>
                     </div>
 
                 </div>
