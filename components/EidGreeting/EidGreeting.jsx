@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import Confetti from 'react-confetti';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaRegCalendarAlt, FaCopy, FaFacebookF, FaTwitter, FaWhatsapp } from 'react-icons/fa';
+import { useState, useEffect } from "react";
+import Confetti from "react-confetti";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaRegCalendarAlt, FaCopy, FaFacebookF, FaTwitter, FaWhatsapp } from "react-icons/fa";
 
 const EidGreeting = () => {
     const greetings = [
@@ -11,7 +11,7 @@ const EidGreeting = () => {
         "Wishing you a blessed Eid filled with happiness and prosperity.",
         "Eid Mubarak to you and your family! May your days be full of love and joy.",
         "Sending you heartfelt wishes on this blessed Eid. Eid Mubarak!",
-        "May Allah bless you with peace, happiness, and endless blessings. Eid Mubarak!"
+        "May Allah bless you with peace, happiness, and endless blessings. Eid Mubarak!",
     ];
 
     const giftSuggestions = [
@@ -19,7 +19,7 @@ const EidGreeting = () => {
         "A set of Eid-themed candles.",
         "Personalized Eid greeting cards.",
         "A gift box with sweet treats.",
-        "A stylish watch for a perfect Eid look."
+        "A stylish watch for a perfect Eid look.",
     ];
 
     const [greeting, setGreeting] = useState("");
@@ -29,15 +29,16 @@ const EidGreeting = () => {
         days: 0,
         hours: 0,
         minutes: 0,
-        seconds: 0
+        seconds: 0,
     });
+    const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
     const getNextEidDate = () => new Date("2025-04-10");
 
     useEffect(() => {
         const interval = setInterval(() => {
             const eidDate = getNextEidDate();
-            const timeLeft = eidDate - new Date();
+            const timeLeft = eidDate.getTime() - new Date().getTime();
 
             if (timeLeft <= 0) {
                 clearInterval(interval);
@@ -53,6 +54,15 @@ const EidGreeting = () => {
         }, 1000);
 
         return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        const updateSize = () => {
+            setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+        };
+        updateSize();
+        window.addEventListener("resize", updateSize);
+        return () => window.removeEventListener("resize", updateSize);
     }, []);
 
     const generateGreeting = () => {
@@ -75,7 +85,7 @@ const EidGreeting = () => {
     const countdownVariants = {
         initial: { opacity: 0, y: -10 },
         animate: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: 10 }
+        exit: { opacity: 0, y: 10 },
     };
 
     return (
@@ -83,18 +93,18 @@ const EidGreeting = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 70, damping: 12 }}
-            className="bg-teal-100 shadow-2xl mx-auto my-10 p-8 rounded-xl max-w-lg text-center"
+            className="bg-teal-100 shadow-2xl mx-auto my-10 p-8 rounded-xl max-w-lg w-full text-center"
         >
             <h2 className="mb-6 font-bold text-teal-600 text-3xl">Eid Greeting Generator</h2>
 
-            {showConfetti && <Confetti />}
+            {showConfetti && <Confetti width={windowSize.width} height={windowSize.height} />}
 
             <div className="mb-6">
                 <div className="text-xl font-semibold text-teal-700 flex items-center justify-center mb-4">
                     <FaRegCalendarAlt className="mr-2" />
                     Countdown to Eid
                 </div>
-                <div className="flex justify-center gap-4 mb-4">
+                <div className="flex justify-center gap-4 mb-4 flex-wrap">
                     {["days", "hours", "minutes", "seconds"].map((unit, index) => (
                         <motion.div
                             key={index}
@@ -124,7 +134,7 @@ const EidGreeting = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="mb-6 text-gray-800 text-xl italic"
+                    className="mb-6 text-gray-800 text-xl italic px-4"
                 >
                     {greeting}
                 </motion.p>
@@ -172,10 +182,10 @@ const EidGreeting = () => {
                             transition={{ delay: 0.3 }}
                             className="flex gap-6 mt-2"
                         >
-                            {[ 
-                                { href: `https://www.facebook.com/sharer/sharer.php?u=https://your-app-url.com&quote=${encodedGreeting}`, icon: <FaFacebookF />, bg: "bg-blue-600", hover: "hover:bg-blue-700" },
-                                { href: `https://twitter.com/intent/tweet?text=${encodedGreeting}`, icon: <FaTwitter />, bg: "bg-blue-400", hover: "hover:bg-blue-500" },
-                                { href: `https://api.whatsapp.com/send?text=${encodedGreeting}`, icon: <FaWhatsapp />, bg: "bg-green-500", hover: "hover:bg-green-600" },
+                            {[
+                                { href: `https://www.facebook.com/sharer/sharer.php?u=https://your-app-url.com&quote=${encodedGreeting}`, icon: <FaFacebookF />, bg: "bg-blue-600", hover: "hover:bg-blue-700", label: "Share on Facebook" },
+                                { href: `https://twitter.com/intent/tweet?text=${encodedGreeting}`, icon: <FaTwitter />, bg: "bg-blue-400", hover: "hover:bg-blue-500", label: "Share on Twitter" },
+                                { href: `https://api.whatsapp.com/send?text=${encodedGreeting}`, icon: <FaWhatsapp />, bg: "bg-green-500", hover: "hover:bg-green-600", label: "Share on WhatsApp" },
                             ].map((item, i) => (
                                 <motion.a
                                     key={i}
@@ -184,6 +194,7 @@ const EidGreeting = () => {
                                     href={item.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label={item.label}
                                     className={`${item.bg} ${item.hover} p-4 rounded-full text-white transition`}
                                 >
                                     {item.icon}

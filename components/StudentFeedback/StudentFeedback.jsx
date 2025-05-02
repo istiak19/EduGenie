@@ -60,18 +60,19 @@ const StudentFeedback = () => {
                 <div className="flex flex-col space-y-8">
                     {/* Mentor Card */}
                     <div className="bg-white p-5 rounded-xl shadow-lg max-w-sm relative">
-                        <h3 className="font-semibold text-gray-700 text-base mb-4">100+ Verified Expert Mentors</h3>
+                        <h3 className="font-semibold text-gray-700 text-base mb-2">100+ Verified Expert Educator</h3>
                         <div className="space-y-3">
                             {[
-                                { name: 'Lori Stevens', role: 'Educator at EduGenie', img: '/educator-1.jpg' },
-                                { name: 'Billy Vasquez', role: 'Educator at EduGenie', img: '/educator-2.jpg' },
-                                { name: 'Larry Lawson', role: 'Educator at EduGenie', img: '/educator-3.jpg' },
+                                { name: 'Ambia Khatun Ela', role: 'Educator at EduGenie', img: '/educator-1.jpg' },
+                                { name: 'Istiak Ahamed', role: 'Educator at EduGenie', img: '/educator-2.jpg' },
+                                { name: 'Showrov Kumar Ghosh', role: 'Educator at EduGenie', img: '/educator-3.jpg' },
+                                { name: 'Md Jane Alam', role: 'Educator at EduGenie', img: '/educator-3.jpg' },
                             ].map((mentor, idx) => (
-                                <div key={idx} className="flex items-center gap-3">
+                                <div key={idx} className="flex items-center gap-2">
                                     <Image src={mentor.img} alt={mentor.name} width={36} height={36} className="rounded-full w-8 h-8" />
                                     <div>
                                         <p className="font-medium">{mentor.name}</p>
-                                        <p className="text-xs text-gray-500">{mentor.role}</p>
+                                        <p className="text-xs text-gray-500 text-justify">{mentor.role}</p>
                                     </div>
                                 </div>
                             ))}
