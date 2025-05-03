@@ -185,7 +185,7 @@ const Contact = () => {
           ></div>
 
           {/* Color Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-teal-300 to-teal-700 opacity-40"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-teal-600 opacity-40"></div>
         </div>
 
         {/* Content */}

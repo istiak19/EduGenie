@@ -11,15 +11,7 @@ const page = () => {
             }}
         >
             <div
-                style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    backgroundColor: "rgba(0, 0, 0, 0.5)",
-                    zIndex: -5,
-                }}
+                className="absolute inset-0 bg-gradient-to-r from-teal-400 to-teal-600 opacity-40"
             ></div>
             <JoinCommunityPage />
         </div>

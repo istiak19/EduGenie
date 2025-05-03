@@ -10,7 +10,7 @@ const JoinCommunityPage = () => {
                 {/* Title */}
                 <div className="text-center max-w-3xl">
                     <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
-                        Join Our Thriving Learning Community 🚀
+                        Join Our Thriving Learning Community
                     </h1>
                     <p className="mt-6 text-gray-600 text-lg">
                         Connect with passionate learners, access exclusive resources, and elevate your skills with expert guidance.
@@ -65,9 +65,9 @@ const JoinCommunityPage = () => {
                         Sign Up & Start Learning
                     </Link>
 
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-gray-800 text-sm">
                         Already have an account?{' '}
-                        <Link href="/login" className="text-teal-600 hover:underline font-semibold">
+                        <Link href="/login" className="text-teal-800 hover:underline font-semibold">
                             Log In
                         </Link>
                     </p>
