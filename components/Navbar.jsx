@@ -18,7 +18,7 @@ export default function Navbar() {
     setIsClient(true);
   }, []);
 
-  const staticMenuItems = ["Home", "Courses", "Blogs", "Contact"];
+  const staticMenuItems = ["Home", "Courses", "Blog", "Contact"];
   const menuItems =
     status === "authenticated"
       ? [...staticMenuItems.slice(0, 2), "Dashboard", ...staticMenuItems.slice(2)]
@@ -34,7 +34,7 @@ export default function Navbar() {
         return session?.user?.role === "educator"
           ? "/dashboard/educatorHome"
           : "/dashboard/studentHome";
-      case "Blogs":
+      case "Blog":
         return "/blogs";
       case "Contact":
         return "/contact";

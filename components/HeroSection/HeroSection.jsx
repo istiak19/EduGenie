@@ -26,11 +26,11 @@ const HeroSection = () => {
             </p>
 
             {/* Features */}
-            <div className="flex flex-wrap justify-center items-center gap-6 text-lg font-semibold text-gray-800 mt-10">
+            <div className="flex flex-wrap justify-center items-center gap-6 font-semibold text-gray-800 mt-10">
                 {['Learn', 'Grow', 'Innovate', 'Lead', 'Achieve'].map((item) => (
                     <span
                         key={item}
-                        className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-md hover:shadow-lg transition"
+                        className="flex items-center gap-2 bg-white px-4 py-2 rounded-md"
                     >
                         <span className="text-teal-400">▶</span> {item}
                     </span>

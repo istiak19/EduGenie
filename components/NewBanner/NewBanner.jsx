@@ -8,7 +8,7 @@ const NewBanner = () => {
 
   return (
     <div className="bg-[#fafafa]">
-      <div className="max-w-7xl mx-auto py-10 md:py-20 flex flex-col md:flex-row gap-5 items-center justify-between">
+      <div className="max-w-7xl mx-auto py-10 md:py-20 flex flex-col md:flex-row gap-5 items-center justify-between px-4">
         {/* Left side*/}
         <div className="md:w-1/2 space-y-6 text-center md:text-left">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-teal-800 leading-tight">
