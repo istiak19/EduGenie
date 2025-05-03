@@ -28,7 +28,7 @@ EduGenie is a cutting-edge AI-powered educational platform designed to revolutio
 - Role-Based Access Control (RBAC): Restricts access to different  sections based on user roles (student, educator, admin).
 - Chapter-Wise Learning Flow: Students proceed through courses one chapter at a time with embedded content and navigation buttons.
 - Quiz and Evaluation: Includes quizzes with automatic pass/fail evaluation based on scores.
-- Blog Creation and Interaction: Educators can create AI-generated blogs that students can like and comment on.
+- Blog Creation: Developed a blog creation system for educators to publish their own blogs, with like and comment features for student interaction and engagement.
 - Chatbot Integration: An AI chatbot that helps students with real-time queries during their learning journey.
 - Course Management Based on User Role: Role-specific permissions for course creation, viewing, and management.
 - Security & Authentication: JWT-based login system with route protection to ensure secure access to content.
