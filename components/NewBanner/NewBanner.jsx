@@ -40,7 +40,7 @@ const NewBanner = () => {
             </button>
 
             <button
-              onClick={() => router.push('/dashboard/generator')}
+              onClick={() => router.push('/courses')}
               className="flex items-center gap-2 text-indigo-600 font-medium hover:text-indigo-800 hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-in-out cursor-pointer"
             >
               <div className="bg-indigo-100 p-3 rounded-full hover:bg-indigo-200 transition">
