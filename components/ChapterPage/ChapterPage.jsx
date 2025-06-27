@@ -11,7 +11,7 @@ const ChapterPage = () => {
     const [chapters, setChapters] = useState([]);
    
     const [selectedChapter, setSelectedChapter] = useState(null);
-    console.log(selectedChapter);
+    // console.log(selectedChapter);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 

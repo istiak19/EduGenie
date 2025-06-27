@@ -10,11 +10,10 @@ const SocialAuth = () => {
     const router = useRouter();
     const session = useSession();
     const handleSocialAuth = async (providerName) => {
-        console.log(providerName);
+        // console.log(providerName);
         await signIn(providerName);
     }
 
-    console.log(session)
     useEffect(() => {
         if (session?.status === 'authenticated') {
             router.push('/')

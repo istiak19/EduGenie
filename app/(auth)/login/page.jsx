@@ -6,14 +6,13 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import loginPic from "../../../public/assets/login.jpg";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import SocialAuth from "@/components/SocialAuth/SocialAuth";
 import { signIn } from "next-auth/react";
 import Swal from "sweetalert2";
 import { login } from "@/app/actions/auth/login";
+import Player from "@/lib/dynamicLottiePlayer";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email format." }),
@@ -73,17 +72,15 @@ const LoginPage = () => {
         backgroundAttachment: "fixed",
       }}
     >
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-5">
-          {/* Image Section */}
+          {/* Animation Section */}
           <div className="w-full md:w-2/3 lg:w-1/2">
-            <Image
-              src={loginPic}
-              alt="Login"
-              width={600}
-              height={600}
-              className="rounded-lg w-full object-cover"
-              priority
+            <Player
+              autoplay
+              loop
+              src="/assets/lottie/login.json"
+              style={{ height: '400px', width: '100%' }}
             />
           </div>
 

@@ -165,12 +165,12 @@ const CourseDetails = () => {
                     <p className="text-gray-600 text-base text-justify">{course?.Description}</p>
                 </div>
                 <div className="w-full md:w-1/2">
-                    <div className="w-full h-56 md:h-72 relative overflow-hidden rounded-lg shadow-lg">
+                    <div className="w-full h-56 md:h-72 relative overflow-hidden rounded-md shadow-lg">
                         <label htmlFor="image" className="block w-full h-full relative cursor-pointer">
                             {course?.photo ? (
                                 <Image src={course?.photo} alt="Course Image" fill className="object-cover" />
                             ) : (
-                                <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-lg border border-dashed border-teal-400">
+                                <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-500 text-lg border border-dashed border-teal-200">
                                     Click To Upload Course Image
                                 </div>
                             )}
@@ -188,7 +188,7 @@ const CourseDetails = () => {
 
             {/* Meta Info */}
             <motion.div
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-6 bg-teal-50 p-6 rounded-lg shadow-md border border-teal-200"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 my-6 bg-teal-50 p-6 rounded-lg shadow-md border border-dashed border-teal-200"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8 }}

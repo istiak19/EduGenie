@@ -16,7 +16,7 @@ const FeaturedBlogs = () => {
       setError('Both title and content are required!');
     } else {
       setError('');
-      console.log({ title, content });
+      // console.log({ title, content });
       setSuccessMessage('Blog submitted successfully!');
       setTitle('');
       setContent('');

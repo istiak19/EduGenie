@@ -1,6 +1,7 @@
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
-import errorPic from "../public/assets/errorPic.jpg";
 
 export default function NotFound() {
     return (
@@ -21,7 +22,7 @@ export default function NotFound() {
                 <Image
                     width={500}
                     height={550}
-                    src={errorPic}
+                    src="/assets/errorPic.jpg"
                     alt="Error page"
                     className="rounded-lg shadow-lg"
                 />

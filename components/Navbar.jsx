@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { ModeToggle } from "./ui/mode-toggle";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -89,6 +90,9 @@ export default function Navbar() {
           <button className="text-gray-600 dark:text-gray-300 hover:text-teal-500">
             <Bell size={20} />
           </button>
+          <div>
+            <ModeToggle />
+          </div>
 
           {/* Auth Section */}
           {status === "authenticated" ? (

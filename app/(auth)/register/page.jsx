@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { register } from "@/app/actions/auth/register";
+import Player from "@/lib/dynamicLottiePlayer";
 
 // Zod validation
 const formSchema = z.object({
@@ -91,13 +92,11 @@ const Register = () => {
                 <div className="flex flex-col lg:flex-row items-center justify-center gap-5 py-12">
                     {/* Left Image Section */}
                     <div className="w-full lg:w-1/2 flex justify-center">
-                        <Image
-                            src={loginPic}
-                            alt="Login Picture"
-                            width={600}
-                            height={600}
-                            className="rounded-xl object-cover w-full"
-                            priority
+                        <Player
+                            autoplay
+                            loop
+                            src="/assets/lottie/login.json"
+                            style={{ height: '400px', width: '100%' }}
                         />
                     </div>
 
