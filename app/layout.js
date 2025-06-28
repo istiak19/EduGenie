@@ -3,7 +3,7 @@ import "./globals.css";
 import NextAuthProvider from "@/provider/NextAuthProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/provider/Theme-provider";
 
 const inter = Inter({
   variable: "--font-inter",

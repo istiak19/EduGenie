@@ -3,7 +3,7 @@ import Chatbot from "./Chatbot";
 const Chat = () => {
     return (
         <div>
-            <div className="mb-8">
+            <div>
                 <Chatbot />
             </div>
         </div>

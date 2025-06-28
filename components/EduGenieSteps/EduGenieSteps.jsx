@@ -33,7 +33,7 @@ const EduGenieSteps = () => {
                 {steps.map((step) => (
                     <div
                         key={step.id}
-                        className="bg-white p-5 text-center group hover:bg-teal-500"
+                        className="bg-white dark:bg-gray-900 transition-colors duration-500 p-5 text-center group hover:bg-teal-500 dark:hover:bg-teal-500 rounded-md shadow-md"
                     >
                         <div className="flex justify-center mb-6">
                             <img
@@ -42,10 +42,10 @@ const EduGenieSteps = () => {
                                 className="w-20 h-20 object-contain transition-transform duration-300 group-hover:scale-110"
                             />
                         </div>
-                        <h3 className="text-2xl font-bold text-gray-800 group-hover:text-white transition-colors duration-300">
+                        <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-100 group-hover:text-white transition-colors duration-300">
                             {step.title}
                         </h3>
-                        <p className="text-gray-600 mt-4 text-base group-hover:text-white transition-colors duration-300">
+                        <p className="text-gray-600 dark:text-gray-300 mt-4 text-base group-hover:text-white transition-colors duration-300">
                             {step.description}
                         </p>
                     </div>

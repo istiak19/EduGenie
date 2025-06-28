@@ -2,10 +2,9 @@
 
 import Player from "@/lib/dynamicLottiePlayer";
 
-
 const Loading = () => {
     return (
-        <div className="flex items-center justify-center w-full min-h-[calc(100vh-305px)]">
+        <div className="flex items-center justify-center w-full min-h-[calc(100vh-305px)] bg-white dark:bg-gray-900">
             <Player
                 autoplay
                 loop
