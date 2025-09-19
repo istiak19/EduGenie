@@ -4,7 +4,7 @@ EduGenie is a cutting-edge AI-powered educational platform designed to revolutio
 
 The platform focuses on interactivity and accessibility with a clean, responsive UI, built using Next.js, Tailwind CSS, and integrated with MongoDB for persistent data storage. Authenticated via NextAuth.js, EduGenie ensures secure access and smooth transitions across devices. Whether you're a curious student or a passionate teacher, EduGenie makes learning more personalized, efficient, and enjoyable by merging the power of artificial intelligence with modern education.
 
-🌐 **Live Demo**: [https://genies-two.vercel.app/](https://genies-two.vercel.app/)
+🌐 **Live Demo**: [https://genies-two.vercel.app](https://genies-two.vercel.app/)
 📂 **GitHub Repository**: [https://github.com/istiak19/EduGenie](https://github.com/istiak19/EduGenie)
 
 ---
