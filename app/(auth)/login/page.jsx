@@ -72,7 +72,7 @@ const LoginPage = () => {
         backgroundAttachment: "fixed",
       }}
     >
-      <div className="w-full max-w-7xl mx-auto">
+      <div className="w-full container px-4 mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-5">
           {/* Animation Section */}
           <div className="w-full md:w-2/3 lg:w-1/2">

@@ -33,7 +33,7 @@ const CoursePromo = () => {
     return (
         <div className="bg-[#fafafa] dark:bg-gray-900 transition-colors duration-500">
             <div className="py-16 px-4 md:px-10">
-                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 items-center">
+                <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 items-center">
                     {/* Left Side Text */}
                     <div className="col-span-1 border-b-2 md:border-b-0 md:border-r-2 border-teal-500 pb-8 md:pb-0 md:pr-8">
                         <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-4 leading-snug">

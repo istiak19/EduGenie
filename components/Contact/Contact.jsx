@@ -42,7 +42,7 @@ const Contact = () => {
 
   return (
     <div>
-      <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto py-10 px-4 sm:px-6 lg:px-8">
         <ToastContainer />
         <div className="bg-white rounded-xl shadow-lg overflow-hidden p-6 md:p-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center text-teal-600 mb-8 md:mb-12">

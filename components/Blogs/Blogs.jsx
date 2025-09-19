@@ -79,7 +79,7 @@ const Blogs = () => {
     };
 
     return (
-        <div className="py-10 px-4 md:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div className="py-10 px-4 container mx-auto">
             <div className="bg-white p-6 sm:p-8 md:p-10 rounded-2xl shadow-md border border-gray-200">
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-teal-600 mb-8">
                     Create a Blog

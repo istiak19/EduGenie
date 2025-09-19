@@ -25,8 +25,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light" enableSystem={false}
           disableTransitionOnChange>
           <NextAuthProvider>
             <Navbar />

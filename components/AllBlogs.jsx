@@ -60,7 +60,7 @@ const AllBlogs = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
+    <div className="container mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold mb-6 text-center text-teal-700">
         Explore Latest Blogs
       </h2>
@@ -81,8 +81,8 @@ const AllBlogs = () => {
                 src={blog?.photo}
                 alt={blog?.title}
                 width={800}
-                height={200}
-                className="w-full lg:h-80 rounded-lg mb-4 object-cover"
+                height={300}
+                className="w-full lg:h-80 rounded-lg mb-4"
               />
               <h3 className="text-2xl font-semibold mb-2 text-teal-700">
                 {blog.title}

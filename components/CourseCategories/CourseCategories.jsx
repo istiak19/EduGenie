@@ -17,7 +17,7 @@ const CourseCategories = () => {
 
     return (
         <div className="bg-[#fafafa] dark:bg-gray-900 transition-colors duration-500">
-            <div className="py-10 px-4 max-w-7xl mx-auto text-center">
+            <div className="py-10 container px-4 mx-auto text-center">
                 {/* Title */}
                 <div className="mb-10">
                     <h2 className="text-2xl md:text-3xl font-bold flex items-center justify-center gap-2 text-gray-800 dark:text-gray-100">
