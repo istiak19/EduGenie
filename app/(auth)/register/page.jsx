@@ -82,15 +82,108 @@ const Register = () => {
     };
 
     return (
-        <div className="flex justify-center items-center bg-cover bg-center min-h-screen w-full px-4 sm:px-6 lg:px-8"
+        <div className="flex justify-center items-center bg-cover bg-center w-full px-4 sm:px-6 lg:px-8"
             style={{
                 backgroundImage: "url('/assets/background.jpg')",
                 backgroundAttachment: "fixed",
             }}
         >
-            <div className="w-full max-w-6xl mx-auto">
-                <div className="flex flex-col lg:flex-row items-center justify-center gap-5 py-12">
-                    {/* Left Image Section */}
+            <div className="w-full container mx-auto">
+                <div className="flex flex-col lg:flex-row items-center justify-center gap-5 py-8">
+                    <div className="w-full md:w-2/3 lg:w-1/2  p-6 md:p-10">
+                        {/* EduGenie Logo + Home Link */}
+                        <div className="flex items-center gap-2 mb-8 cursor-pointer hover:scale-105 transition-transform">
+                            <Link href="/" className="flex items-center gap-2">
+                                <Image
+                                    src="/Edugine-logo.png"
+                                    alt="EduGenie Logo"
+                                    width={40}
+                                    height={40}
+                                    className="rounded-md"
+                                />
+                                <span className="text-3xl font-bold tracking-wide text-gray-800">
+                                    EduGenie
+                                </span>
+                            </Link>
+                        </div>
+
+                        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+                            Create Your EduGenie Account
+                        </h2>
+
+                        <div className="p-6 rounded-xl shadow-md border border-gray-200 dark:border-neutral-700">
+                            <Form {...form}>
+                                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                                    <FormField
+                                        control={form.control}
+                                        name="name"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Name</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="Your Name" type="text" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={form.control}
+                                        name="email"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Email</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="Your Email" type="email" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={form.control}
+                                        name="password"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Password</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="Your Password" type="password" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <FormField
+                                        control={form.control}
+                                        name="cPassword"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Confirm Password</FormLabel>
+                                                <FormControl>
+                                                    <Input placeholder="Confirm Password" type="password" {...field} />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                    <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700 cursor-pointer">
+                                        Sign Up
+                                    </Button>
+                                </form>
+                            </Form>
+
+                            <p className="text-center py-5 font-medium text-gray-700">Or Sign Up With</p>
+                            <SocialAuth />
+
+                            <p className="pt-5 text-center text-sm text-gray-600">
+                                Already have an account?{" "}
+                                <Link href="/login" className="text-teal-600 font-semibold hover:underline">
+                                    Sign In
+                                </Link>
+                            </p>
+                        </div>
+                    </div>
+
                     <div className="w-full lg:w-1/2 flex justify-center">
                         <Player
                             autoplay
@@ -98,81 +191,6 @@ const Register = () => {
                             src="/assets/lottie/login.json"
                             style={{ height: '400px', width: '100%' }}
                         />
-                    </div>
-
-                    {/* Right Form Section */}
-                    <div className="w-full md:w-2/3 lg:w-1/2  p-6 md:p-10">
-                        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Sign Up</h2>
-
-                        <Form {...form}>
-                            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-                                <FormField
-                                    control={form.control}
-                                    name="name"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Name</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Your Name" type="text" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="email"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Email</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Your Email" type="email" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="password"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Password</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Your Password" type="password" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="cPassword"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel>Confirm Password</FormLabel>
-                                            <FormControl>
-                                                <Input placeholder="Confirm Password" type="password" {...field} />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                                <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700 cursor-pointer">
-                                    Sign Up
-                                </Button>
-                            </form>
-                        </Form>
-
-                        <p className="text-center py-5 font-medium text-gray-700">Or Sign Up With</p>
-                        <SocialAuth />
-
-                        <p className="pt-5 text-center text-sm text-gray-600">
-                            Already have an account?{" "}
-                            <Link href="/login" className="text-teal-600 font-semibold hover:underline">
-                                Sign In
-                            </Link>
-                        </p>
                     </div>
                 </div>
             </div>

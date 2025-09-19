@@ -70,7 +70,7 @@ const ChapterPage = () => {
     }
 
     return (
-        <div className="flex flex-col lg:flex-row max-w-7xl mx-auto px-4 py-10 gap-5 min-h-screen">
+        <div className="flex flex-col lg:flex-row container mx-auto px-4 py-10 gap-5 min-h-screen">
             {/* Sidebar */}
             <aside className="w-full lg:w-72 bg-white p-4 rounded-2xl shadow-lg max-h-[80vh] overflow-y-auto border border-teal-100">
                 <h3 className="text-xl font-bold mb-5 flex items-center gap-2 text-teal-700">

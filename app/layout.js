@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
           defaultTheme="light" enableSystem={false}
           disableTransitionOnChange>
           <NextAuthProvider>
-            <main className="min-h-[calc(100svh-230px)]">
+            <main>
               {children}
             </main>
           </NextAuthProvider>
