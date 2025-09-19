@@ -1,8 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import NextAuthProvider from "@/provider/NextAuthProvider";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/provider/Theme-provider";
 
 const inter = Inter({
@@ -28,11 +26,9 @@ export default function RootLayout({ children }) {
           defaultTheme="light" enableSystem={false}
           disableTransitionOnChange>
           <NextAuthProvider>
-            <Navbar />
             <main className="min-h-[calc(100svh-230px)]">
               {children}
             </main>
-            <Footer />
           </NextAuthProvider>
         </ThemeProvider>
       </body>

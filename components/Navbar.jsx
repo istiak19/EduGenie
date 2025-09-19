@@ -127,7 +127,7 @@ export default function Navbar() {
           ) : (
             <Link
               href="/login"
-              className="px-4 py-2 bg-teal-500 text-white rounded-md hover:bg-teal-700 transition"
+              className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition"
             >
               Login
             </Link>
