@@ -1,120 +1,142 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function HowItWorks() {
   const steps = [
     {
       id: 1,
-      title: "Sign Up",
-      description: "Create your free EduGenie account in seconds.",
+      title: "Create Your Account",
+      description: "Sign up and unlock access to personalized AI-driven learning.",
       icon: "👤",
     },
     {
       id: 2,
-      title: "Select Your Course",
-      description: "Choose from AI-generated courses tailored to your needs.",
-      icon: "📚",
+      title: "Pick Your Path",
+      description: "Explore tailored courses based on your goals and interests.",
+      icon: "🧭",
     },
     {
       id: 3,
-      title: "Learn & Engage",
-      description: "Interact with AI-powered lessons and community discussions.",
-      icon: "🧠",
+      title: "Interactive Learning",
+      description: "Dive into lessons, quizzes, and discussions with our AI assistant.",
+      icon: "📖",
     },
     {
       id: 4,
-      title: "Achieve Your Goals",
-      description: "Track your progress and unlock new opportunities!",
-      icon: "🏆",
+      title: "Grow & Earn",
+      description: "Track progress, earn certificates, and achieve career goals.",
+      icon: "🌟",
     },
   ];
 
   const blogs = [
     {
       id: 1,
-      title: "Mastering AI in Education",
-      author: "By Jane Doe",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPiTkIL31u1Jplh2A6kouDuCb5PtC4dSEJIQ&s",
+      title: "The Future of AI in Education",
+      author: "Jane Doe",
+      image: "https://i.ibb.co.com/xt52ghd8/2151133554.jpg",
     },
     {
       id: 2,
-      title: "Top 10 Learning Hacks",
-      author: "By John Smith",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUtP3_BAREFiO-T45XAC620wiE6RWYAifoIg&s",
+      title: "Design Thinking in Digital Classrooms",
+      author: "Mark Taylor",
+      image: "https://i.ibb.co.com/Y40rHqVM/10780697-19198666.jpg",
     },
     {
       id: 3,
-      title: "Why AI is the Future of Learning",
-      author: "By Alex Brown",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQluAH3XJcELIidT_K1I9d2EWUNKL1WZXzw0w&s",
+      title: "How to Stay Focused While Studying Online",
+      author: "Alex Morgan",
+      image: "https://i.ibb.co.com/W4db5gwp/2149332867.jpg",
     },
   ];
 
   return (
-    <section className="bg-white py-16 px-6">
-      {/* "How It Works" Section */}
+    <section className="bg-gradient-to-br from-[#f0f9ff] to-white px-4 py-10">
+      {/* Section Header */}
       <motion.h2
-        className="text-4xl font-bold text-gray-800 text-center mb-10"
+        className="text-4xl sm:text-5xl font-extrabold text-center text-gray-800 mb-16"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.6 }}
       >
-        How It Works...!
+        How It Works
       </motion.h2>
 
-      <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-        {steps.map((step) => (
+      {/* Steps Timeline with Simulated Left Gradient Border */}
+      <div className="max-w-4xl mx-auto space-y-10 relative pl-10">
+        {/* Simulated Gradient Border */}
+        <motion.div
+          className="absolute top-0 left-4 bottom-0 w-1 bg-gradient-to-b from-teal-400 to-cyan-500 rounded-full"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "100%" }}
+          transition={{ duration: 1 }}
+        />
+
+        {steps.map((step, index) => (
           <motion.div
             key={step.id}
-            className="p-6 bg-yellow-400 text-black text-center rounded-lg shadow-md"
-            whileHover={{ scale: 1.05 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: index * 0.2 }}
+            className="relative bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition"
           >
-            <div className="text-5xl">{step.icon}</div>
-            <h3 className="text-xl font-bold mt-4">{step.title}</h3>
-            <p className="text-gray-600 mt-2">{step.description}</p>
+            <div className="absolute -left-[42px] top-4 text-2xl bg-teal-500 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg ring-4 ring-white">
+              {step.icon}
+            </div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-1">{step.title}</h3>
+            <p className="text-gray-600">{step.description}</p>
           </motion.div>
         ))}
       </div>
 
-      {/* Blog Showcase Section */}
+      {/* Blog Section Header */}
       <motion.h2
-        className="text-4xl font-bold text-gray-800 text-center mt-20 mb-10"
+        className="text-4xl sm:text-5xl font-extrabold text-center text-gray-80 pt-16 pb-10  px-4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.6 }}
       >
-        Featured Blogs
+        📚 Featured Blogs
       </motion.h2>
 
-      <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {/* Blog Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
         {blogs.map((blog) => (
           <motion.div
             key={blog.id}
-            className="bg-white shadow-lg rounded-lg overflow-hidden"
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.03 }}
+            className="relative group rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
           >
             <img
               src={blog.image}
               alt={blog.title}
-              className="w-full h-48 object-cover"
+              className="w-full h-64 object-cover group-hover:brightness-75 transition duration-300"
             />
-            <div className="p-4">
-              <h3 className="text-lg font-bold">{blog.title}</h3>
-              <p className="text-gray-600">{blog.author}</p>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent px-5 py-6 flex flex-col justify-end">
+              <h3 className="text-xl font-bold text-white mb-1 group-hover:underline">
+                {blog.title}
+              </h3>
+              <p className="text-sm text-gray-200 flex items-center gap-2">
+                <span>👤</span> {blog.author}
+              </p>
             </div>
           </motion.div>
         ))}
       </div>
 
-      {/* Write a Blog Button */}
-      <div className="text-center mt-12">
-        <motion.button
-          className="px-6 py-3 bg-yellow-500 text-black rounded-lg font-bold hover:bg-blue-700 transition-all"
-          whileHover={{ scale: 1.05 }}
-        >
-          Write a Blog ✍️
-        </motion.button>
+      {/* Button */}
+      <div className="pt-10 text-center px-4">
+        <Link href="/blogs">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className="px-6 cursor-pointer py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full shadow-md ring-2 ring-transparent hover:ring-teal-400 transition-all duration-300"
+          >
+            Explore All Blogs ✨
+          </motion.button>
+        </Link>
       </div>
     </section>
   );

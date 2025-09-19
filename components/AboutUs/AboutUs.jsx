@@ -8,15 +8,13 @@ const AboutUs = () => {
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-5xl font-semibold">About Us</h1>
       </div>
-      {/* about section content  */}
+      {/* about section */}
       <div className="flex flex-col-reverse md:flex-row items-center justify-center gap-10">
         <div>
           <p className="text-md md:text-xl flex flex-col gap-6">
             <span>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </span>
 
             <span>
