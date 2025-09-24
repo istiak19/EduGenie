@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Loading from "./Loading/Loading";
 import Image from "next/image";
+import { FaRegThumbsUp, FaThumbsUp, FaRegCommentDots, FaCommentDots } from "react-icons/fa";
 
 const AllBlogs = () => {
   const { data: session } = useSession();
@@ -98,20 +99,11 @@ const AllBlogs = () => {
                     className="flex items-center text-blue-600 text-sm hover:text-blue-700 cursor-pointer transition-all duration-200 ease-in-out"
                     onClick={() => handleLike(blog._id)}
                   >
-                    <svg
-                      className="w-5 h-5 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 15l7-7 7 7"
-                      />
-                    </svg>
+                    {blog.likes?.includes(userEmail) ? (
+                      <FaThumbsUp className="w-5 h-5 mr-2 text-blue-600" />
+                    ) : (
+                      <FaRegThumbsUp className="w-5 h-5 mr-2" />
+                    )}
                     Like
                   </button>
                   <span className="text-gray-600 text-sm">
@@ -129,20 +121,11 @@ const AllBlogs = () => {
                       )
                     }
                   >
-                    <svg
-                      className="w-5 h-5 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M8 12h.01M12 12h.01M16 12h.01M4 4h16v16H4z"
-                      />
-                    </svg>
+                    {activeCommentBlogId === blog._id ? (
+                      <FaCommentDots className="w-5 h-5 mr-2" />
+                    ) : (
+                      <FaRegCommentDots className="w-5 h-5 mr-2" />
+                    )}
                     Comment
                   </button>
                   <span className="text-gray-600 text-sm">
